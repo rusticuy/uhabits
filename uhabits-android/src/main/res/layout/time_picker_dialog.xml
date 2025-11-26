@@ -49,14 +49,14 @@
         android:layout_height="1dip"
         android:background="@color/line_background" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         style="?android:attr/buttonBarStyle"
         android:layout_width="@dimen/date_picker_component_width"
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="?android:attr/buttonBarButtonStyle"
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:id="@+id/clear_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -66,8 +66,8 @@
             android:text="@string/clear_label"
             android:textSize="@dimen/done_label_size" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            style="?android:attr/buttonBarButtonStyle"
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button.TextButton"
             android:id="@+id/done_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -76,6 +76,6 @@
             android:textColor="#333"
             android:text="@string/done_label"
             android:textSize="@dimen/done_label_size" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
 </LinearLayout>
