@@ -49,6 +49,7 @@ import org.isoron.uhabits.core.ui.screens.habits.show.ShowHabitMenuPresenter
 import org.isoron.uhabits.core.ui.screens.habits.show.ShowHabitPresenter
 import org.isoron.uhabits.core.ui.views.OnDateClickedListener
 import org.isoron.uhabits.intents.IntentFactory
+import org.isoron.uhabits.security.AppLockManager
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.currentTheme
 import org.isoron.uhabits.utils.dismissCurrentAndShow
@@ -66,6 +67,7 @@ class ShowHabitActivity : AppCompatActivity(), CommandRunner.Listener {
     private lateinit var preferences: Preferences
     private lateinit var themeSwitcher: AndroidThemeSwitcher
     private lateinit var widgetUpdater: WidgetUpdater
+    private lateinit var appLockManager: AppLockManager
 
     private val scope = CoroutineScope(Dispatchers.Main)
     private lateinit var presenter: ShowHabitPresenter
@@ -80,6 +82,7 @@ class ShowHabitActivity : AppCompatActivity(), CommandRunner.Listener {
         preferences = appComponent.preferences
         commandRunner = appComponent.commandRunner
         widgetUpdater = appComponent.widgetUpdater
+        appLockManager = appComponent.appLockManager
 
         themeSwitcher = AndroidThemeSwitcher(this, preferences)
         themeSwitcher.apply()
@@ -124,6 +127,8 @@ class ShowHabitActivity : AppCompatActivity(), CommandRunner.Listener {
 
     override fun onResume() {
         super.onResume()
+        appLockManager.requireUnlock(this)
+        
         commandRunner.addListener(this)
         supportFragmentManager.findFragmentByTag("historyEditor")?.let {
             (it as HistoryEditorDialog).setOnDateClickedListener(presenter.historyCardPresenter)

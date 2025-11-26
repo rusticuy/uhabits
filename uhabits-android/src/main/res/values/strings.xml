@@ -237,4 +237,22 @@
     <string name="pref_midnight_delay_description">Wait until 3:00 AM to show a new day. Useful if you typically go to sleep after midnight. Requires app restart.</string>
     <string name="pref_animations_title">Disable animations</string>
     <string name="pref_animations_description">Disable confetti animation after adding a checkmark.</string>
+
+    <!-- App Lock Strings -->
+    <string name="unlock_app">Unlock App</string>
+    <string name="use_biometric">Use Biometric</string>
+    <string name="or">or</string>
+    <string name="enter_pin">Enter PIN</string>
+    <string name="backspace">← Back</string>
+    <string name="unlock">Unlock</string>
+    <string name="pref_app_lock_title">App Lock</string>
+    <string name="pref_app_lock_description">Protect your habits with a PIN or biometric authentication</string>
+    <string name="pref_lock_type_title">Lock Type</string>
+    <string name="pref_lock_timeout_title">Lock Timeout (seconds)</string>
+    <string name="pref_lock_timeout_description">Time before the app locks when backgrounded</string>
+    <string name="security_preferences">Security</string>
+    <string name="lock_type_none">None</string>
+    <string name="lock_type_pin">PIN</string>
+    <string name="lock_type_pattern">Pattern</string>
+    <string name="lock_type_biometric">Biometric</string>
 </resources>

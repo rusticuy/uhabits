@@ -37,6 +37,7 @@ import org.isoron.uhabits.intents.IntentFactory
 import org.isoron.uhabits.intents.IntentParser
 import org.isoron.uhabits.intents.PendingIntentFactory
 import org.isoron.uhabits.receivers.ReminderController
+import org.isoron.uhabits.security.AppLockManager
 import org.isoron.uhabits.tasks.AndroidTaskRunner
 import org.isoron.uhabits.widgets.WidgetUpdater
 
@@ -63,4 +64,5 @@ interface HabitsApplicationComponent {
     val taskRunner: TaskRunner
     val widgetPreferences: WidgetPreferences
     val widgetUpdater: WidgetUpdater
+    val appLockManager: AppLockManager
 }

@@ -48,6 +48,7 @@ import org.isoron.uhabits.core.ui.NotificationTray
 import org.isoron.uhabits.core.utils.DateUtils.Companion.getLongWeekdayNames
 import org.isoron.uhabits.notifications.AndroidNotificationTray.Companion.createAndroidNotificationChannel
 import org.isoron.uhabits.notifications.RingtoneManager
+import org.isoron.uhabits.security.AppLockManager
 import org.isoron.uhabits.utils.StyledResources
 import org.isoron.uhabits.utils.applyBottomInset
 import org.isoron.uhabits.utils.startActivitySafely
@@ -59,6 +60,7 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
     private var ringtoneManager: RingtoneManager? = null
     private lateinit var prefs: Preferences
     private var widgetUpdater: WidgetUpdater? = null
+    private var appLockManager: AppLockManager? = null
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -88,6 +90,7 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
         if (appContext is HabitsApplication) {
             prefs = appContext.component.preferences
             widgetUpdater = appContext.component.widgetUpdater
+            appLockManager = appContext.component.appLockManager
         }
         setResultOnPreferenceClick("importData", RESULT_IMPORT_DATA)
         setResultOnPreferenceClick("exportCSV", RESULT_EXPORT_CSV)
@@ -123,6 +126,10 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
     override fun onPreferenceTreeClick(preference: Preference): Boolean {
         val key = preference.key ?: return false
         when (key) {
+            "appLock" -> {
+                showAppLockDialog()
+                return true
+            }
             "reminderSound" -> {
                 showRingtonePicker()
                 return true
@@ -258,6 +265,39 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
             "file" -> java.io.File(uri.path!!).absolutePath
             else -> null
         }
+    }
+
+    private fun showAppLockDialog() {
+        val lockTypeOptions = arrayOf("None", "PIN", "Pattern", "Biometric")
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("Select Lock Type")
+            .setItems(lockTypeOptions) { _, which ->
+                when (which) {
+                    0 -> appLockManager?.disableLock()
+                    1 -> showPinSetupDialog()
+                    2 -> {}
+                    3 -> {}
+                }
+            }
+            .show()
+    }
+
+    private fun showPinSetupDialog() {
+        val input = android.widget.EditText(requireContext())
+        input.inputType = android.text.InputType.TYPE_CLASS_NUMBER or android.text.InputType.TYPE_NUMBER_VARIATION_PASSWORD
+        input.hint = "Enter PIN"
+
+        val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())
+            .setTitle("Set PIN")
+            .setView(input)
+            .setPositiveButton("OK") { _, _ ->
+                val pin = input.text.toString()
+                if (pin.isNotEmpty()) {
+                    appLockManager?.setLockPin(pin)
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
     }
 
     companion object {

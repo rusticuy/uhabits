@@ -109,6 +109,9 @@ dependencies {
     implementation(libs.documentfile)
     implementation(libs.opencsv)
     implementation(libs.konfetti.xml)
+    implementation(libs.biometric)
+    implementation(libs.lifecycle.process)
+    implementation(libs.lifecycle.runtime)
     implementation(project(":uhabits-core"))
     ksp(libs.dagger.compiler)
 
