@@ -62,6 +62,11 @@
                 style="@style/Card"
                 android:paddingTop="12dp" />
 
+            <org.isoron.uhabits.activities.habits.show.views.AnalyticsCardView
+                android:id="@+id/analyticsCard"
+                style="@style/Card"
+                android:gravity="center" />
+
             <org.isoron.uhabits.activities.habits.show.views.ScoreCardView
                 android:id="@+id/scoreCard"
                 style="@style/Card"
