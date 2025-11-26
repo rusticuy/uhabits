@@ -90,4 +90,64 @@
 
     <color name="ic_launcher_background">#1976D2</color>
     <color name="color_background">@color/grey_200</color>
+
+    <!-- Material 3 Light Theme Colors -->
+    <color name="m3_primary_light">#363636</color>
+    <color name="m3_on_primary_light">#FFFFFF</color>
+    <color name="m3_primary_container_light">#E8E8E8</color>
+    <color name="m3_on_primary_container_light">#1A1A1A</color>
+    <color name="m3_primary_dark_light">#303030</color>
+
+    <color name="m3_secondary_light">#625B71</color>
+    <color name="m3_on_secondary_light">#FFFFFF</color>
+    <color name="m3_secondary_container_light">#E8DEF8</color>
+    <color name="m3_on_secondary_container_light">#1E192B</color>
+
+    <color name="m3_tertiary_light">#7D5260</color>
+    <color name="m3_on_tertiary_light">#FFFFFF</color>
+    <color name="m3_tertiary_container_light">#FFD8E4</color>
+    <color name="m3_on_tertiary_container_light">#31111D</color>
+
+    <color name="m3_error_light">#B3261E</color>
+    <color name="m3_on_error_light">#FFFFFF</color>
+    <color name="m3_error_container_light">#F9DEDC</color>
+    <color name="m3_on_error_container_light">#410E0B</color>
+
+    <color name="m3_background_light">#FFFBFE</color>
+    <color name="m3_on_background_light">#1C1B1F</color>
+
+    <color name="m3_surface_light">#FFFBFE</color>
+    <color name="m3_on_surface_light">#1C1B1F</color>
+    <color name="m3_surface_variant_light">#E7E0EC</color>
+    <color name="m3_on_surface_variant_light">#49454F</color>
+
+    <!-- Material 3 Dark Theme Colors -->
+    <color name="m3_primary_dark">#E8E8E8</color>
+    <color name="m3_on_primary_dark">#1F1F1F</color>
+    <color name="m3_primary_container_dark">#1F1F1F</color>
+    <color name="m3_on_primary_container_dark">#E8E8E8</color>
+
+    <color name="m3_secondary_dark">#CCC7DB</color>
+    <color name="m3_on_secondary_dark">#332D41</color>
+    <color name="m3_secondary_container_dark">#4A4458</color>
+    <color name="m3_on_secondary_container_dark">#E8DEF8</color>
+
+    <color name="m3_tertiary_dark">#EFB8C8</color>
+    <color name="m3_on_tertiary_dark">#492532</color>
+    <color name="m3_tertiary_container_dark">#633B48</color>
+    <color name="m3_on_tertiary_container_dark">#FFD8E4</color>
+
+    <color name="m3_error_dark">#F2B8B5</color>
+    <color name="m3_on_error_dark">#601410</color>
+    <color name="m3_error_container_dark">#8C1D18</color>
+    <color name="m3_on_error_container_dark">#F9DEDC</color>
+
+    <color name="m3_background_dark">#1C1B1F</color>
+    <color name="m3_on_background_dark">#E8E7EB</color>
+
+    <color name="m3_surface_dark">#1C1B1F</color>
+    <color name="m3_on_surface_dark">#E8E7EB</color>
+    <color name="m3_surface_variant_dark">#49454F</color>
+    <color name="m3_on_surface_variant_dark">#CAC7D0</color>
+
 </resources>

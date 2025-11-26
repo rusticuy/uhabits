@@ -1,0 +1,557 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016-2025 Álinson Santos Xavier <git@axavier.org>
+  ~
+  ~ This file is part of Loop Habit Tracker.
+  ~
+  ~ Loop Habit Tracker is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by the
+  ~ Free Software Foundation, either version 3 of the License, or (at your
+  ~ option) any later version.
+  ~
+  ~ Loop Habit Tracker is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  ~ or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+  ~ more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License along
+  ~ with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Material 3 Light Theme -->
+    <style name="AppBaseTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Material 3 Color System -->
+        <item name="colorPrimary">@color/m3_primary_light</item>
+        <item name="colorOnPrimary">@color/m3_on_primary_light</item>
+        <item name="colorPrimaryContainer">@color/m3_primary_container_light</item>
+        <item name="colorOnPrimaryContainer">@color/m3_on_primary_container_light</item>
+
+        <item name="colorSecondary">@color/m3_secondary_light</item>
+        <item name="colorOnSecondary">@color/m3_on_secondary_light</item>
+        <item name="colorSecondaryContainer">@color/m3_secondary_container_light</item>
+        <item name="colorOnSecondaryContainer">@color/m3_on_secondary_container_light</item>
+
+        <item name="colorTertiary">@color/m3_tertiary_light</item>
+        <item name="colorOnTertiary">@color/m3_on_tertiary_light</item>
+        <item name="colorTertiaryContainer">@color/m3_tertiary_container_light</item>
+        <item name="colorOnTertiaryContainer">@color/m3_on_tertiary_container_light</item>
+
+        <item name="colorError">@color/m3_error_light</item>
+        <item name="colorOnError">@color/m3_on_error_light</item>
+        <item name="colorErrorContainer">@color/m3_error_container_light</item>
+        <item name="colorOnErrorContainer">@color/m3_on_error_container_light</item>
+
+        <item name="android:colorBackground">@color/m3_background_light</item>
+        <item name="colorOnBackground">@color/m3_on_background_light</item>
+
+        <item name="colorSurface">@color/m3_surface_light</item>
+        <item name="colorOnSurface">@color/m3_on_surface_light</item>
+        <item name="colorSurfaceVariant">@color/m3_surface_variant_light</item>
+        <item name="colorOnSurfaceVariant">@color/m3_on_surface_variant_light</item>
+
+        <!-- Legacy custom attributes for backward compatibility -->
+        <item name="aboutScreenColor">@color/blue_800</item>
+        <item name="actionBarPopupTheme">@style/ThemeOverlay.Material3.Light</item>
+        <item name="actionModeBackground">@color/grey_700</item>
+        <item name="android:alertDialogTheme">@style/Theme.Material3.Light.AlertDialog</item>
+        <item name="android:dialogTheme">@style/Theme.Material3.Light.AlertDialog</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:itemBackground">?attr/contrast0</item>
+        <item name="android:navigationBarColor">?attr/colorPrimary</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <item name="cardBackground">@drawable/card_light_background</item>
+        <item name="cardBgColor">@color/grey_50</item>
+        <item name="colorAccent">?aboutScreenColor</item>
+        <item name="colorPrimaryDark">@color/m3_primary_dark_light</item>
+        <item name="dialogIconChangeColor">@drawable/ic_action_color_light</item>
+        <item name="headerBackgroundColor">@color/grey_200</item>
+        <item name="highlightedBackgroundColor">@color/grey_100</item>
+        <item name="iconAdd">@drawable/ic_action_add_dark</item>
+        <item name="iconArchive">@drawable/ic_action_archive_dark</item>
+        <item name="iconChangeColor">@drawable/ic_action_color_dark</item>
+        <item name="iconDownload">@drawable/ic_action_download_dark</item>
+        <item name="iconEdit">@drawable/ic_action_edit_dark</item>
+        <item name="iconFilter">@drawable/ic_action_filter_dark</item>
+        <item name="iconUnarchive">@drawable/ic_action_unarchive_dark</item>
+        <item name="iconArrowUp">@drawable/ic_arrow_up_light</item>
+        <item name="iconArrowDown">@drawable/ic_arrow_down_light</item>
+        <item name="contrast0">@color/white</item>
+        <item name="contrast20">@color/grey_300</item>
+        <item name="contrast40">@color/grey_350</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_700</item>
+        <item name="contrast100">@color/grey_800</item>
+        <item name="palette">@array/lightPalette</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="scrollableRecyclerViewStyle">@style/ScrollableRecyclerViewStyle</item>
+        <item name="selectedBackground">@drawable/selected_box</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.Material3.Light</item>
+        <item name="useHabitColorAsPrimary">true</item>
+        <item name="widgetBackgroundAlpha">1</item>
+        <item name="widgetShadowAlpha">0.25</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowBackgroundColor">@color/grey_200</item>
+        <item name="android:textColorAlertDialogListItem">@color/grey_800</item>
+        <item name="singleLineTitle">false</item>
+        <item name="dialogFormLabelColor">@color/white</item>
+        
+        <!-- Material 3 Edge-to-Edge support -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+    <!-- Material 3 Dark Theme -->
+    <style name="AppBaseThemeDark" parent="@style/Theme.MaterialComponents.NoActionBar">
+        <!-- Material 3 Color System for Dark -->
+        <item name="colorPrimary">@color/m3_primary_dark</item>
+        <item name="colorOnPrimary">@color/m3_on_primary_dark</item>
+        <item name="colorPrimaryContainer">@color/m3_primary_container_dark</item>
+        <item name="colorOnPrimaryContainer">@color/m3_on_primary_container_dark</item>
+
+        <item name="colorSecondary">@color/m3_secondary_dark</item>
+        <item name="colorOnSecondary">@color/m3_on_secondary_dark</item>
+        <item name="colorSecondaryContainer">@color/m3_secondary_container_dark</item>
+        <item name="colorOnSecondaryContainer">@color/m3_on_secondary_container_dark</item>
+
+        <item name="colorTertiary">@color/m3_tertiary_dark</item>
+        <item name="colorOnTertiary">@color/m3_on_tertiary_dark</item>
+        <item name="colorTertiaryContainer">@color/m3_tertiary_container_dark</item>
+        <item name="colorOnTertiaryContainer">@color/m3_on_tertiary_container_dark</item>
+
+        <item name="colorError">@color/m3_error_dark</item>
+        <item name="colorOnError">@color/m3_on_error_dark</item>
+        <item name="colorErrorContainer">@color/m3_error_container_dark</item>
+        <item name="colorOnErrorContainer">@color/m3_on_error_container_dark</item>
+
+        <item name="android:colorBackground">@color/m3_background_dark</item>
+        <item name="colorOnBackground">@color/m3_on_background_dark</item>
+
+        <item name="colorSurface">@color/m3_surface_dark</item>
+        <item name="colorOnSurface">@color/m3_on_surface_dark</item>
+        <item name="colorSurfaceVariant">@color/m3_surface_variant_dark</item>
+        <item name="colorOnSurfaceVariant">@color/m3_on_surface_variant_dark</item>
+
+        <!-- Legacy custom attributes for backward compatibility -->
+        <item name="aboutScreenColor">@color/blue_300</item>
+        <item name="actionModeBackground">@color/grey_800</item>
+        <item name="android:alertDialogTheme">@style/Theme.Material3.Dark.AlertDialog</item>
+        <item name="android:dialogTheme">@style/Theme.Material3.Dark.AlertDialog</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:textColor">@color/grey_100</item>
+        <item name="cardBackground">@drawable/card_dark_background</item>
+        <item name="cardBgColor">@color/grey_850</item>
+        <item name="colorAccent">?aboutScreenColor</item>
+        <item name="colorPrimaryDark">@color/grey_950</item>
+        <item name="dialogIconChangeColor">@drawable/ic_action_color_dark</item>
+        <item name="headerBackgroundColor">@color/grey_900</item>
+        <item name="highlightedBackgroundColor">@color/grey_800</item>
+        <item name="iconAdd">@drawable/ic_action_add_dark</item>
+        <item name="iconArchive">@drawable/ic_action_archive_dark</item>
+        <item name="iconChangeColor">@drawable/ic_action_color_dark</item>
+        <item name="iconEdit">@drawable/ic_action_edit_dark</item>
+        <item name="iconFilter">@drawable/ic_action_filter_dark</item>
+        <item name="iconUnarchive">@drawable/ic_action_unarchive_dark</item>
+        <item name="iconArrowUp">@drawable/ic_arrow_up_dark</item>
+        <item name="iconArrowDown">@drawable/ic_arrow_down_dark</item>
+        <item name="contrast0">@color/grey_900</item>
+        <item name="contrast20">@color/grey_800</item>
+        <item name="contrast40">@color/grey_750</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_300</item>
+        <item name="contrast100">@color/grey_100</item>
+        <item name="palette">@array/darkPalette</item>
+        <item name="popupMenuBackground">@color/black</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
+        <item name="scrollableRecyclerViewStyle">@style/ScrollableRecyclerViewStyle</item>
+        <item name="selectedBackground">@drawable/selected_box</item>
+        <item name="textColorAlertDialogListItem">@color/grey_100</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.Material3.Dark</item>
+        <item name="useHabitColorAsPrimary">false</item>
+        <item name="widgetBackgroundAlpha">1</item>
+        <item name="widgetShadowAlpha">0.25</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowBackgroundColor">@color/grey_900</item>
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyle</item>
+        <item name="android:textColorAlertDialogListItem">@color/grey_100</item>
+        <item name="singleLineTitle">false</item>
+        <item name="dialogFormLabelColor">@color/grey_800</item>
+        
+        <!-- Material 3 Edge-to-Edge support -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+    <!-- Pure Black variant for AMOLED screens -->
+    <style name="AppBaseThemeDark.PureBlack" parent="@style/AppBaseThemeDark">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:textColor">@color/grey_200</item>
+        <item name="cardBackground">@drawable/card_amoled_background</item>
+        <item name="cardBgColor">@color/black</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="headerBackgroundColor">@color/black</item>
+        <item name="highlightedBackgroundColor">@color/black</item>
+        <item name="contrast0">@color/black</item>
+        <item name="contrast20">@color/grey_900</item>
+        <item name="contrast40">@color/grey_800</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_400</item>
+        <item name="contrast100">@color/grey_200</item>
+        <item name="selectedBackground">@drawable/selected_box</item>
+        <item name="textColorAlertDialogListItem">@color/grey_100</item>
+        <item name="windowBackgroundColor">@color/black</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material.PureBlack</item>
+        <item name="dialogFormLabelColor">@color/grey_800</item>
+        <item name="android:colorBackground">@color/black</item>
+    </style>
+
+    <!-- Material 3 Color Overrides for Light Theme Palette -->
+    <style name="Theme.Material3.Light.AlertDialog" parent="@style/Theme.MaterialComponents.Light.Dialog.Alert" />
+    <style name="ThemeOverlay.Material3.Light" parent="@style/ThemeOverlay.MaterialComponents.Light" />
+
+    <!-- Material 3 Color Overrides for Dark Theme Palette -->
+    <style name="Theme.Material3.Dark.AlertDialog" parent="@style/Theme.MaterialComponents.Dialog.Alert" />
+    <style name="ThemeOverlay.Material3.Dark" parent="@style/ThemeOverlay.MaterialComponents" />
+
+    <!-- Legacy Theme Definitions for Backward Compatibility -->
+    <style name="BaseDialog" parent="Theme.AppCompat.Light.Dialog">
+        <item name="contrast0">@color/white</item>
+        <item name="contrast20">@color/grey_300</item>
+        <item name="contrast40">@color/grey_350</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_700</item>
+        <item name="contrast100">@color/grey_800</item>
+        <item name="palette">@array/lightPalette</item>
+        <item name="dialogFormLabelColor">@color/white</item>
+    </style>
+
+    <style name="BaseDialogDark" parent="Theme.AppCompat.Dialog">
+        <item name="contrast0">@color/grey_900</item>
+        <item name="contrast20">@color/grey_800</item>
+        <item name="contrast40">@color/grey_750</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_300</item>
+        <item name="contrast100">@color/grey_100</item>
+        <item name="palette">@array/darkPalette</item>
+        <item name="dialogFormLabelColor">@color/grey_800</item>
+    </style>
+
+    <style name="PreferenceThemeOverlay.v14.Material.PureBlack">
+        <item name="colorControlHighlight">@color/white_a0</item>
+    </style>
+
+    <style name="WidgetTheme" parent="AppBaseThemeDark">
+        <item name="cardBgColor">@color/grey_850</item>
+        <item name="contrast0">@color/white</item>
+        <item name="contrast20">@color/white_a0</item>
+        <item name="contrast60">@color/white_aa</item>
+        <item name="contrast80">@color/grey_800</item>
+        <item name="contrast100">@color/white</item>
+        <item name="palette">@array/transparentWidgetPalette</item>
+        <item name="widgetShadowAlpha">0</item>
+    </style>
+
+    <style name="DialogButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textSize">@dimen/regularTextSize</item>
+        <item name="android:textColor">@color/grey_100</item>
+    </style>
+
+    <style name="SmallSpinner">
+        <item name="android:textColor">?attr/contrast60</item>
+        <item name="android:textSize">@dimen/smallTextSize</item>
+    </style>
+
+    <style name="CardList">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?windowBackgroundColor</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="CardCommon">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">4dp</item>
+        <item name="android:layout_marginBottom">3dp</item>
+        <item name="android:layout_marginLeft">3dp</item>
+        <item name="android:layout_marginRight">3dp</item>
+        <item name="android:background">?cardBackground</item>
+    </style>
+
+    <style name="Card" parent="CardCommon">
+        <item name="android:layout_marginBottom">1dp</item>
+        <item name="android:elevation">1dp</item>
+        <item name="android:background">?attr/cardBgColor</item>
+    </style>
+
+    <style name="CardHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:textSize">@dimen/regularTextSize</item>
+    </style>
+
+    <style name="About" />
+
+    <style name="About.Item">
+        <item name="android:textSize">@dimen/regularTextSize</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingTop">6dp</item>
+        <item name="android:paddingBottom">6dp</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="About.Item.Language">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/smallTextSize</item>
+        <item name="android:gravity">center</item>
+        <item name="android:background">?attr/contrast20</item>
+        <item name="android:textAlignment">viewStart</item>
+    </style>
+
+    <style name="About.Item.Clickable">
+        <item name="android:paddingBottom">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:background">@drawable/ripple_transparent</item>
+    </style>
+
+    <style name="Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="Preference.Category.Material">
+        <item name="android:layout">@layout/preference_category_custom</item>
+    </style>
+
+    <style name="DialogWithTitle" parent="@style/Theme.AppCompat.Light.Dialog">
+        <item name="windowNoTitle">false</item>
+    </style>
+
+    <style name="DarkDialogWithTitle" parent="@style/Theme.AppCompat.Dialog">
+        <item name="windowNoTitle">false</item>
+    </style>
+
+    <style name="ScrollableRecyclerViewStyle" parent="android:Widget">
+        <item name="android:scrollbars">vertical</item>
+    </style>
+
+    <style name="SelectHabitTypeButton">
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingTop">14dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:layout_marginLeft">16dp</item>
+        <item name="android:layout_marginRight">16dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:elevation">6dp</item>
+        <item name="android:background">@drawable/round_ripple</item>
+        <item name="android:clickable">true</item>
+        <item name="android:selectable">true</item>
+    </style>
+
+    <style name="SelectHabitTypeButtonTitle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginBottom">8dp</item>
+    </style>
+
+    <style name="SelectHabitTypeButtonBody">
+        <item name="android:textSize">@dimen/smallTextSize</item>
+        <item name="android:lineSpacingMultiplier">1.25</item>
+    </style>
+
+    <style name="PopupAnimation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="Translucent">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowAnimationStyle">@style/PopupAnimation</item>
+    </style>
+
+    <style name="FormLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">-15dp</item>
+        <item name="android:layout_marginBottom">-4dp</item>
+        <item name="android:background">?attr/contrast0</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:textSize">@dimen/smallerTextSize</item>
+    </style>
+
+    <style name="FormInput">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/transparent</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textSize">@dimen/regularTextSize</item>
+    </style>
+
+    <style name="FormDropdown">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_drop_down_dark</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">14dp</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+        <item name="android:textSize">@dimen/regularTextSize</item>
+    </style>
+
+    <style name="FormInnerBox">
+        <item name="android:background">@drawable/bg_input_group</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="FormOuterBox">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingLeft">4dp</item>
+        <item name="android:paddingRight">4dp</item>
+    </style>
+
+    <style name="FormDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+        <item name="android:background">?attr/contrast20</item>
+    </style>
+
+    <style name="DialogFormInnerBox">
+        <item name="android:background">@drawable/dialog_bg_input_box</item>
+        <item name="android:clipChildren">false</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="DialogFormLabel">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginTop">-15dp</item>
+        <item name="android:layout_marginBottom">-4dp</item>
+        <item name="android:paddingStart">8dp</item>
+        <item name="android:background">?attr/dialogFormLabelColor</item>
+        <item name="android:paddingEnd">8dp</item>
+        <item name="android:textSize">@dimen/smallTextSize</item>
+    </style>
+
+    <style name="CheckmarkPopupBtn">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/ripple_transparent</item>
+        <item name="android:textSize">@dimen/smallerTextSize</item>
+    </style>
+
+    <style name="NumericalPopupBtn">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:paddingStart">12dp</item>
+        <item name="android:paddingEnd">12dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <item name="android:background">@drawable/ripple_transparent</item>
+        <item name="android:textSize">@dimen/smallerTextSize</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="Theme.Transparent" parent="android:Theme">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <!-- Show Habit Styles -->
+    <style name="ShowHabit" />
+
+    <style name="ShowHabit.Subtitle">
+        <item name="android:background">?headerBackgroundColor</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:elevation">2dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingLeft">60dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingStart">60dp</item>
+        <item name="android:paddingTop">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- Dialog Form Styles -->
+    <style name="dialogFormText">
+        <item name="android:textSize">@dimen/regularTextSize</item>
+        <item name="android:textColor">?attr/contrast100</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="dialogFormLabel" parent="dialogFormText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:minWidth">90dp</item>
+        <item name="android:gravity">left</item>
+        <item name="android:paddingLeft">6dp</item>
+        <item name="android:textColor">?attr/contrast60</item>
+    </style>
+
+    <style name="dialogFormRow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:minWidth">300dp</item>
+        <item name="android:gravity">start|center_vertical</item>
+    </style>
+
+    <style name="dialogFormPanel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+</resources>
