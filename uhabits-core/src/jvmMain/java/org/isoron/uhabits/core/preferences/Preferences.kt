@@ -183,6 +183,36 @@ open class Preferences(private val storage: Storage) {
             for (l in listeners) l.onCheckmarkSequenceChanged()
         }
 
+    var lockType: String
+        get() = storage.getString("pref_lock_type", "NONE")
+        set(type) {
+            storage.putString("pref_lock_type", type)
+        }
+
+    var lockTimeoutMinutes: Int
+        get() = storage.getInt("pref_lock_timeout_minutes", 5)
+        set(minutes) {
+            storage.putInt("pref_lock_timeout_minutes", minutes)
+        }
+
+    var biometricAllowed: Boolean
+        get() = storage.getBoolean("pref_biometric_allowed", false)
+        set(allowed) {
+            storage.putBoolean("pref_biometric_allowed", allowed)
+        }
+
+    var passcodeSalt: String
+        get() = storage.getString("pref_passcode_salt", "")
+        set(salt) {
+            storage.putString("pref_passcode_salt", salt)
+        }
+
+    var passcodeHash: String
+        get() = storage.getString("pref_passcode_hash", "")
+        set(hash) {
+            storage.putString("pref_passcode_hash", hash)
+        }
+
     fun updateLastHint(number: Int, timestamp: Timestamp) {
         storage.putInt("last_hint_number", number)
         storage.putLong("last_hint_timestamp", timestamp.unixTime)
