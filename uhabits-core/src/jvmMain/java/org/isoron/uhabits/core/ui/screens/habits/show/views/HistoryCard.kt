@@ -21,6 +21,7 @@ package org.isoron.uhabits.core.ui.screens.habits.show.views
 
 import org.isoron.platform.time.DayOfWeek
 import org.isoron.platform.time.LocalDate
+import org.isoron.uhabits.core.analytics.AnalyticsInteractor
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.commands.CreateRepetitionCommand
 import org.isoron.uhabits.core.models.Entry
@@ -151,6 +152,30 @@ class HistoryCardPresenter(
 
     fun onClickEditButton() {
         screen.showHistoryEditorDialog(this)
+    }
+
+    fun getPagedHeatmapData(page: Int = 0, pageSize: Int = 365): List<HistoryChart.Square> {
+        val analyticsInteractor = AnalyticsInteractor()
+        val heatmapCells = analyticsInteractor.getHeatmapPage(habit, page, pageSize)
+        return heatmapCells.map { cell ->
+            when {
+                habit.isNumerical -> {
+                    when {
+                        cell.value < 0.5 -> OFF
+                        cell.value < 1.0 -> GREY
+                        else -> ON
+                    }
+                }
+                else -> {
+                    when (cell.value) {
+                        1.0 -> ON
+                        0.5 -> HATCHED
+                        0.0 -> OFF
+                        else -> OFF
+                    }
+                }
+            }
+        }
     }
 
     companion object {
