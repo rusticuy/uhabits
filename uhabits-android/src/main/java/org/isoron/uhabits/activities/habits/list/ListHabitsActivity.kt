@@ -45,6 +45,7 @@ import org.isoron.uhabits.inject.ActivityContextModule
 import org.isoron.uhabits.inject.DaggerHabitsActivityComponent
 import org.isoron.uhabits.inject.HabitsActivityComponent
 import org.isoron.uhabits.inject.HabitsApplicationComponent
+import org.isoron.uhabits.security.AppLockManager
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.dismissCurrentDialog
 import org.isoron.uhabits.utils.restartWithFade
@@ -60,6 +61,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
     lateinit var screen: ListHabitsScreen
     lateinit var prefs: Preferences
     lateinit var midnightTimer: MidnightTimer
+    lateinit var appLockManager: AppLockManager
     private val scope = CoroutineScope(Dispatchers.Main)
 
     private var permissionAlreadyRequested = false
@@ -94,6 +96,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
         prefs.addListener(this)
         pureBlack = prefs.isPureBlackEnabled
         midnightTimer = appComponent.midnightTimer
+        appLockManager = appComponent.appLockManager
         rootView = component.listHabitsRootView
         screen = component.listHabitsScreen
         adapter = component.habitCardListAdapter
@@ -114,6 +117,8 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
     }
 
     override fun onResume() {
+        appLockManager.requireUnlock(this)
+        
         adapter.refresh()
         screen.onAttached()
         rootView.postInvalidate()

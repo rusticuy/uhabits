@@ -26,15 +26,21 @@ import org.isoron.uhabits.R
 import org.isoron.uhabits.activities.AndroidThemeSwitcher
 import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.databinding.SettingsActivityBinding
+import org.isoron.uhabits.security.AppLockManager
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.setupToolbar
 
 class SettingsActivity : AppCompatActivity() {
+
+    private lateinit var appLockManager: AppLockManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val component = (application as HabitsApplication).component
         val themeSwitcher = AndroidThemeSwitcher(this, component.preferences)
         themeSwitcher.apply()
+
+        appLockManager = component.appLockManager
 
         val binding = SettingsActivityBinding.inflate(LayoutInflater.from(this))
         binding.root.setupToolbar(
@@ -45,5 +51,10 @@ class SettingsActivity : AppCompatActivity() {
         )
         binding.root.applyRootViewInsets()
         setContentView(binding.root)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        appLockManager.requireUnlock(this)
     }
 }
