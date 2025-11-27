@@ -11,6 +11,7 @@ commonsLang3 = "3.14.0"
 dagger = "2.55"
 desugar = "2.1.4"
 dexmaker = "2.28.3"
+encryptedsharedpreferences = "1.1.0-alpha06"
 espresso = "3.6.1"
 guava = "33.2.1-android"
 hamcrest = "2.2"
@@ -80,6 +81,7 @@ rules = { group = "androidx.test", name = "rules", version.ref = "rules" }
 sqlite-jdbc = { module = "org.xerial:sqlite-jdbc", version.ref = "sqliteJdbc" }
 uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 documentfile = { group = "androidx.documentfile", name = "documentfile", version.ref = "documentfile" }
+encrypted-shared-preferences = { group = "androidx.security", name = "security-crypto", version.ref = "encryptedsharedpreferences" }
 
 [bundles]
 androidTest = [

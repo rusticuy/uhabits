@@ -112,6 +112,7 @@ dependencies {
     implementation(libs.biometric)
     implementation(libs.lifecycle.process)
     implementation(libs.lifecycle.runtime)
+    implementation(libs.encrypted.shared.preferences)
     implementation(project(":uhabits-core"))
     ksp(libs.dagger.compiler)
 

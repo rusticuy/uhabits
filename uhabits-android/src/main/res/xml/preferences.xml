@@ -21,34 +21,6 @@
         xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <PreferenceCategory
-            android:key="securityCategory"
-            android:title="@string/security_preferences">
-
-        <Preference
-                android:key="appLock"
-                android:title="@string/pref_app_lock_title"
-                android:summary="@string/pref_app_lock_description"
-                app:iconSpaceReserved="false" />
-
-        <ListPreference
-                android:defaultValue="NONE"
-                android:entries="@array/lock_type_entries"
-                android:entryValues="@array/lock_type_values"
-                android:key="pref_lock_type"
-                android:title="@string/pref_lock_type_title"
-                app:iconSpaceReserved="false" />
-
-        <EditTextPreference
-                android:defaultValue="300"
-                android:inputType="numberDecimal"
-                android:key="pref_lock_timeout"
-                android:title="@string/pref_lock_timeout_title"
-                android:summary="@string/pref_lock_timeout_description"
-                app:iconSpaceReserved="false" />
-
-    </PreferenceCategory>
-
-    <PreferenceCategory
             android:key="interfaceCategory"
             android:title="@string/interface_preferences">
 
@@ -115,6 +87,57 @@
                 android:key="pref_first_weekday"
                 android:title="@string/first_day_of_the_week"
                 app:iconSpaceReserved="false" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+            android:key="securityCategory"
+            android:title="@string/security_preferences">
+
+        <Preference
+                android:key="appLock"
+                android:title="@string/pref_app_lock_title"
+                android:summary="@string/pref_app_lock_description"
+                app:iconSpaceReserved="false" />
+
+        <ListPreference
+                android:defaultValue="NONE"
+                android:entries="@array/lock_type_entries"
+                android:entryValues="@array/lock_type_values"
+                android:key="pref_lock_type"
+                android:title="@string/pref_lock_type_title"
+                app:iconSpaceReserved="false" />
+
+        <ListPreference
+                android:defaultValue="5"
+                android:entries="@array/lock_timeout_entries"
+                android:entryValues="@array/lock_timeout_values"
+                android:key="pref_lock_timeout"
+                android:summary="@string/pref_lock_timeout_description"
+                android:title="@string/pref_lock_timeout_title"
+                app:iconSpaceReserved="false" />
+
+        <SwitchPreferenceCompat
+                android:defaultValue="false"
+                android:key="pref_lock_enabled"
+                android:summary="@string/pref_lock_description"
+                android:title="@string/pref_lock_title"
+                app:iconSpaceReserved="false" />
+
+        <Preference
+                android:key="lockSetup"
+                android:title="@string/pref_lock_setup"
+                android:summary="@string/pref_lock_setup_description"
+                app:iconSpaceReserved="false"
+                android:dependency="pref_lock_enabled" />
+
+        <SwitchPreferenceCompat
+                android:defaultValue="false"
+                android:key="pref_biometric_allowed"
+                android:summary="@string/pref_biometric_description"
+                android:title="@string/pref_biometric_title"
+                app:iconSpaceReserved="false"
+                android:dependency="pref_lock_enabled" />
 
     </PreferenceCategory>
 

@@ -41,6 +41,7 @@ import org.isoron.uhabits.intents.IntentScheduler
 import org.isoron.uhabits.io.AndroidLogging
 import org.isoron.uhabits.notifications.AndroidNotificationTray
 import org.isoron.uhabits.preferences.SharedPreferencesStorage
+import org.isoron.uhabits.security.AppLockConfig
 import org.isoron.uhabits.utils.DatabaseUtils
 import java.io.File
 
@@ -113,5 +114,11 @@ class HabitsModule(dbFile: File) {
     @AppScope
     fun getDatabase(): Database {
         return db
+    }
+
+    @Provides
+    @AppScope
+    fun getAppLockConfig(preferences: Preferences): AppLockConfig {
+        return AppLockConfig(preferences)
     }
 }

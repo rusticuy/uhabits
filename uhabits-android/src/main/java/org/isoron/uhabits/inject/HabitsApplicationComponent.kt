@@ -38,12 +38,14 @@ import org.isoron.uhabits.intents.IntentParser
 import org.isoron.uhabits.intents.PendingIntentFactory
 import org.isoron.uhabits.receivers.ReminderController
 import org.isoron.uhabits.security.AppLockManager
+import org.isoron.uhabits.security.AppLockConfig
 import org.isoron.uhabits.tasks.AndroidTaskRunner
 import org.isoron.uhabits.widgets.WidgetUpdater
 
 @AppScope
 @Component(modules = [AppContextModule::class, HabitsModule::class, AndroidTaskRunner::class])
 interface HabitsApplicationComponent {
+    val appLockConfig: AppLockConfig
     val commandRunner: CommandRunner
 
     @get:AppContext

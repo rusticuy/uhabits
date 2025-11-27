@@ -22,6 +22,8 @@ package org.isoron.uhabits.preferences
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import androidx.security.crypto.EncryptedSharedPreferences
+import androidx.security.crypto.MasterKey
 import org.isoron.uhabits.R
 import org.isoron.uhabits.core.AppScope
 import org.isoron.uhabits.core.preferences.Preferences
@@ -31,11 +33,29 @@ import javax.inject.Inject
 @AppScope
 class SharedPreferencesStorage
 @Inject constructor(
-    @AppContext context: Context
+    @AppContext private val context: Context
 ) : SharedPreferences.OnSharedPreferenceChangeListener, Preferences.Storage {
 
     private val sharedPrefs: SharedPreferences =
         PreferenceManager.getDefaultSharedPreferences(context)
+
+    private val encryptedSharedPrefs: SharedPreferences by lazy {
+        val masterKey = MasterKey.Builder(context)
+            .setKeyScheme(MasterKey.KeyScheme.AES256_GCM)
+            .build()
+        EncryptedSharedPreferences.create(
+            context,
+            "lock_settings",
+            masterKey,
+            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+        )
+    }
+
+    private val sensitiveKeys = setOf(
+        "pref_passcode_salt",
+        "pref_passcode_hash"
+    )
 
     private var preferences: Preferences? = null
 
@@ -44,7 +64,10 @@ class SharedPreferencesStorage
         PreferenceManager.setDefaultValues(context, R.xml.preferences, false)
     }
 
-    override fun clear() = sharedPrefs.edit().clear().apply()
+    override fun clear() {
+        sharedPrefs.edit().clear().apply()
+        encryptedSharedPrefs.edit().clear().apply()
+    }
 
     override fun getBoolean(key: String, defValue: Boolean) =
         sharedPrefs.getBoolean(key, defValue)
@@ -55,8 +78,13 @@ class SharedPreferencesStorage
     override fun getLong(key: String, defValue: Long) =
         sharedPrefs.getLong(key, defValue)
 
-    override fun getString(key: String, defValue: String): String =
-        sharedPrefs.getString(key, defValue)!!
+    override fun getString(key: String, defValue: String): String {
+        return if (key in sensitiveKeys) {
+            encryptedSharedPrefs.getString(key, defValue) ?: defValue
+        } else {
+            sharedPrefs.getString(key, defValue)!!
+        }
+    }
 
     override fun onAttached(preferences: Preferences) {
         this.preferences = preferences
@@ -71,11 +99,21 @@ class SharedPreferencesStorage
     override fun putLong(key: String, value: Long) =
         sharedPrefs.edit().putLong(key, value).apply()
 
-    override fun putString(key: String, value: String) =
-        sharedPrefs.edit().putString(key, value).apply()
+    override fun putString(key: String, value: String) {
+        if (key in sensitiveKeys) {
+            encryptedSharedPrefs.edit().putString(key, value).apply()
+        } else {
+            sharedPrefs.edit().putString(key, value).apply()
+        }
+    }
 
-    override fun remove(key: String) =
-        sharedPrefs.edit().remove(key).apply()
+    override fun remove(key: String) {
+        if (key in sensitiveKeys) {
+            encryptedSharedPrefs.edit().remove(key).apply()
+        } else {
+            sharedPrefs.edit().remove(key).apply()
+        }
+    }
 
     override fun onSharedPreferenceChanged(
         sharedPreferences: SharedPreferences,

@@ -118,7 +118,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
 
     override fun onResume() {
         appLockManager.requireUnlock(this)
-        
+
         adapter.refresh()
         screen.onAttached()
         rootView.postInvalidate()
