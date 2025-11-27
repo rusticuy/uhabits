@@ -128,7 +128,7 @@ class ShowHabitActivity : AppCompatActivity(), CommandRunner.Listener {
     override fun onResume() {
         super.onResume()
         appLockManager.requireUnlock(this)
-        
+
         commandRunner.addListener(this)
         supportFragmentManager.findFragmentByTag("historyEditor")?.let {
             (it as HistoryEditorDialog).setOnDateClickedListener(presenter.historyCardPresenter)

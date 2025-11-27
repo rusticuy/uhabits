@@ -36,6 +36,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.commit
 import org.isoron.uhabits.HabitsApplication
 import org.isoron.uhabits.R
 import org.isoron.uhabits.activities.habits.list.RESULT_BUG_REPORT
@@ -49,6 +50,7 @@ import org.isoron.uhabits.core.utils.DateUtils.Companion.getLongWeekdayNames
 import org.isoron.uhabits.notifications.AndroidNotificationTray.Companion.createAndroidNotificationChannel
 import org.isoron.uhabits.notifications.RingtoneManager
 import org.isoron.uhabits.security.AppLockManager
+import org.isoron.uhabits.security.AppLockConfig
 import org.isoron.uhabits.utils.StyledResources
 import org.isoron.uhabits.utils.applyBottomInset
 import org.isoron.uhabits.utils.startActivitySafely
@@ -61,6 +63,7 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
     private lateinit var prefs: Preferences
     private var widgetUpdater: WidgetUpdater? = null
     private var appLockManager: AppLockManager? = null
+    private lateinit var appLockConfig: AppLockConfig
 
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -91,6 +94,7 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
             prefs = appContext.component.preferences
             widgetUpdater = appContext.component.widgetUpdater
             appLockManager = appContext.component.appLockManager
+            appLockConfig = appContext.component.appLockConfig
         }
         setResultOnPreferenceClick("importData", RESULT_IMPORT_DATA)
         setResultOnPreferenceClick("exportCSV", RESULT_EXPORT_CSV)
@@ -155,6 +159,10 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
                         Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
                 )
                 startActivityForResult(intent, PUBLIC_BACKUP_REQUEST_CODE)
+                return true
+            }
+            "lockSetup" -> {
+                showLockSetupDialog()
                 return true
             }
         }
@@ -298,6 +306,13 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
             }
             .setNegativeButton("Cancel", null)
             .show()
+    }
+
+    private fun showLockSetupDialog() {
+        parentFragmentManager.commit {
+            addToBackStack(null)
+            replace(android.R.id.content, LockSetupFragment())
+        }
     }
 
     companion object {

@@ -113,6 +113,22 @@
         <item>@string/hint_drag</item>
         <item>@string/hint_landscape</item>
     </string-array>
+    <string-array name="lock_timeout_entries">
+        <item>5 minutes</item>
+        <item>10 minutes</item>
+        <item>15 minutes</item>
+        <item>30 minutes</item>
+        <item>1 hour</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="lock_timeout_values">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>30</item>
+        <item>60</item>
+        <item>0</item>
+    </string-array>
     <string name="about">About</string>
     <string name="translators">Translators</string>
     <string name="developers">Developers</string>
@@ -248,11 +264,25 @@
     <string name="pref_app_lock_title">App Lock</string>
     <string name="pref_app_lock_description">Protect your habits with a PIN or biometric authentication</string>
     <string name="pref_lock_type_title">Lock Type</string>
-    <string name="pref_lock_timeout_title">Lock Timeout (seconds)</string>
-    <string name="pref_lock_timeout_description">Time before the app locks when backgrounded</string>
+    <string name="pref_lock_timeout_title">Auto-lock timeout</string>
+    <string name="pref_lock_timeout_description">Lock the app after selected duration of inactivity.</string>
     <string name="security_preferences">Security</string>
+    <string name="security">Security</string>
     <string name="lock_type_none">None</string>
     <string name="lock_type_pin">PIN</string>
     <string name="lock_type_pattern">Pattern</string>
     <string name="lock_type_biometric">Biometric</string>
+    <string name="pref_lock_title">Enable app lock</string>
+    <string name="pref_lock_description">Require a PIN or pattern to access the app.</string>
+    <string name="pref_lock_setup">Set up lock</string>
+    <string name="pref_lock_setup_description">Configure your PIN or pattern</string>
+    <string name="pref_biometric_title">Allow biometric unlock</string>
+    <string name="pref_biometric_description">Use fingerprint or face recognition to unlock the app.</string>
+    <string name="pin_input_hint">Enter PIN (4+ digits)</string>
+    <string name="pin_confirm_hint">Confirm PIN</string>
+    <string name="pin_cannot_be_empty">PIN cannot be empty</string>
+    <string name="pin_too_short">PIN must be at least 4 digits</string>
+    <string name="pin_mismatch">PINs do not match</string>
+    <string name="lock_setup_complete">Lock setup complete</string>
+    <string name="enter_pin_instruction">Enter a 4+ digit PIN to protect your habits</string>
 </resources>
