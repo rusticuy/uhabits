@@ -34,13 +34,12 @@
         android:layout_width="match_parent"
         android:layout_height="160dp"/>
 
-    <androidx.appcompat.widget.AppCompatButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/edit"
-        style="?android:borderlessButtonStyle"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:src="@drawable/ic_action_edit_light"
         android:text="@string/edit"
         android:textColor="@color/grey_400"
         android:textSize="@dimen/smallTextSize"/>

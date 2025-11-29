@@ -18,7 +18,7 @@
   -->
 
 
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/container"
     android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
     app:divider="@drawable/checkmark_dialog_divider"
     app:showDividers="middle">
 
-    <androidx.appcompat.widget.AppCompatEditText
+    <EditText
         android:id="@+id/notes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -43,7 +43,7 @@
         android:text=""
         android:textSize="@dimen/smallTextSize" />
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:id="@+id/booleanButtons"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -71,9 +71,9 @@
             android:id="@+id/unknownBtn"
             style="@style/CheckmarkPopupBtn"
             android:text="@string/fa_question" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <LinearLayout
         android:id="@+id/numberButtons"
         android:layout_width="match_parent"
         android:layout_height="48dp"
@@ -82,7 +82,7 @@
         app:divider="@drawable/checkmark_dialog_divider"
         app:showDividers="middle">
 
-        <androidx.appcompat.widget.AppCompatEditText
+        <EditText
             android:id="@+id/value"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -107,5 +107,5 @@
             android:id="@+id/unknownBtnNumber"
             style="@style/CheckmarkPopupBtn"
             android:text="@string/fa_question" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
-</androidx.appcompat.widget.LinearLayoutCompat>
+    </LinearLayout>
+</LinearLayout>
