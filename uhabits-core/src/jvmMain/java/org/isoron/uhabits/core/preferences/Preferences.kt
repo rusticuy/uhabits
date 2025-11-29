@@ -307,4 +307,11 @@ open class Preferences(private val storage: Storage) {
         listeners = LinkedList()
         storage.onAttached(this)
     }
+
+    companion object {
+        const val LOCK_TYPE_NONE = "NONE"
+        const val LOCK_TYPE_PIN = "PIN"
+        const val LOCK_TYPE_PATTERN = "PATTERN"
+        const val LOCK_TYPE_BIOMETRIC = "BIOMETRIC"
+    }
 }

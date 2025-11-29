@@ -94,4 +94,18 @@
         <item>51</item>
         <item>0</item>
     </string-array>
+
+    <string-array name="lock_type_entries">
+        <item>@string/lock_type_none</item>
+        <item>@string/lock_type_pin</item>
+        <item>@string/lock_type_pattern</item>
+        <item>@string/lock_type_biometric</item>
+    </string-array>
+
+    <string-array name="lock_type_values" translatable="false">
+        <item>NONE</item>
+        <item>PIN</item>
+        <item>PATTERN</item>
+        <item>BIOMETRIC</item>
+    </string-array>
 </resources>

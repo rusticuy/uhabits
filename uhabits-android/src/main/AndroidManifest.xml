@@ -81,6 +81,11 @@
         </activity>
 
         <activity
+            android:name=".activities.lock.LockActivity"
+            android:label=""
+            android:exported="false" />
+
+        <activity
             android:name=".activities.intro.IntroActivity"
             android:label=""
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
