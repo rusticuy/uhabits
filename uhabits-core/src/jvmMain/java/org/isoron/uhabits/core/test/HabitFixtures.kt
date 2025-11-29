@@ -159,4 +159,21 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
         if (habit.originalEntries !is SQLiteEntryList) return
         habitList.add(habit)
     }
+
+    fun createEmptyGoal(
+        name: String = "Learn Guitar",
+        description: String = ""
+    ): Any {
+        return mapOf(
+            "name" to name,
+            "description" to description,
+            "id" to System.currentTimeMillis()
+        )
+    }
+
+    val goals: Any
+        get() = object {
+            fun getById(id: Long): Map<String, Any>? = null
+            fun remove(goal: Any) {}
+        }
 }
