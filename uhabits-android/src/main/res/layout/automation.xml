@@ -52,7 +52,7 @@
                 android:textColor="@color/white"
                 app:rippleColor="@color/white"
                 app:strokeColor="@color/white" />
-        </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -69,7 +69,7 @@
                     style="@style/FormLabel"
                     android:text="@string/habit" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <Spinner
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:paddingTop="16dp"
@@ -87,7 +87,7 @@
                     style="@style/FormLabel"
                     android:text="@string/action" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <Spinner
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:id="@+id/actionSpinner"

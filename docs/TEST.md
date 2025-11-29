@@ -24,3 +24,36 @@ Note that instrumented tests are designed to run on a clean install, inside an e
 - All animations must be manually disabled.
 
 If there are failing view tests (that is, if some custom views do not render exactly like the prerendered images we have), then both the actual and expected images will be automatically downloaded from the device to the folder `uhabits-android/build/outputs`. After verifying the differences, if you feel that the actual images are actually fine and should replace the prerendered ones, then run `./build.sh android-accept-images`.
+
+## Material3 UI Theme Screenshot Tests
+
+The `MaterialThemeScreenshotTest` class provides automated regression detection for Material3 UI themes. These tests launch full activities (`ListHabitsActivity` and `ShowHabitActivity`) in light, dark, and pure-black themes, capture screenshots, and compare them against golden reference images.
+
+### Running Material3 UI tests
+
+```bash
+./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.isoron.uhabits.material.MaterialThemeScreenshotTest
+```
+
+### Regenerating Golden Images
+
+After intentional UI or theme changes, regenerate golden images:
+
+1. Run tests (they will fail but save actual renders to device):
+   ```bash
+   ./gradlew connectedDebugAndroidTest -Pandroid.testInstrumentationRunnerArguments.class=org.isoron.uhabits.material.MaterialThemeScreenshotTest
+   ```
+
+2. Pull generated screenshots from device:
+   ```bash
+   adb pull /data/data/org.isoron.uhabits/test-screenshots/views/habits/material/
+   ```
+
+3. Copy to assets directory:
+   ```bash
+   cp test-screenshots/views/habits/material/*.png uhabits-android/src/androidTest/assets/views/habits/material/
+   ```
+
+4. Run tests again to verify they pass
+
+See `uhabits-android/src/androidTest/assets/views/habits/material/README.md` for more details.

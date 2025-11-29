@@ -26,3 +26,4 @@
     android:layout_height="?actionBarSize"
     android:theme="@style/ThemeOverlay.Material3.Dark"
     app:popupTheme="?toolbarPopupTheme"/>
+    app:popupTheme="?toolbarPopupTheme"/>
