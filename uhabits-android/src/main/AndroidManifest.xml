@@ -73,6 +73,33 @@
         </activity>
 
         <activity
+            android:name=".activities.goals.list.ListGoalsActivity"
+            android:exported="true"
+            android:label="@string/goals">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.habits.list.ListHabitsActivity" />
+        </activity>
+
+        <activity
+            android:name=".activities.goals.edit.EditGoalActivity"
+            android:exported="true"
+            android:label="@string/add_goal">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.goals.list.ListGoalsActivity" />
+        </activity>
+
+        <activity
+            android:name=".activities.goals.show.ShowGoalActivity"
+            android:exported="true"
+            android:label="@string/goal_details">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.goals.list.ListGoalsActivity" />
+        </activity>
+
+        <activity
             android:name=".activities.settings.SettingsActivity"
             android:label="@string/settings">
             <meta-data
