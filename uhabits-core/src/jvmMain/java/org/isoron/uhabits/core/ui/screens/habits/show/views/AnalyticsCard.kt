@@ -29,7 +29,6 @@ import org.isoron.uhabits.core.models.Habit
 import org.isoron.uhabits.core.models.NumericalHabitType.AT_LEAST
 import org.isoron.uhabits.core.models.NumericalHabitType.AT_MOST
 import org.isoron.uhabits.core.models.PaletteColor
-import org.isoron.uhabits.core.models.Streak
 import org.isoron.uhabits.core.ui.views.HistoryChart
 import org.isoron.uhabits.core.ui.views.HistoryChart.Square.DIMMED
 import org.isoron.uhabits.core.ui.views.HistoryChart.Square.GREY
@@ -38,7 +37,6 @@ import org.isoron.uhabits.core.ui.views.HistoryChart.Square.OFF
 import org.isoron.uhabits.core.ui.views.HistoryChart.Square.ON
 import org.isoron.uhabits.core.ui.views.Theme
 import org.isoron.uhabits.core.utils.DateUtils
-import kotlin.math.roundToInt
 
 data class TrendDataPoint(
     val date: LocalDate,

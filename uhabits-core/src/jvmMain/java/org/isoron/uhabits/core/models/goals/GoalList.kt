@@ -1,0 +1,82 @@
+/*
+ * Copyright (C) 2016-2025 Álinson Santos Xavier <git@axavier.org>
+ *
+ * This file is part of Loop Habit Tracker.
+ *
+ * Loop Habit Tracker is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * Loop Habit Tracker is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.isoron.uhabits.core.models.goals
+
+import org.isoron.uhabits.core.models.ModelObservable
+import javax.annotation.concurrent.ThreadSafe
+
+@ThreadSafe
+abstract class GoalList : Iterable<Goal> {
+    val observable: ModelObservable
+
+    constructor() {
+        observable = ModelObservable()
+    }
+
+    abstract fun add(goal: Goal)
+
+    abstract fun getById(id: Long): Goal?
+
+    abstract fun getByUUID(uuid: String?): Goal?
+
+    abstract fun size(): Int
+
+    abstract fun remove(goal: Goal)
+
+    abstract fun update(goal: Goal)
+
+    abstract fun update(goals: List<Goal>)
+
+    abstract fun indexOf(goal: Goal): Int
+
+    val isEmpty: Boolean
+        get() = size() == 0
+
+    open fun removeAll() {
+        val copy = mutableListOf<Goal>()
+        for (g in this) copy.add(g)
+        for (g in copy) remove(g)
+        observable.notifyListeners()
+    }
+
+    abstract fun getLinkedHabits(goalId: Long): List<GoalHabitLink>
+
+    abstract fun addHabitLink(link: GoalHabitLink)
+
+    abstract fun removeHabitLink(link: GoalHabitLink)
+
+    abstract fun updateHabitLink(link: GoalHabitLink)
+
+    abstract fun getMilestones(goalId: Long): List<GoalMilestone>
+
+    abstract fun addMilestone(milestone: GoalMilestone)
+
+    abstract fun removeMilestone(milestone: GoalMilestone)
+
+    abstract fun updateMilestone(milestone: GoalMilestone)
+
+    enum class Order {
+        BY_NAME_ASC,
+        BY_NAME_DESC,
+        BY_PROGRESS_ASC,
+        BY_PROGRESS_DESC,
+        BY_DEADLINE_ASC,
+        BY_DEADLINE_DESC
+    }
+}
