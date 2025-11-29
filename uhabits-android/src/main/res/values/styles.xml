@@ -18,6 +18,7 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <style name="PreferenceThemeOverlay.v14.Material.PureBlack">
     <style name="AppBaseTheme" parent="@style/Theme.Material3.Light.NoActionBar">
         <item name="aboutScreenColor">@color/blue_800</item>
         <item name="actionBarPopupTheme">@style/ThemeOverlay.Material3.Light</item>
@@ -172,8 +173,7 @@
         <item name="colorControlHighlight">@color/white_a0</item>
     </style>
 
-
-    <style name="WidgetTheme" parent="AppBaseThemeDark">
+    <style name="WidgetTheme" parent="@style/Theme.Material3.Dark.NoActionBar">
         <item name="cardBgColor">@color/grey_850</item>
         <item name="contrast0">@color/white</item>
         <item name="contrast20">@color/white_a0</item>
@@ -257,6 +257,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">?colorPrimary</item>
+        <item name="android:theme">@style/ThemeOverlay.Material3.Dark.ActionBar</item>
         <item name="android:theme">@style/ThemeOverlay.Material3.Dark</item>
     </style>
 
@@ -268,6 +269,7 @@
         <item name="windowNoTitle">false</item>
     </style>
 
+    <style name="DarkDialogWithTitle" parent="@style/Theme.Material3.Dark.Dialog">
     <style name="DarkDialogWithTitle"
            parent="@style/Theme.Material3.Dark.Dialog">
         <item name="windowNoTitle">false</item>
@@ -423,7 +425,6 @@
         <item name="android:background">@drawable/ripple_transparent</item>
         <item name="android:textSize">@dimen/smallerTextSize</item>
         <item name="android:textAllCaps">true</item>
-
     </style>
 
     <style name="Theme.Transparent" parent="android:Theme">
@@ -434,5 +435,4 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
-
 </resources>

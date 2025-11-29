@@ -58,6 +58,9 @@ constructor(
 
     override fun applyDarkTheme() {
         currentTheme = DarkTheme()
+        context.setTheme(R.style.Theme_Loop_Light)
+        (context as Activity).window.navigationBarColor =
+            ContextCompat.getColor(context, R.color.grey_900)
         context.setTheme(R.style.AppBaseThemeDark)
         val activity = context as Activity
         DynamicColors.applyToActivityIfAvailable(activity)
@@ -66,6 +69,7 @@ constructor(
 
     override fun applyLightTheme() {
         currentTheme = LightTheme()
+        context.setTheme(R.style.Theme_Loop_Light)
         context.setTheme(R.style.AppBaseTheme)
         val activity = context as Activity
         DynamicColors.applyToActivityIfAvailable(activity)
@@ -74,6 +78,9 @@ constructor(
 
     override fun applyPureBlackTheme() {
         currentTheme = PureBlackTheme()
+        context.setTheme(R.style.Theme_Loop_Light_PureBlack)
+        (context as Activity).window.navigationBarColor =
+            ContextCompat.getColor(context, R.color.black)
         context.setTheme(R.style.AppBaseThemeDark_PureBlack)
         val activity = context as Activity
         setEdgeToEdgeBar(activity)

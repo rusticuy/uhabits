@@ -78,7 +78,7 @@ abstract class BaseAndroidTest : TestCase() {
         setFixedLocalTime(FIXED_LOCAL_TIME)
         setStartDayOffset(0, 0)
         setResolution(2.0f)
-        setTheme(R.style.AppBaseTheme)
+        setTheme(R.style.Theme_Loop_Light)
         setLocale("en", "US")
         latch = CountDownLatch(1)
         val context = targetContext.applicationContext
