@@ -293,4 +293,17 @@
     <string name="activity_heatmap">Activity Heatmap</string>
     <string name="trend">Trend (7-day moving average)</string>
     <string name="chain_timeline">Streak History</string>
+
+    <!-- Goals Strings -->
+    <string name="goals">Goals</string>
+    <string name="add_goal">Add goal</string>
+    <string name="goal_details">Goal Details</string>
+    <string name="goal_habits_linked">%d habits linked</string>
+    <string name="goal_progress">Progress</string>
+    <string name="goal_milestones">Milestones</string>
+    <string name="goal_linked_habits">Linked Habits</string>
+    <string name="goal_deadline">Deadline</string>
+    <string name="toast_goal_created">Goal created</string>
+    <string name="toast_goal_archived">Goal archived</string>
+    <string name="toast_goal_deleted">Goal deleted</string>
 </resources>

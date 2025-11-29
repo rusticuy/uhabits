@@ -20,11 +20,13 @@
 package org.isoron.uhabits.activities.habits.list
 
 import android.content.Context
+import android.content.Intent
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import org.isoron.uhabits.R
+import org.isoron.uhabits.activities.goals.list.ListGoalsActivity
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.preferences.Preferences
 import org.isoron.uhabits.core.ui.ThemeSwitcher
@@ -143,6 +145,11 @@ class ListHabitsMenu @Inject constructor(
 
             R.id.actionSortStatus -> {
                 behavior.onSortByStatus()
+                return true
+            }
+
+            R.id.actionGoals -> {
+                activity.startActivity(Intent(activity, ListGoalsActivity::class.java))
                 return true
             }
 

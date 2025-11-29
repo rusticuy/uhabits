@@ -107,6 +107,8 @@ data class Timestamp(var unixTime: Long) : Comparable<Timestamp> {
         )
     }
 
+    fun toMillis(): Long = unixTime
+
     companion object {
         const val DAY_LENGTH: Long = 86400000
         val ZERO = Timestamp(0)
@@ -125,6 +127,10 @@ data class Timestamp(var unixTime: Long) : Comparable<Timestamp> {
          */
         fun oldest(first: Timestamp, second: Timestamp): Timestamp {
             return if (first.unixTime < second.unixTime) first else second
+        }
+
+        fun today(): Timestamp {
+            return Timestamp(getStartOfTodayCalendar().timeInMillis)
         }
     }
 

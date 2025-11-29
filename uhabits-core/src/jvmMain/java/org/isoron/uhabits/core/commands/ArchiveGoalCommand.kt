@@ -16,8 +16,16 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.commands
 
-const val DATABASE_FILENAME = "uhabits.db"
+import org.isoron.uhabits.core.models.Goal
+import org.isoron.uhabits.core.models.GoalList
 
-const val DATABASE_VERSION = 26
+data class ArchiveGoalCommand(
+    val goalList: GoalList,
+    val goal: Goal
+) : Command {
+    override fun run() {
+        goalList.update(goal.copy(archived = true))
+    }
+}

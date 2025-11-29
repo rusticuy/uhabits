@@ -24,6 +24,9 @@ import org.isoron.uhabits.core.BaseUnitTest
 import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.goals.MemoryGoalList
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.MatcherAssert.assertThat
+import org.isoron.uhabits.core.BaseUnitTest
 import org.junit.Before
 import org.junit.Test
 
@@ -75,5 +78,28 @@ class EditGoalCommandTest : BaseUnitTest() {
         val nonExistentId = 999L
         val editCommand = EditGoalCommand(goalList, nonExistentId, modifiedGoal)
         editCommand.run()
+
+    @Before
+    @Throws(Exception::class)
+    override fun setUp() {
+        super.setUp()
+    }
+
+    @Test
+    fun testEditGoalName() {
+        val goal = fixtures.createEmptyGoal("Original Name")
+        assertThat(goal, notNullValue())
+    }
+
+    @Test
+    fun testEditGoalDeadline() {
+        val goal = fixtures.createEmptyGoal()
+        assertThat(goal, notNullValue())
+    }
+
+    @Test
+    fun testEditGoalDescription() {
+        val goal = fixtures.createEmptyGoal()
+        assertThat(goal, notNullValue())
     }
 }

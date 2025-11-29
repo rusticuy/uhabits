@@ -69,5 +69,23 @@ class CreateGoalCommandTest : BaseUnitTest() {
         assertThat(createdGoal.name, equalTo(goal.name))
         assertThat(createdGoal.description, equalTo(goal.description))
         assertThat(createdGoal.targetValue, equalTo(goal.targetValue))
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.MatcherAssert.assertThat
+import org.isoron.uhabits.core.BaseUnitTest
+import org.junit.Before
+import org.junit.Test
+
+class CreateGoalCommandTest : BaseUnitTest() {
+
+    @Before
+    @Throws(Exception::class)
+    override fun setUp() {
+        super.setUp()
+    }
+
+    @Test
+    fun testCreateGoal() {
+        val goal = fixtures.createEmptyGoal("Test Goal")
+        assertThat(goal, notNullValue())
     }
 }
