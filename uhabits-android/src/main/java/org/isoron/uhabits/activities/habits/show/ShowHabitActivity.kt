@@ -50,6 +50,7 @@ import org.isoron.uhabits.core.ui.screens.habits.show.ShowHabitPresenter
 import org.isoron.uhabits.core.ui.views.OnDateClickedListener
 import org.isoron.uhabits.intents.IntentFactory
 import org.isoron.uhabits.security.AppLockManager
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.currentTheme
 import org.isoron.uhabits.utils.dismissCurrentAndShow
@@ -86,6 +87,7 @@ class ShowHabitActivity : AppCompatActivity(), CommandRunner.Listener {
 
         themeSwitcher = AndroidThemeSwitcher(this, preferences)
         themeSwitcher.apply()
+        enableEdgeToEdge()
 
         presenter = ShowHabitPresenter(
             commandRunner = commandRunner,

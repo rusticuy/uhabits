@@ -25,6 +25,7 @@ import androidx.fragment.app.Fragment
 import com.github.appintro.AppIntro2
 import com.github.appintro.AppIntroFragment
 import org.isoron.uhabits.R
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 
 /**
  * Activity that introduces the app to the user, shown only after the app is
@@ -35,6 +36,7 @@ class IntroActivity : AppIntro2() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         showStatusBar(false)
+        enableEdgeToEdge()
 
         addSlide(
             AppIntroFragment.newInstance(

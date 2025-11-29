@@ -22,6 +22,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import org.isoron.uhabits.HabitsApplication
 import org.isoron.uhabits.activities.AndroidThemeSwitcher
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 
 /**
  * Activity that allows the user to see information about the app itself.
@@ -37,6 +38,7 @@ class AboutActivity : AppCompatActivity() {
             app.component.preferences
         )
         AndroidThemeSwitcher(this, app.component.preferences).apply()
+        enableEdgeToEdge()
         setContentView(AboutView(this, screen))
     }
 }

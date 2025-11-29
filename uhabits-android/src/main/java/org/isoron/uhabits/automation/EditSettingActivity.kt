@@ -24,6 +24,7 @@ import androidx.appcompat.app.AppCompatActivity
 import org.isoron.uhabits.HabitsApplication
 import org.isoron.uhabits.activities.AndroidThemeSwitcher
 import org.isoron.uhabits.core.models.HabitMatcher
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 import org.isoron.uhabits.utils.applyRootViewInsets
 
 class EditSettingActivity : AppCompatActivity() {
@@ -37,6 +38,7 @@ class EditSettingActivity : AppCompatActivity() {
             )
         )
         AndroidThemeSwitcher(this, app.component.preferences).apply()
+        enableEdgeToEdge()
 
         val args = SettingUtils.parseIntent(this.intent, habits)
         val controller = EditSettingController(this)
