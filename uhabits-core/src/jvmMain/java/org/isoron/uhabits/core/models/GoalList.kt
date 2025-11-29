@@ -19,6 +19,32 @@
 
 package org.isoron.uhabits.core.models
 
+open class GoalList {
+    protected val goals: MutableList<Goal> = mutableListOf()
+
+    open fun add(goal: Goal) {
+        goals.add(goal)
+    }
+
+    open fun remove(goal: Goal) {
+        goals.remove(goal)
+    }
+
+    open fun getAll(): List<Goal> = goals.toList()
+
+    open fun getById(id: Long): Goal? = goals.find { it.id == id }
+
+    open fun update(goal: Goal) {
+        val index = goals.indexOfFirst { it.id == goal.id }
+        if (index >= 0) {
+            goals[index] = goal
+        }
+    }
+
+    open fun getArchived(archived: Boolean): List<Goal> =
+        goals.filter { it.archived == archived }
+
+    open fun iterator(): Iterator<Goal> = goals.iterator()
 import javax.inject.Inject
 
 class GoalList @Inject constructor() {

@@ -19,6 +19,48 @@
 
 package org.isoron.uhabits.core.models
 
+data class Goal(
+    val id: Long = 0,
+    val name: String = "",
+    val description: String = "",
+    val targetValue: Double = 0.0,
+    val deadlineDate: Timestamp = Timestamp(0),
+    val goalType: String = "CUMULATIVE",
+    val archived: Boolean = false,
+    val createdAt: Timestamp = Timestamp(0),
+    val linkedHabits: List<Long> = emptyList(),
+    val milestones: List<GoalMilestone> = emptyList()
+) {
+    fun isOverdue(): Boolean {
+        val today = Timestamp.today()
+        return deadlineDate < today && !isComplete()
+    }
+
+    fun isComplete(): Boolean {
+        return targetValue <= 0.0
+    }
+
+    fun daysUntilDeadline(): Long {
+        val today = Timestamp.today()
+        return if (deadlineDate < today) 0L else (deadlineDate.toCalendar().timeInMillis - today.toCalendar().timeInMillis) / (1000 * 60 * 60 * 24)
+    }
+}
+
+data class GoalMilestone(
+    val id: Long = 0,
+    val goalId: Long = 0,
+    val title: String = "",
+    val targetValue: Double = 0.0,
+    val deadlineDate: Timestamp = Timestamp(0),
+    val completed: Boolean = false
+)
+
+data class GoalHabitLink(
+    val id: Long = 0,
+    val goalId: Long = 0,
+    val habitId: Long = 0,
+    val weight: Double = 1.0
+)
 import java.util.Objects
 
 data class Milestone(
