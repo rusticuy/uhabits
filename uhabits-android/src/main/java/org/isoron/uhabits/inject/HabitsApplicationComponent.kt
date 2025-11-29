@@ -24,6 +24,7 @@ import org.isoron.uhabits.core.AppScope
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.io.GenericImporter
 import org.isoron.uhabits.core.io.Logging
+import org.isoron.uhabits.core.models.GoalList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
 import org.isoron.uhabits.core.models.goals.GoalList
@@ -52,6 +53,7 @@ interface HabitsApplicationComponent {
     @get:AppContext
     val context: Context
     val genericImporter: GenericImporter
+    val goalList: GoalList
     val habitCardListCache: HabitCardListCache
     val habitList: HabitList
     val goalList: GoalList

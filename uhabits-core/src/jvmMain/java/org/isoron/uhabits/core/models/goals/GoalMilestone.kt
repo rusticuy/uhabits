@@ -79,3 +79,10 @@ data class GoalMilestone(
         return result
     }
 }
+data class GoalMilestone(
+    var id: Long? = null,
+    var goalId: Long = 0,
+    var targetPercentage: Double = 0.0,
+    var isComplete: Boolean = false,
+    var completedAt: Long? = null
+)

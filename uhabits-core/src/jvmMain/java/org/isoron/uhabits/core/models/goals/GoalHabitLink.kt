@@ -44,3 +44,7 @@ data class GoalHabitLink(
         return result
     }
 }
+    var goalId: Long = 0,
+    var habitId: Long = 0,
+    var weight: Double = 1.0
+)
