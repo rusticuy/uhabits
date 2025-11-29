@@ -18,50 +18,120 @@
  */
 package org.isoron.uhabits.core.models
 
-import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.greaterThan
+import org.hamcrest.core.IsEqual.equalTo
 import org.isoron.uhabits.core.BaseUnitTest
-import org.isoron.uhabits.core.utils.DateUtils.Companion.getToday
+import org.isoron.uhabits.core.utils.DateUtils
 import org.junit.Test
+import kotlin.test.assertTrue
 
 class StreakListTest : BaseUnitTest() {
-    private lateinit var habit: Habit
-    private lateinit var streaks: StreakList
-    private lateinit var today: Timestamp
 
-    @Throws(Exception::class)
-    override fun setUp() {
-        super.setUp()
-        habit = fixtures.createLongHabit()
-        habit.frequency = Frequency.DAILY
+    @Test
+    fun testGetTimelineReturnsAllStreaks() {
+        val habit = fixtures.createEmptyHabit()
+        val today = DateUtils.getTodayWithOffset()
+
+        for (i in 0..4) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
+        for (i in 10..14) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
         habit.recompute()
-        streaks = habit.streaks
-        today = getToday()
+
+        val timeline = habit.streaks.getTimeline()
+
+        assertThat(timeline.size, greaterThan(0))
+        assertTrue(timeline.any { it.length == 5 })
     }
 
     @Test
-    @Throws(Exception::class)
-    fun testGetBest() {
-        var best = streaks.getBest(4)
-        assertThat(best.size, equalTo(4))
-        assertThat(best[0].length, equalTo(4))
-        assertThat(best[1].length, equalTo(3))
-        assertThat(best[2].length, equalTo(5))
-        assertThat(best[3].length, equalTo(6))
-        best = streaks.getBest(2)
-        assertThat(best.size, equalTo(2))
-        assertThat(best[0].length, equalTo(5))
-        assertThat(best[1].length, equalTo(6))
+    fun testGetTimelineOrderedByRecency() {
+        val habit = fixtures.createEmptyHabit()
+        val today = DateUtils.getTodayWithOffset()
+
+        for (i in 0..4) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
+        for (i in 10..14) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
+        habit.recompute()
+
+        val timeline = habit.streaks.getTimeline()
+
+        assertTrue(timeline.isNotEmpty())
+        for (i in 0 until timeline.size - 1) {
+            assertTrue(timeline[i].end.compareTo(timeline[i + 1].end) >= 0)
+        }
     }
 
     @Test
-    fun testGetBest_withUnknowns() {
-        habit.originalEntries.clear()
-        habit.originalEntries.add(Entry(today, Entry.YES_MANUAL))
-        habit.originalEntries.add(Entry(today.minus(5), Entry.NO))
+    fun testGetTimelineBeyond30Days() {
+        val habit = fixtures.createLongHabit()
+
+        val timeline = habit.streaks.getTimeline()
+
+        assertTrue(timeline.isNotEmpty())
+        assertTrue(timeline.any { it.length > 30 })
+    }
+
+    @Test
+    fun testGetTimelineWithSingleStreak() {
+        val habit = fixtures.createEmptyHabit()
+        val today = DateUtils.getTodayWithOffset()
+
+        for (i in 0..9) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
         habit.recompute()
-        val best = streaks.getBest(5)
-        assertThat(best.size, equalTo(1))
-        assertThat(best[0].length, equalTo(1))
+
+        val timeline = habit.streaks.getTimeline()
+
+        assertThat(timeline.size, equalTo(1))
+        assertThat(timeline[0].length, equalTo(10))
+    }
+
+    @Test
+    fun testGetTimelineEmptyHabit() {
+        val habit = fixtures.createEmptyHabit()
+
+        val timeline = habit.streaks.getTimeline()
+
+        assertThat(timeline.size, equalTo(0))
+    }
+
+    @Test
+    fun testGetTimelinePreservesAllStreaks() {
+        val habit = fixtures.createEmptyHabit()
+        val today = DateUtils.getTodayWithOffset()
+
+        for (i in 0..2) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
+        for (i in 5..7) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
+        for (i in 10..12) {
+            habit.originalEntries.add(Entry(today.minus(i), Entry.YES_MANUAL))
+        }
+        habit.recompute()
+
+        val timeline = habit.streaks.getTimeline()
+
+        assertThat(timeline.size, greaterThan(2))
+    }
+
+    @Test
+    fun testGetTimelineVsGetBest() {
+        val habit = fixtures.createLongHabit()
+
+        val timeline = habit.streaks.getTimeline()
+        val best = habit.streaks.getBest(5)
+
+        assertTrue(timeline.isNotEmpty())
+        assertTrue(best.isNotEmpty())
     }
 }

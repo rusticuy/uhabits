@@ -34,6 +34,11 @@ class StreakList {
     }
 
     @Synchronized
+    fun getTimeline(): List<Streak> {
+        return list.sortedByDescending { it.end }
+    }
+
+    @Synchronized
     fun recompute(
         computedEntries: EntryList,
         from: Timestamp,
