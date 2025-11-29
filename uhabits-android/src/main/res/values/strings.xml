@@ -287,4 +287,10 @@
     <string name="lock_type_pin">PIN</string>
     <string name="lock_type_pattern">Pattern</string>
     <string name="lock_type_biometric">Biometric</string>
+
+    <!-- Analytics Strings -->
+    <string name="analytics">Analytics</string>
+    <string name="activity_heatmap">Activity Heatmap</string>
+    <string name="trend">Trend (7-day moving average)</string>
+    <string name="chain_timeline">Streak History</string>
 </resources>

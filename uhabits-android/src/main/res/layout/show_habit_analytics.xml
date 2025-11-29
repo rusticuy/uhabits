@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) 2016-2025 Álinson Santos Xavier <git@axavier.org>
+  ~
+  ~ This file is part of Loop Habit Tracker.
+  ~
+  ~ Loop Habit Tracker is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by the
+  ~ Free Software Foundation, either version 3 of the License, or (at your
+  ~ option) any later version.
+  ~
+  ~ Loop Habit Tracker is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+  ~ or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+  ~ more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License along
+  ~ with this program. If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/CardHeader"
+            android:text="@string/analytics"
+            android:contentDescription="@string/analytics" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/heatmapLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_heatmap"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/activity_heatmap" />
+
+            <org.isoron.platform.gui.AndroidDataView
+                android:id="@+id/heatmapChart"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/trendLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/trend"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/trend" />
+
+            <org.isoron.uhabits.activities.common.views.TrendChartView
+                android:id="@+id/trendChart"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="8dp" />
+
+            <TextView
+                android:id="@+id/chainTimelineLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chain_timeline"
+                android:textSize="14sp"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:contentDescription="@string/chain_timeline" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/chainTimelineRecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</merge>
