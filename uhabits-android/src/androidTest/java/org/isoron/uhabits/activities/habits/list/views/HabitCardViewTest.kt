@@ -42,7 +42,7 @@ class HabitCardViewTest : BaseViewTest() {
 
     override fun setUp() {
         super.setUp()
-        setTheme(R.style.AppBaseTheme)
+        setTheme(R.style.Theme_Loop_Light)
 
         habit1 = fixtures.createLongHabit()
         habit2 = fixtures.createLongNumericalHabit()

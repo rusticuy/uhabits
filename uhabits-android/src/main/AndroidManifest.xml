@@ -32,7 +32,7 @@
         android:label="@string/main_activity_title"
         android:localeConfig="@xml/locales_config"
         android:supportsRtl="true"
-        android:theme="@style/AppBaseTheme">
+        android:theme="@style/Theme.Loop.Light">
 
         <activity
             android:name=".activities.habits.edit.EditHabitActivity"
@@ -88,12 +88,12 @@
         <activity
             android:name=".activities.intro.IntroActivity"
             android:label=""
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+            android:theme="@style/Theme.Loop.Light" />
 
         <activity
             android:name=".widgets.activities.HabitPickerDialog"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.Dialog">
+            android:theme="@style/Theme.Loop.Material3.Light.Dialog">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
@@ -102,7 +102,7 @@
         <activity
             android:name=".widgets.activities.BooleanHabitPickerDialog"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.Dialog">
+            android:theme="@style/Theme.Loop.Material3.Light.Dialog">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>
@@ -111,7 +111,7 @@
         <activity
             android:name=".widgets.activities.NumericalHabitPickerDialog"
             android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.Dialog">
+            android:theme="@style/Theme.Loop.Material3.Light.Dialog">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE" />
             </intent-filter>

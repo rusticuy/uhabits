@@ -18,153 +18,11 @@
   -->
 
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="AppBaseTheme" parent="@style/Theme.MaterialComponents.Light.NoActionBar">
-        <item name="aboutScreenColor">@color/blue_800</item>
-        <item name="actionBarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="actionModeBackground">@color/grey_700</item>
-        <item name="android:alertDialogTheme">@style/Theme.AppCompat.Light.Dialog</item>
-        <item name="android:dialogTheme">@style/Theme.AppCompat.Light.Dialog</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:itemBackground">?attr/contrast0</item>
-        <item name="android:navigationBarColor">?attr/colorPrimary</item>
-        <item name="android:textColor">@color/grey_800</item>
-        <item name="cardBackground">@drawable/card_light_background</item>
-        <item name="cardBgColor">@color/grey_50</item>
-        <item name="colorAccent">?aboutScreenColor</item>
-        <item name="colorPrimary">#363636</item>
-        <item name="colorPrimaryDark">#303030</item>
-        <item name="dialogIconChangeColor">@drawable/ic_action_color_light</item>
-        <item name="headerBackgroundColor">@color/grey_200</item>
-        <item name="highlightedBackgroundColor">@color/grey_100</item>
-        <item name="iconAdd">@drawable/ic_action_add_dark</item>
-        <item name="iconArchive">@drawable/ic_action_archive_dark</item>
-        <item name="iconChangeColor">@drawable/ic_action_color_dark</item>
-        <item name="iconDownload">@drawable/ic_action_download_dark</item>
-        <item name="iconEdit">@drawable/ic_action_edit_dark</item>
-        <item name="iconFilter">@drawable/ic_action_filter_dark</item>
-        <item name="iconUnarchive">@drawable/ic_action_unarchive_dark</item>
-        <item name="iconArrowUp">@drawable/ic_arrow_up_light</item>
-        <item name="iconArrowDown">@drawable/ic_arrow_down_light</item>
-        <item name="contrast0">@color/white</item>
-        <item name="contrast20">@color/grey_300</item>
-        <item name="contrast40">@color/grey_350</item>
-        <item name="contrast60">@color/grey_500</item>
-        <item name="contrast80">@color/grey_700</item>
-        <item name="contrast100">@color/grey_800</item>
-        <item name="palette">@array/lightPalette</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="scrollableRecyclerViewStyle">@style/ScrollableRecyclerViewStyle</item>
-        <item name="selectedBackground">@drawable/selected_box</item>
-        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat.Light</item>
-        <item name="useHabitColorAsPrimary">true</item>
-        <item name="widgetBackgroundAlpha">1</item>
-        <item name="widgetShadowAlpha">0.25</item>
-        <item name="windowActionModeOverlay">true</item>
-        <item name="windowBackgroundColor">@color/grey_200</item>
-        <item name="android:colorBackground">@color/color_background</item>
-        <item name="android:textColorAlertDialogListItem">@color/grey_800</item>
-        <item name="singleLineTitle">false</item>
-        <item name="dialogFormLabelColor">@color/white</item>
-    </style>
-
-    <style name="AppBaseThemeDark" parent="@style/ThemeOverlay.MaterialComponents.Dark.ActionBar">
-        <item name="aboutScreenColor">@color/blue_300</item>
-        <item name="actionModeBackground">@color/grey_800</item>
-        <item name="android:alertDialogTheme">@style/Theme.AppCompat.Dialog</item>
-        <item name="android:dialogTheme">@style/Theme.AppCompat.Dialog</item>
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:textColor">@color/grey_100</item>
-        <item name="cardBackground">@drawable/card_dark_background</item>
-        <item name="cardBgColor">@color/grey_850</item>
-        <item name="colorAccent">?aboutScreenColor</item>
-        <item name="colorPrimary">@color/grey_950</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="dialogIconChangeColor">@drawable/ic_action_color_dark</item>
-        <item name="headerBackgroundColor">@color/grey_900</item>
-        <item name="highlightedBackgroundColor">@color/grey_800</item>
-        <item name="iconAdd">@drawable/ic_action_add_dark</item>
-        <item name="iconArchive">@drawable/ic_action_archive_dark</item>
-        <item name="iconChangeColor">@drawable/ic_action_color_dark</item>
-        <item name="iconEdit">@drawable/ic_action_edit_dark</item>
-        <item name="iconFilter">@drawable/ic_action_filter_dark</item>
-        <item name="iconUnarchive">@drawable/ic_action_unarchive_dark</item>
-        <item name="iconArrowUp">@drawable/ic_arrow_up_dark</item>
-        <item name="iconArrowDown">@drawable/ic_arrow_down_dark</item>
-        <item name="contrast0">@color/grey_900</item>
-        <item name="contrast20">@color/grey_800</item>
-        <item name="contrast40">@color/grey_750</item>
-        <item name="contrast60">@color/grey_500</item>
-        <item name="contrast80">@color/grey_300</item>
-        <item name="contrast100">@color/grey_100</item>
-        <item name="palette">@array/darkPalette</item>
-        <item name="popupMenuBackground">@color/black</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material</item>
-        <item name="scrollableRecyclerViewStyle">@style/ScrollableRecyclerViewStyle</item>
-        <item name="selectedBackground">@drawable/selected_box</item>
-        <item name="textColorAlertDialogListItem">@color/grey_100</item>
-        <item name="toolbarPopupTheme">@style/ThemeOverlay.AppCompat</item>
-        <item name="useHabitColorAsPrimary">false</item>
-        <item name="widgetBackgroundAlpha">1</item>
-        <item name="widgetShadowAlpha">0.25</item>
-        <item name="windowActionModeOverlay">true</item>
-        <item name="windowBackgroundColor">@color/grey_900</item>
-        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyle</item>
-        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyle</item>
-        <item name="android:textColorAlertDialogListItem">@color/grey_100</item>
-        <item name="singleLineTitle">false</item>
-        <item name="dialogFormLabelColor">@color/grey_800</item>
-    </style>
-
-    <style name="AppBaseThemeDark.PureBlack">
-        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        <item name="android:textColor">@color/grey_200</item>
-        <item name="cardBackground">@drawable/card_amoled_background</item>
-        <item name="cardBgColor">@color/black</item>
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/black</item>
-        <item name="headerBackgroundColor">@color/black</item>
-        <item name="highlightedBackgroundColor">@color/black</item>
-        <item name="contrast0">@color/black</item>
-        <item name="contrast20">@color/grey_900</item>
-        <item name="contrast40">@color/grey_800</item>
-        <item name="contrast60">@color/grey_500</item>
-        <item name="contrast80">@color/grey_400</item>
-        <item name="contrast100">@color/grey_200</item>
-        <item name="selectedBackground">@drawable/selected_box</item>
-        <item name="textColorAlertDialogListItem">@color/grey_100</item>
-        <item name="windowBackgroundColor">@color/black</item>
-        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material.PureBlack</item>
-        <item name="dialogFormLabelColor">@color/grey_800</item>
-    </style>
-
-    <style name="BaseDialog" parent="Theme.AppCompat.Light.Dialog">
-        <item name="contrast0">@color/white</item>
-        <item name="contrast20">@color/grey_300</item>
-        <item name="contrast40">@color/grey_350</item>
-        <item name="contrast60">@color/grey_500</item>
-        <item name="contrast80">@color/grey_700</item>
-        <item name="contrast100">@color/grey_800</item>
-        <item name="palette">@array/lightPalette</item>
-        <item name="dialogFormLabelColor">@color/white</item>
-    </style>
-
-    <style name="BaseDialogDark" parent="Theme.AppCompat.Dialog">
-        <item name="contrast0">@color/grey_900</item>
-        <item name="contrast20">@color/grey_800</item>
-        <item name="contrast40">@color/grey_750</item>
-        <item name="contrast60">@color/grey_500</item>
-        <item name="contrast80">@color/grey_300</item>
-        <item name="contrast100">@color/grey_100</item>
-        <item name="palette">@array/darkPalette</item>
-        <item name="dialogFormLabelColor">@color/grey_800</item>
-    </style>
-
     <style name="PreferenceThemeOverlay.v14.Material.PureBlack">
         <item name="colorControlHighlight">@color/white_a0</item>
     </style>
 
-
-    <style name="WidgetTheme" parent="AppBaseThemeDark">
+    <style name="WidgetTheme" parent="@style/Theme.Material3.Dark.NoActionBar">
         <item name="cardBgColor">@color/grey_850</item>
         <item name="contrast0">@color/white</item>
         <item name="contrast20">@color/white_a0</item>
@@ -248,19 +106,18 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">?colorPrimary</item>
-        <item name="android:theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+        <item name="android:theme">@style/ThemeOverlay.Material3.Dark.ActionBar</item>
     </style>
 
     <style name="Preference.Category.Material">
         <item name="android:layout">@layout/preference_category_custom</item>
     </style>
 
-    <style name="DialogWithTitle" parent="@style/Theme.AppCompat.Light.Dialog">
+    <style name="DialogWithTitle" parent="@style/Theme.Material3.Light.Dialog">
         <item name="windowNoTitle">false</item>
     </style>
 
-    <style name="DarkDialogWithTitle"
-           parent="@style/Theme.AppCompat.Dialog">
+    <style name="DarkDialogWithTitle" parent="@style/Theme.Material3.Dark.Dialog">
         <item name="windowNoTitle">false</item>
     </style>
 
@@ -414,7 +271,6 @@
         <item name="android:background">@drawable/ripple_transparent</item>
         <item name="android:textSize">@dimen/smallerTextSize</item>
         <item name="android:textAllCaps">true</item>
-
     </style>
 
     <style name="Theme.Transparent" parent="android:Theme">
@@ -425,5 +281,4 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowAnimationStyle">@null</item>
     </style>
-
 </resources>

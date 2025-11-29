@@ -56,19 +56,19 @@ constructor(
 
     override fun applyDarkTheme() {
         currentTheme = DarkTheme()
-        context.setTheme(R.style.AppBaseThemeDark)
+        context.setTheme(R.style.Theme_Loop_Light)
         (context as Activity).window.navigationBarColor =
             ContextCompat.getColor(context, R.color.grey_900)
     }
 
     override fun applyLightTheme() {
         currentTheme = LightTheme()
-        context.setTheme(R.style.AppBaseTheme)
+        context.setTheme(R.style.Theme_Loop_Light)
     }
 
     override fun applyPureBlackTheme() {
         currentTheme = PureBlackTheme()
-        context.setTheme(R.style.AppBaseThemeDark_PureBlack)
+        context.setTheme(R.style.Theme_Loop_Light_PureBlack)
         (context as Activity).window.navigationBarColor =
             ContextCompat.getColor(context, R.color.black)
     }
