@@ -46,6 +46,7 @@ import org.isoron.uhabits.inject.DaggerHabitsActivityComponent
 import org.isoron.uhabits.inject.HabitsActivityComponent
 import org.isoron.uhabits.inject.HabitsApplicationComponent
 import org.isoron.uhabits.security.AppLockManager
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.dismissCurrentDialog
 import org.isoron.uhabits.utils.restartWithFade
@@ -91,6 +92,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
             .habitsApplicationComponent(appComponent)
             .build()
         component.themeSwitcher.apply()
+        enableEdgeToEdge()
 
         prefs = appComponent.preferences
         prefs.addListener(this)

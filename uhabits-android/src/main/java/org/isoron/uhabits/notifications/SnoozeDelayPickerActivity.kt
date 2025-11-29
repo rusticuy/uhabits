@@ -36,6 +36,7 @@ import org.isoron.uhabits.core.models.Habit
 import org.isoron.uhabits.core.ui.views.DarkTheme
 import org.isoron.uhabits.core.ui.views.LightTheme
 import org.isoron.uhabits.receivers.ReminderController
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 import org.isoron.uhabits.utils.SystemUtils
 import java.util.Calendar
 
@@ -53,6 +54,7 @@ class SnoozeDelayPickerActivity : FragmentActivity(), OnItemClickListener {
         val appComponent = app.component
         val themeSwitcher = AndroidThemeSwitcher(this, appComponent.preferences)
         themeSwitcher.setTheme()
+        enableEdgeToEdge()
 
         val data = intent.data
         if (data == null) {

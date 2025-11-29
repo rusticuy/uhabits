@@ -27,6 +27,7 @@ import org.isoron.uhabits.activities.AndroidThemeSwitcher
 import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.databinding.SettingsActivityBinding
 import org.isoron.uhabits.security.AppLockManager
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.setupToolbar
 
@@ -39,6 +40,7 @@ class SettingsActivity : AppCompatActivity() {
         val component = (application as HabitsApplication).component
         val themeSwitcher = AndroidThemeSwitcher(this, component.preferences)
         themeSwitcher.apply()
+        enableEdgeToEdge()
 
         appLockManager = component.appLockManager
 

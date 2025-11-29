@@ -31,6 +31,7 @@ import com.google.android.material.button.MaterialButton
 import org.isoron.uhabits.HabitsApplication
 import org.isoron.uhabits.R
 import org.isoron.uhabits.security.AppLockManager
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 import java.util.concurrent.Executor
 
 class LockActivity : AppCompatActivity() {
@@ -44,6 +45,7 @@ class LockActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_lock)
+        enableEdgeToEdge()
 
         val component = (applicationContext as HabitsApplication).component
         appLockManager = component.appLockManager

@@ -52,6 +52,7 @@ import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.core.models.Reminder
 import org.isoron.uhabits.core.models.WeekdayList
 import org.isoron.uhabits.databinding.ActivityEditHabitBinding
+import org.isoron.uhabits.utils.EdgeToEdge.enableEdgeToEdge
 import org.isoron.uhabits.utils.applyRootViewInsets
 import org.isoron.uhabits.utils.applyToolbarInsets
 import org.isoron.uhabits.utils.dismissCurrentAndShow
@@ -92,6 +93,7 @@ class EditHabitActivity : AppCompatActivity() {
         val component = (application as HabitsApplication).component
         themeSwitcher = AndroidThemeSwitcher(this, component.preferences)
         themeSwitcher.apply()
+        enableEdgeToEdge()
 
         binding = ActivityEditHabitBinding.inflate(layoutInflater)
         binding.root.applyRootViewInsets()

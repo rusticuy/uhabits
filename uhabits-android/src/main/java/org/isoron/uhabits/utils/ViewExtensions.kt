@@ -48,6 +48,7 @@ import androidx.appcompat.widget.Toolbar
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.snackbar.Snackbar
 import org.isoron.platform.gui.toInt
 import org.isoron.uhabits.HabitsApplication
@@ -255,7 +256,8 @@ fun View.applyRootViewInsets() {
         val left = maxOf(systemBarsInsets.left, displayCutoutInsets.left)
         val right = maxOf(systemBarsInsets.right, displayCutoutInsets.right)
         view.setPadding(left, 0, right, 0)
-        view.background = ColorDrawable(Color.BLACK)
+        val backgroundColor = MaterialColors.getColor(view, com.google.android.material.R.attr.colorSurface)
+        view.background = ColorDrawable(backgroundColor)
         insets
     }
 }
