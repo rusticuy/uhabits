@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,6 +38,7 @@
             android:gravity="end"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+            android:theme="@style/ThemeOverlay.Material3.Dark"
             app:title="@string/app_name"
             app:titleTextColor="@color/white">
 
@@ -52,7 +53,7 @@
                 android:textColor="@color/white"
                 app:rippleColor="@color/white"
                 app:strokeColor="@color/white" />
-        </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -69,7 +70,7 @@
                     style="@style/FormLabel"
                     android:text="@string/habit" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <Spinner
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:paddingTop="16dp"
@@ -87,7 +88,7 @@
                     style="@style/FormLabel"
                     android:text="@string/action" />
 
-                <androidx.appcompat.widget.AppCompatSpinner
+                <Spinner
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:id="@+id/actionSpinner"

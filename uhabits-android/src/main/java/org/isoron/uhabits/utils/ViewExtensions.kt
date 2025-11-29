@@ -44,7 +44,7 @@ import android.widget.RelativeLayout.BELOW
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import com.google.android.material.appbar.MaterialToolbar
 import androidx.core.content.FileProvider
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -96,9 +96,9 @@ fun RelativeLayout.addAtTop(
     this.addView(view)
 }
 
-fun ViewGroup.buildToolbar(): Toolbar {
+fun ViewGroup.buildToolbar(): MaterialToolbar {
     val inflater = LayoutInflater.from(context)
-    return inflater.inflate(R.layout.toolbar, null) as Toolbar
+    return inflater.inflate(R.layout.toolbar, null) as MaterialToolbar
 }
 
 fun View.showMessage(msg: String) {
@@ -168,7 +168,7 @@ fun Activity.restartWithFade(cls: Class<*>?) {
 }
 
 fun View.setupToolbar(
-    toolbar: Toolbar,
+    toolbar: MaterialToolbar,
     title: String,
     color: PaletteColor,
     theme: Theme,
@@ -178,14 +178,14 @@ fun View.setupToolbar(
     val res = StyledResources(context)
     toolbar.title = title
     val toolbarColor = if (!res.getBoolean(R.attr.useHabitColorAsPrimary)) {
-        StyledResources(context).getColor(R.attr.colorPrimary)
+        res.getColor(R.attr.colorPrimary)
     } else {
         theme.color(color).toInt()
     }
     toolbar.background = ColorDrawable(toolbarColor)
     toolbar.applyToolbarInsets()
     val activity = context as AppCompatActivity
-    activity.window.statusBarColor = toolbarColor
+    activity.window.statusBarColor = Color.TRANSPARENT
     activity.setSupportActionBar(toolbar)
     activity.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 }

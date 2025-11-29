@@ -33,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,6 +42,7 @@
             android:gravity="end"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
+            android:theme="@style/ThemeOverlay.Material3.Dark"
             app:title="@string/create_habit"
             app:titleTextColor="@color/white">
 
@@ -56,7 +57,7 @@
                 android:textColor="@color/white"
                 app:rippleColor="@color/white"
                 app:strokeColor="@color/white" />
-        </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -111,7 +112,7 @@
                         <TextView
                             style="@style/FormLabel"
                             android:text="@string/color" />
-                        <androidx.appcompat.widget.AppCompatButton
+                        <com.google.android.material.button.MaterialButton
                             android:id="@+id/colorButton"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"

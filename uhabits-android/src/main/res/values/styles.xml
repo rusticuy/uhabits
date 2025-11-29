@@ -19,6 +19,157 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
     <style name="PreferenceThemeOverlay.v14.Material.PureBlack">
+    <style name="AppBaseTheme" parent="@style/Theme.Material3.Light.NoActionBar">
+        <item name="aboutScreenColor">@color/blue_800</item>
+        <item name="actionBarPopupTheme">@style/ThemeOverlay.Material3.Light</item>
+        <item name="actionModeBackground">@color/grey_700</item>
+        <item name="android:alertDialogTheme">@style/Theme.Material3.Light.Dialog</item>
+        <item name="android:dialogTheme">@style/Theme.Material3.Light.Dialog</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:itemBackground">?attr/contrast0</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:textColor">@color/grey_800</item>
+        <item name="cardBackground">@drawable/card_light_background</item>
+        <item name="cardBgColor">@color/grey_50</item>
+        <item name="colorAccent">?aboutScreenColor</item>
+        <item name="colorPrimary">#363636</item>
+        <item name="colorPrimaryDark">#303030</item>
+        <item name="dialogIconChangeColor">@drawable/ic_action_color_light</item>
+        <item name="headerBackgroundColor">@color/grey_200</item>
+        <item name="highlightedBackgroundColor">@color/grey_100</item>
+        <item name="iconAdd">@drawable/ic_action_add_dark</item>
+        <item name="iconArchive">@drawable/ic_action_archive_dark</item>
+        <item name="iconChangeColor">@drawable/ic_action_color_dark</item>
+        <item name="iconDownload">@drawable/ic_action_download_dark</item>
+        <item name="iconEdit">@drawable/ic_action_edit_dark</item>
+        <item name="iconFilter">@drawable/ic_action_filter_dark</item>
+        <item name="iconUnarchive">@drawable/ic_action_unarchive_dark</item>
+        <item name="iconArrowUp">@drawable/ic_arrow_up_light</item>
+        <item name="iconArrowDown">@drawable/ic_arrow_down_light</item>
+        <item name="contrast0">@color/white</item>
+        <item name="contrast20">@color/grey_300</item>
+        <item name="contrast40">@color/grey_350</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_700</item>
+        <item name="contrast100">@color/grey_800</item>
+        <item name="palette">@array/lightPalette</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material3</item>
+        <item name="scrollableRecyclerViewStyle">@style/ScrollableRecyclerViewStyle</item>
+        <item name="selectedBackground">@drawable/selected_box</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.Material3.Light</item>
+        <item name="useHabitColorAsPrimary">true</item>
+        <item name="widgetBackgroundAlpha">1</item>
+        <item name="widgetShadowAlpha">0.25</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowBackgroundColor">@color/grey_200</item>
+        <item name="android:colorBackground">@color/color_background</item>
+        <item name="android:textColorAlertDialogListItem">@color/grey_800</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="singleLineTitle">false</item>
+        <item name="dialogFormLabelColor">@color/white</item>
+    </style>
+
+    <style name="AppBaseThemeDark" parent="@style/Theme.Material3.Dark.NoActionBar">
+        <item name="aboutScreenColor">@color/blue_300</item>
+        <item name="actionModeBackground">@color/grey_800</item>
+        <item name="android:alertDialogTheme">@style/Theme.Material3.Dark.Dialog</item>
+        <item name="android:dialogTheme">@style/Theme.Material3.Dark.Dialog</item>
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:textColor">@color/grey_100</item>
+        <item name="cardBackground">@drawable/card_dark_background</item>
+        <item name="cardBgColor">@color/grey_850</item>
+        <item name="colorAccent">?aboutScreenColor</item>
+        <item name="colorPrimary">@color/grey_950</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="dialogIconChangeColor">@drawable/ic_action_color_dark</item>
+        <item name="headerBackgroundColor">@color/grey_900</item>
+        <item name="highlightedBackgroundColor">@color/grey_800</item>
+        <item name="iconAdd">@drawable/ic_action_add_dark</item>
+        <item name="iconArchive">@drawable/ic_action_archive_dark</item>
+        <item name="iconChangeColor">@drawable/ic_action_color_dark</item>
+        <item name="iconEdit">@drawable/ic_action_edit_dark</item>
+        <item name="iconFilter">@drawable/ic_action_filter_dark</item>
+        <item name="iconUnarchive">@drawable/ic_action_unarchive_dark</item>
+        <item name="iconArrowUp">@drawable/ic_arrow_up_dark</item>
+        <item name="iconArrowDown">@drawable/ic_arrow_down_dark</item>
+        <item name="contrast0">@color/grey_900</item>
+        <item name="contrast20">@color/grey_800</item>
+        <item name="contrast40">@color/grey_750</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_300</item>
+        <item name="contrast100">@color/grey_100</item>
+        <item name="palette">@array/darkPalette</item>
+        <item name="popupMenuBackground">@color/black</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material3</item>
+        <item name="scrollableRecyclerViewStyle">@style/ScrollableRecyclerViewStyle</item>
+        <item name="selectedBackground">@drawable/selected_box</item>
+        <item name="textColorAlertDialogListItem">@color/grey_100</item>
+        <item name="toolbarPopupTheme">@style/ThemeOverlay.Material3</item>
+        <item name="useHabitColorAsPrimary">false</item>
+        <item name="widgetBackgroundAlpha">1</item>
+        <item name="widgetShadowAlpha">0.25</item>
+        <item name="windowActionModeOverlay">true</item>
+        <item name="windowBackgroundColor">@color/grey_900</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="buttonBarNegativeButtonStyle">@style/DialogButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/DialogButtonStyle</item>
+        <item name="android:textColorAlertDialogListItem">@color/grey_100</item>
+        <item name="singleLineTitle">false</item>
+        <item name="dialogFormLabelColor">@color/grey_800</item>
+    </style>
+
+    <style name="AppBaseThemeDark.PureBlack">
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+        <item name="android:textColor">@color/grey_200</item>
+        <item name="cardBackground">@drawable/card_amoled_background</item>
+        <item name="cardBgColor">@color/black</item>
+        <item name="colorPrimary">@color/black</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="headerBackgroundColor">@color/black</item>
+        <item name="highlightedBackgroundColor">@color/black</item>
+        <item name="contrast0">@color/black</item>
+        <item name="contrast20">@color/grey_900</item>
+        <item name="contrast40">@color/grey_800</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_400</item>
+        <item name="contrast100">@color/grey_200</item>
+        <item name="selectedBackground">@drawable/selected_box</item>
+        <item name="textColorAlertDialogListItem">@color/grey_100</item>
+        <item name="windowBackgroundColor">@color/black</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="preferenceTheme">@style/PreferenceThemeOverlay.v14.Material3.PureBlack</item>
+        <item name="dialogFormLabelColor">@color/grey_800</item>
+    </style>
+
+    <style name="BaseDialog" parent="Theme.Material3.Light.Dialog">
+        <item name="contrast0">@color/white</item>
+        <item name="contrast20">@color/grey_300</item>
+        <item name="contrast40">@color/grey_350</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_700</item>
+        <item name="contrast100">@color/grey_800</item>
+        <item name="palette">@array/lightPalette</item>
+        <item name="dialogFormLabelColor">@color/white</item>
+    </style>
+
+    <style name="BaseDialogDark" parent="Theme.Material3.Dark.Dialog">
+        <item name="contrast0">@color/grey_900</item>
+        <item name="contrast20">@color/grey_800</item>
+        <item name="contrast40">@color/grey_750</item>
+        <item name="contrast60">@color/grey_500</item>
+        <item name="contrast80">@color/grey_300</item>
+        <item name="contrast100">@color/grey_100</item>
+        <item name="palette">@array/darkPalette</item>
+        <item name="dialogFormLabelColor">@color/grey_800</item>
+    </style>
+
+    <style name="PreferenceThemeOverlay.v14.Material3">
+        <item name="colorControlHighlight">@color/white_a0</item>
+    </style>
+
+    <style name="PreferenceThemeOverlay.v14.Material3.PureBlack">
         <item name="colorControlHighlight">@color/white_a0</item>
     </style>
 
@@ -107,6 +258,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">?colorPrimary</item>
         <item name="android:theme">@style/ThemeOverlay.Material3.Dark.ActionBar</item>
+        <item name="android:theme">@style/ThemeOverlay.Material3.Dark</item>
     </style>
 
     <style name="Preference.Category.Material">
@@ -118,6 +270,8 @@
     </style>
 
     <style name="DarkDialogWithTitle" parent="@style/Theme.Material3.Dark.Dialog">
+    <style name="DarkDialogWithTitle"
+           parent="@style/Theme.Material3.Dark.Dialog">
         <item name="windowNoTitle">false</item>
     </style>
 
