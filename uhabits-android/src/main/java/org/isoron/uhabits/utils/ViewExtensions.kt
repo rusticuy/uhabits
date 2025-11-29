@@ -178,14 +178,14 @@ fun View.setupToolbar(
     val res = StyledResources(context)
     toolbar.title = title
     val toolbarColor = if (!res.getBoolean(R.attr.useHabitColorAsPrimary)) {
-        StyledResources(context).getColor(R.attr.colorPrimary)
+        res.getColor(R.attr.colorPrimary)
     } else {
         theme.color(color).toInt()
     }
     toolbar.background = ColorDrawable(toolbarColor)
     toolbar.applyToolbarInsets()
     val activity = context as AppCompatActivity
-    activity.window.statusBarColor = toolbarColor
+    activity.window.statusBarColor = Color.TRANSPARENT
     activity.setSupportActionBar(toolbar)
     activity.supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
 }
