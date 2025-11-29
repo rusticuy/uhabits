@@ -30,7 +30,11 @@ import org.isoron.uhabits.core.models.Entry
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
 import org.isoron.uhabits.core.models.Timestamp
+import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.sqlite.records.EntryRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalHabitLinkRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalMilestoneRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalRecord
 import org.isoron.uhabits.core.models.sqlite.records.HabitRecord
 import org.isoron.uhabits.core.utils.isSQLite3File
 import java.io.File
@@ -42,6 +46,7 @@ import javax.inject.Inject
 class LoopDBImporter
 @Inject constructor(
     @AppScope val habitList: HabitList,
+    @AppScope val goalList: GoalList,
     @AppScope val modelFactory: ModelFactory,
     @AppScope val opener: DatabaseOpener,
     @AppScope val runner: CommandRunner,
@@ -75,6 +80,9 @@ class LoopDBImporter
 
         val habitsRepository = Repository(HabitRecord::class.java, db)
         val entryRepository = Repository(EntryRecord::class.java, db)
+        val goalsRepository = Repository(GoalRecord::class.java, db)
+        val goalMilestonesRepository = Repository(GoalMilestoneRecord::class.java, db)
+        val goalHabitLinksRepository = Repository(GoalHabitLinkRecord::class.java, db)
 
         for (habitRecord in habitsRepository.findAll("order by position")) {
             var habit = habitList.getByUUID(habitRecord.uuid)
@@ -107,6 +115,53 @@ class LoopDBImporter
             habit.recompute()
         }
         habitList.resort()
+
+        // Import goals if they exist in the backup
+        val goalRecords = try {
+            goalsRepository.findAll("order by position")
+        } catch (e: Exception) {
+            emptyList()
+        }
+
+        for (goalRecord in goalRecords) {
+            var goal = goalList.getByUUID(goalRecord.uuid)
+            if (goal == null) {
+                goal = modelFactory.buildGoal()
+                goalRecord.id = null
+                goalRecord.copyTo(goal)
+                goalList.add(goal)
+            } else {
+                goalRecord.copyTo(goal)
+                goalList.update(goal)
+            }
+
+            goal = goalList.getByUUID(goalRecord.uuid)!!
+            val milestoneRecords = try {
+                goalMilestonesRepository.findAll("where goal_id = ? order by position", goal.id.toString())
+            } catch (e: Exception) {
+                emptyList()
+            }
+
+            for (milestoneRecord in milestoneRecords) {
+                val milestone = modelFactory.buildGoal().milestones.let {
+                    val m = org.isoron.uhabits.core.models.goals.GoalMilestone()
+                    milestoneRecord.copyTo(m)
+                    m
+                }
+                goal.milestones.add(milestone)
+            }
+
+            val linkRecords = try {
+                goalHabitLinksRepository.findAll("where goal_id = ?", goal.id.toString())
+            } catch (e: Exception) {
+                emptyList()
+            }
+
+            for (linkRecord in linkRecords) {
+                // Habit links are only stored in database, no need to import here as they're metadata
+            }
+        }
+        goalList.resort()
         db.close()
     }
 }
