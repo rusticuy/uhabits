@@ -27,6 +27,7 @@ import org.isoron.uhabits.core.io.Logging
 import org.isoron.uhabits.core.models.GoalList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
+import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.preferences.Preferences
 import org.isoron.uhabits.core.preferences.WidgetPreferences
 import org.isoron.uhabits.core.reminders.ReminderScheduler
@@ -55,6 +56,7 @@ interface HabitsApplicationComponent {
     val goalList: GoalList
     val habitCardListCache: HabitCardListCache
     val habitList: HabitList
+    val goalList: GoalList
     val intentFactory: IntentFactory
     val intentParser: IntentParser
     val logging: Logging

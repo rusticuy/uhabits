@@ -20,6 +20,30 @@ package org.isoron.uhabits.core.models.goals
 
 data class GoalHabitLink(
     var id: Long? = null,
+    var goalId: Long? = null,
+    var habitId: Long? = null,
+    var weight: Double = 1.0
+) {
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is GoalHabitLink) return false
+
+        if (id != other.id) return false
+        if (goalId != other.goalId) return false
+        if (habitId != other.habitId) return false
+        if (weight != other.weight) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = (id?.hashCode() ?: 0)
+        result = 31 * result + (goalId?.hashCode() ?: 0)
+        result = 31 * result + (habitId?.hashCode() ?: 0)
+        result = 31 * result + weight.hashCode()
+        return result
+    }
+}
     var goalId: Long = 0,
     var habitId: Long = 0,
     var weight: Double = 1.0

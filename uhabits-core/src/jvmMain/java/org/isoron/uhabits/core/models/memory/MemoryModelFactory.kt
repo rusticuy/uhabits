@@ -22,13 +22,19 @@ import org.isoron.uhabits.core.models.EntryList
 import org.isoron.uhabits.core.models.ModelFactory
 import org.isoron.uhabits.core.models.ScoreList
 import org.isoron.uhabits.core.models.StreakList
+import org.isoron.uhabits.core.models.goals.GoalMilestoneList
 
 class MemoryModelFactory : ModelFactory {
     override fun buildComputedEntries() = EntryList()
     override fun buildOriginalEntries() = EntryList()
     override fun buildHabitList() = MemoryHabitList()
+    override fun buildGoalList() = MemoryGoalList()
     override fun buildScoreList() = ScoreList()
     override fun buildStreakList() = StreakList()
+    override fun buildGoalMilestoneList(): GoalMilestoneList = MemoryGoalMilestoneList()
     override fun buildHabitListRepository() = throw NotImplementedError()
     override fun buildRepetitionListRepository() = throw NotImplementedError()
+    override fun buildGoalListRepository() = throw NotImplementedError()
+    override fun buildGoalHabitLinkRepository() = throw NotImplementedError()
+    override fun buildGoalMilestoneRepository() = throw NotImplementedError()
 }

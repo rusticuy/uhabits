@@ -19,7 +19,13 @@
 package org.isoron.uhabits.core.models
 
 import org.isoron.uhabits.core.database.Repository
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalList
+import org.isoron.uhabits.core.models.goals.GoalMilestoneList
 import org.isoron.uhabits.core.models.sqlite.records.EntryRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalHabitLinkRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalMilestoneRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalRecord
 import org.isoron.uhabits.core.models.sqlite.records.HabitRecord
 
 /**
@@ -38,11 +44,21 @@ interface ModelFactory {
             computedEntries = buildComputedEntries()
         )
     }
+
+    fun buildGoal(): Goal {
+        return Goal(milestones = buildGoalMilestoneList())
+    }
+
     fun buildComputedEntries(): EntryList
     fun buildOriginalEntries(): EntryList
     fun buildHabitList(): HabitList
+    fun buildGoalList(): GoalList
     fun buildScoreList(): ScoreList
     fun buildStreakList(): StreakList
+    fun buildGoalMilestoneList(): GoalMilestoneList
     fun buildHabitListRepository(): Repository<HabitRecord>
     fun buildRepetitionListRepository(): Repository<EntryRecord>
+    fun buildGoalListRepository(): Repository<GoalRecord>
+    fun buildGoalHabitLinkRepository(): Repository<GoalHabitLinkRecord>
+    fun buildGoalMilestoneRepository(): Repository<GoalMilestoneRecord>
 }

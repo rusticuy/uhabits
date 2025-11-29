@@ -24,7 +24,12 @@ import org.isoron.uhabits.core.models.EntryList
 import org.isoron.uhabits.core.models.ModelFactory
 import org.isoron.uhabits.core.models.ScoreList
 import org.isoron.uhabits.core.models.StreakList
+import org.isoron.uhabits.core.models.goals.GoalMilestoneList
+import org.isoron.uhabits.core.models.memory.MemoryGoalMilestoneList
 import org.isoron.uhabits.core.models.sqlite.records.EntryRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalHabitLinkRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalMilestoneRecord
+import org.isoron.uhabits.core.models.sqlite.records.GoalRecord
 import org.isoron.uhabits.core.models.sqlite.records.HabitRecord
 import javax.inject.Inject
 
@@ -38,12 +43,23 @@ class SQLModelFactory
     override fun buildOriginalEntries() = SQLiteEntryList(database)
     override fun buildComputedEntries() = EntryList()
     override fun buildHabitList() = SQLiteHabitList(this)
+    override fun buildGoalList() = SQLiteGoalList(database)
     override fun buildScoreList() = ScoreList()
     override fun buildStreakList() = StreakList()
+    override fun buildGoalMilestoneList(): GoalMilestoneList = MemoryGoalMilestoneList()
 
     override fun buildHabitListRepository() =
         Repository(HabitRecord::class.java, database)
 
     override fun buildRepetitionListRepository() =
         Repository(EntryRecord::class.java, database)
+
+    override fun buildGoalListRepository() =
+        Repository(GoalRecord::class.java, database)
+
+    override fun buildGoalHabitLinkRepository() =
+        Repository(GoalHabitLinkRecord::class.java, database)
+
+    override fun buildGoalMilestoneRepository() =
+        Repository(GoalMilestoneRecord::class.java, database)
 }
