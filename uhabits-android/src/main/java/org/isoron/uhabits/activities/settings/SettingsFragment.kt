@@ -36,6 +36,7 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.recyclerview.widget.RecyclerView
+import androidx.fragment.app.commit
 import org.isoron.uhabits.HabitsApplication
 import org.isoron.uhabits.R
 import org.isoron.uhabits.activities.habits.list.RESULT_BUG_REPORT
@@ -48,6 +49,7 @@ import org.isoron.uhabits.core.ui.NotificationTray
 import org.isoron.uhabits.core.utils.DateUtils.Companion.getLongWeekdayNames
 import org.isoron.uhabits.notifications.AndroidNotificationTray.Companion.createAndroidNotificationChannel
 import org.isoron.uhabits.notifications.RingtoneManager
+import org.isoron.uhabits.security.AppLockConfig
 import org.isoron.uhabits.security.AppLockManager
 import org.isoron.uhabits.utils.StyledResources
 import org.isoron.uhabits.utils.applyBottomInset
@@ -59,6 +61,7 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
     private var sharedPrefs: SharedPreferences? = null
     private var ringtoneManager: RingtoneManager? = null
     private lateinit var prefs: Preferences
+    private lateinit var appLockConfig: AppLockConfig
     private var widgetUpdater: WidgetUpdater? = null
     private var appLockManager: AppLockManager? = null
 
@@ -89,6 +92,7 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
         val appContext = requireContext().applicationContext
         if (appContext is HabitsApplication) {
             prefs = appContext.component.preferences
+            appLockConfig = appContext.component.appLockConfig
             widgetUpdater = appContext.component.widgetUpdater
             appLockManager = appContext.component.appLockManager
         }
@@ -155,6 +159,10 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
                         Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
                 )
                 startActivityForResult(intent, PUBLIC_BACKUP_REQUEST_CODE)
+                return true
+            }
+            "lockSetup" -> {
+                showLockSetupDialog()
                 return true
             }
         }
@@ -267,6 +275,11 @@ class SettingsFragment : PreferenceFragmentCompat(), OnSharedPreferenceChangeLis
         }
     }
 
+    private fun showLockSetupDialog() {
+        parentFragmentManager.commit {
+            addToBackStack(null)
+            replace(android.R.id.content, LockSetupFragment())
+        }
     private fun showAppLockDialog() {
         val lockTypeOptions = arrayOf("None", "PIN", "Pattern", "Biometric")
         val dialog = androidx.appcompat.app.AlertDialog.Builder(requireContext())

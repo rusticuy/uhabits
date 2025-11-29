@@ -109,6 +109,7 @@ dependencies {
     implementation(libs.documentfile)
     implementation(libs.opencsv)
     implementation(libs.konfetti.xml)
+    implementation(libs.encrypted.shared.preferences)
     implementation(libs.biometric)
     implementation(libs.lifecycle.process)
     implementation(libs.lifecycle.runtime)
