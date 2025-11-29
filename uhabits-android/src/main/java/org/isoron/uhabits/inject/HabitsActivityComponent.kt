@@ -32,7 +32,7 @@ import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsBehavior
 
 @ActivityScope
 @Component(
-    modules = [ActivityContextModule::class, HabitsActivityModule::class, ListHabitsModule::class, HabitModule::class],
+    modules = [ActivityContextModule::class, HabitsActivityModule::class, ListHabitsModule::class],
     dependencies = [HabitsApplicationComponent::class]
 )
 interface HabitsActivityComponent {

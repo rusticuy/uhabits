@@ -45,4 +45,42 @@ open class GoalList {
         goals.filter { it.archived == archived }
 
     open fun iterator(): Iterator<Goal> = goals.iterator()
+import javax.inject.Inject
+
+class GoalList @Inject constructor() {
+
+    private val goals = mutableListOf<Goal>()
+    private var nextId = 1L
+    val observable = ModelObservable()
+
+    fun add(goal: Goal) {
+        if (goal.id == null) {
+            goal.id = nextId++
+        }
+        goals.add(goal)
+        observable.notifyListeners()
+    }
+
+    fun getById(id: Long): Goal? = goals.find { it.id == id }
+
+    fun getAll(): List<Goal> = goals.toList()
+
+    fun remove(goal: Goal) {
+        goals.remove(goal)
+        observable.notifyListeners()
+    }
+
+    fun update(goal: Goal) {
+        val index = goals.indexOfFirst { it.id == goal.id }
+        if (index >= 0) {
+            goals[index] = goal
+            observable.notifyListeners()
+        }
+    }
+
+    operator fun iterator() = goals.iterator()
+
+    fun size(): Int = goals.size
+
+    fun getLinkedHabitsCount(goal: Goal): Int = goal.linkedHabits.size
 }

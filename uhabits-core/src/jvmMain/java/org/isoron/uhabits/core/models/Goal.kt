@@ -61,3 +61,32 @@ data class GoalHabitLink(
     val habitId: Long = 0,
     val weight: Double = 1.0
 )
+import java.util.Objects
+
+data class Milestone(
+    var id: Long? = null,
+    var goalId: Long? = null,
+    var targetValue: Double = 0.0,
+    var isCompleted: Boolean = false
+)
+
+data class Goal(
+    var id: Long? = null,
+    var name: String = "",
+    var description: String = "",
+    var color: PaletteColor = PaletteColor(8),
+    var deadline: Timestamp = Timestamp(System.currentTimeMillis()),
+    var isArchived: Boolean = false,
+    val linkedHabits: MutableList<Long> = mutableListOf(),
+    val milestones: MutableList<Milestone> = mutableListOf()
+) {
+    val uriString: String
+        get() = "content://org.isoron.uhabits.goals/$id"
+
+    override fun hashCode() = Objects.hash(id)
+
+    override fun equals(other: Any?) = when (other) {
+        !is Goal -> false
+        else -> id == other.id
+    }
+}

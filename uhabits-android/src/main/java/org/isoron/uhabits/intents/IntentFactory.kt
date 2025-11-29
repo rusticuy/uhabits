@@ -24,10 +24,14 @@ import android.content.Intent
 import android.net.Uri
 import org.isoron.uhabits.R
 import org.isoron.uhabits.activities.about.AboutActivity
+import org.isoron.uhabits.activities.goals.edit.EditGoalActivity
+import org.isoron.uhabits.activities.goals.list.ListGoalsActivity
+import org.isoron.uhabits.activities.goals.show.ShowGoalActivity
 import org.isoron.uhabits.activities.habits.edit.EditHabitActivity
 import org.isoron.uhabits.activities.habits.show.ShowHabitActivity
 import org.isoron.uhabits.activities.intro.IntroActivity
 import org.isoron.uhabits.activities.settings.SettingsActivity
+import org.isoron.uhabits.core.models.Goal
 import org.isoron.uhabits.core.models.Habit
 import javax.inject.Inject
 
@@ -100,4 +104,20 @@ class IntentFactory
         intent.putExtra("habitType", habitType)
         return intent
     }
+
+    fun startListGoalsActivity(context: Context) =
+        Intent(context, ListGoalsActivity::class.java)
+
+    fun startShowGoalActivity(context: Context, goal: Goal) =
+        Intent(context, ShowGoalActivity::class.java).apply {
+            putExtra("goalId", goal.id)
+        }
+
+    fun startEditGoalActivity(context: Context, goal: Goal) =
+        Intent(context, EditGoalActivity::class.java).apply {
+            putExtra("goalId", goal.id)
+        }
+
+    fun startEditGoalActivity(context: Context) =
+        Intent(context, EditGoalActivity::class.java)
 }

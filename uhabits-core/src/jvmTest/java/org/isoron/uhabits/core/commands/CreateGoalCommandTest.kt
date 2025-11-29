@@ -16,8 +16,26 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.commands
 
-const val DATABASE_FILENAME = "uhabits.db"
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
+import org.hamcrest.MatcherAssert.assertThat
+import org.isoron.uhabits.core.BaseUnitTest
+import org.junit.Before
+import org.junit.Test
 
-const val DATABASE_VERSION = 26
+class CreateGoalCommandTest : BaseUnitTest() {
+
+    @Before
+    @Throws(Exception::class)
+    override fun setUp() {
+        super.setUp()
+    }
+
+    @Test
+    fun testCreateGoal() {
+        val goal = fixtures.createEmptyGoal("Test Goal")
+        assertThat(goal, notNullValue())
+    }
+}
