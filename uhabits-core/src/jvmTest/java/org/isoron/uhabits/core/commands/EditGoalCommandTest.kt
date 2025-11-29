@@ -18,6 +18,12 @@
  */
 package org.isoron.uhabits.core.commands
 
+import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.MatcherAssert.assertThat
+import org.isoron.uhabits.core.BaseUnitTest
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalList
+import org.isoron.uhabits.core.models.goals.MemoryGoalList
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.isoron.uhabits.core.BaseUnitTest
@@ -25,6 +31,53 @@ import org.junit.Before
 import org.junit.Test
 
 class EditGoalCommandTest : BaseUnitTest() {
+    private lateinit var goalList: GoalList
+    private lateinit var command: EditGoalCommand
+    private lateinit var originalGoal: Goal
+    private lateinit var modifiedGoal: Goal
+    private var goalId: Long = 0
+
+    @Before
+    override fun setUp() {
+        super.setUp()
+        goalList = MemoryGoalList()
+        originalGoal = Goal(
+            name = "Original Goal",
+            description = "Original Description",
+            targetValue = 50.0
+        )
+        goalList.add(originalGoal)
+        goalId = originalGoal.id ?: throw IllegalStateException("Goal id should not be null")
+
+        modifiedGoal = Goal(
+            name = "Modified Goal",
+            description = "Modified Description",
+            targetValue = 75.0
+        )
+        command = EditGoalCommand(goalList, goalId, modifiedGoal)
+    }
+
+    @Test
+    fun testExecute() {
+        command.run()
+        val goal = goalList.getById(goalId)
+        assertThat(goal?.name, equalTo(modifiedGoal.name))
+        assertThat(goal?.description, equalTo(modifiedGoal.description))
+        assertThat(goal?.targetValue, equalTo(modifiedGoal.targetValue))
+    }
+
+    @Test
+    fun testGoalIdUnchanged() {
+        command.run()
+        val goal = goalList.getById(goalId)
+        assertThat(goal?.id, equalTo(goalId))
+    }
+
+    @Test(expected = IllegalArgumentException::class)
+    fun testEditNonExistentGoal() {
+        val nonExistentId = 999L
+        val editCommand = EditGoalCommand(goalList, nonExistentId, modifiedGoal)
+        editCommand.run()
 
     @Before
     @Throws(Exception::class)

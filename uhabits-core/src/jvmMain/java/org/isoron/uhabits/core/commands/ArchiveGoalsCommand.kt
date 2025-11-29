@@ -21,22 +21,12 @@ package org.isoron.uhabits.core.commands
 import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.models.goals.GoalList
 
-data class EditGoalCommand(
+data class ArchiveGoalsCommand(
     val goalList: GoalList,
-    val goalId: Long,
-    val modified: Goal
+    val selected: List<Goal>
 ) : Command {
     override fun run() {
-        val goal = goalList.getById(goalId) ?: throw IllegalArgumentException("Goal not found")
-        goal.copyFrom(modified)
-import org.isoron.uhabits.core.models.Goal
-import org.isoron.uhabits.core.models.GoalList
-
-data class EditGoalCommand(
-    val goalList: GoalList,
-    val goal: Goal
-) : Command {
-    override fun run() {
-        goalList.update(goal)
+        for (goal in selected) goal.isArchived = true
+        goalList.update(selected)
     }
 }

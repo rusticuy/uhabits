@@ -18,25 +18,14 @@
  */
 package org.isoron.uhabits.core.commands
 
-import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.models.goals.GoalList
+import org.isoron.uhabits.core.models.goals.GoalMilestone
 
-data class EditGoalCommand(
+data class UpdateGoalMilestoneCommand(
     val goalList: GoalList,
-    val goalId: Long,
-    val modified: Goal
+    val milestone: GoalMilestone
 ) : Command {
     override fun run() {
-        val goal = goalList.getById(goalId) ?: throw IllegalArgumentException("Goal not found")
-        goal.copyFrom(modified)
-import org.isoron.uhabits.core.models.Goal
-import org.isoron.uhabits.core.models.GoalList
-
-data class EditGoalCommand(
-    val goalList: GoalList,
-    val goal: Goal
-) : Command {
-    override fun run() {
-        goalList.update(goal)
+        goalList.updateMilestone(milestone)
     }
 }

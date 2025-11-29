@@ -26,66 +26,49 @@ import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.goals.MemoryGoalList
 import org.junit.Before
 import org.junit.Test
-import kotlin.test.assertTrue
 
-class CreateGoalCommandTest : BaseUnitTest() {
+class DeleteGoalsCommandTest : BaseUnitTest() {
     private lateinit var goalList: GoalList
-    private lateinit var command: CreateGoalCommand
-    private lateinit var goal: Goal
+    private lateinit var command: DeleteGoalsCommand
+    private val goals = mutableListOf<Goal>()
 
     @Before
     override fun setUp() {
         super.setUp()
         goalList = MemoryGoalList()
-        goal = Goal(
-            name = "Complete a Project",
-            description = "Finish the ongoing project",
-            targetValue = 100.0
-        )
-        command = CreateGoalCommand(goalList, goal)
+        for (i in 0..2) {
+            val goal = Goal(
+                name = "Goal $i",
+                description = "Description $i",
+                targetValue = (i * 25).toDouble()
+            )
+            goalList.add(goal)
+            goals.add(goal)
+        }
+        command = DeleteGoalsCommand(goalList, listOf(goals[0], goals[1]))
     }
 
     @Test
     fun testExecute() {
-        assertTrue(goalList.isEmpty)
+        assertThat(goalList.size(), equalTo(3))
         command.run()
         assertThat(goalList.size(), equalTo(1))
-        val createdGoal = goalList.iterator().next()
-        assertThat(createdGoal.name, equalTo(goal.name))
-        assertThat(createdGoal.id != null, equalTo(true))
+        val remaining = goalList.iterator().next()
+        assertThat(remaining.name, equalTo("Goal 2"))
     }
 
     @Test
-    fun testGoalIdAssigned() {
+    fun testDeletedGoalsNotFound() {
         command.run()
-        val createdGoal = goalList.iterator().next()
-        assertThat(createdGoal.id != null, equalTo(true))
+        assertThat(goalList.getById(goals[0].id!!), equalTo(null))
+        assertThat(goalList.getById(goals[1].id!!), equalTo(null))
     }
 
     @Test
-    fun testGoalPropertiesCopied() {
+    fun testRemainingGoalUnchanged() {
         command.run()
-        val createdGoal = goalList.iterator().next()
-        assertThat(createdGoal.name, equalTo(goal.name))
-        assertThat(createdGoal.description, equalTo(goal.description))
-        assertThat(createdGoal.targetValue, equalTo(goal.targetValue))
-import org.hamcrest.CoreMatchers.notNullValue
-import org.hamcrest.MatcherAssert.assertThat
-import org.isoron.uhabits.core.BaseUnitTest
-import org.junit.Before
-import org.junit.Test
-
-class CreateGoalCommandTest : BaseUnitTest() {
-
-    @Before
-    @Throws(Exception::class)
-    override fun setUp() {
-        super.setUp()
-    }
-
-    @Test
-    fun testCreateGoal() {
-        val goal = fixtures.createEmptyGoal("Test Goal")
-        assertThat(goal, notNullValue())
+        val remaining = goalList.getById(goals[2].id!!)
+        assertThat(remaining?.name, equalTo(goals[2].name))
+        assertThat(remaining?.description, equalTo(goals[2].description))
     }
 }
