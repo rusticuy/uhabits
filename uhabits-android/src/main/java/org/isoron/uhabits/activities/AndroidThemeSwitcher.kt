@@ -25,6 +25,8 @@ import android.content.res.Configuration.UI_MODE_NIGHT_MASK
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import android.os.Build.VERSION.SDK_INT
 import androidx.core.content.ContextCompat
+import com.google.android.material.color.DynamicColors
+import com.google.android.material.color.MaterialColors
 import org.isoron.uhabits.R
 import org.isoron.uhabits.core.preferences.Preferences
 import org.isoron.uhabits.core.ui.ThemeSwitcher
@@ -57,19 +59,33 @@ constructor(
     override fun applyDarkTheme() {
         currentTheme = DarkTheme()
         context.setTheme(R.style.AppBaseThemeDark)
-        (context as Activity).window.navigationBarColor =
-            ContextCompat.getColor(context, R.color.grey_900)
+        val activity = context as Activity
+        DynamicColors.applyToActivityIfAvailable(activity)
+        setEdgeToEdgeBar(activity)
     }
 
     override fun applyLightTheme() {
         currentTheme = LightTheme()
         context.setTheme(R.style.AppBaseTheme)
+        val activity = context as Activity
+        DynamicColors.applyToActivityIfAvailable(activity)
+        setEdgeToEdgeBar(activity)
     }
 
     override fun applyPureBlackTheme() {
         currentTheme = PureBlackTheme()
         context.setTheme(R.style.AppBaseThemeDark_PureBlack)
-        (context as Activity).window.navigationBarColor =
-            ContextCompat.getColor(context, R.color.black)
+        val activity = context as Activity
+        setEdgeToEdgeBar(activity)
+    }
+
+    private fun setEdgeToEdgeBar(activity: Activity) {
+        val surfaceColor = MaterialColors.getColor(
+            context,
+            com.google.android.material.R.attr.colorSurface,
+            ContextCompat.getColor(context, R.color.grey_900)
+        )
+        activity.window.navigationBarColor = surfaceColor
+        activity.window.statusBarColor = android.graphics.Color.TRANSPARENT
     }
 }
