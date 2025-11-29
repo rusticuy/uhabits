@@ -1,0 +1,48 @@
+/*
+ * Copyright (C) 2016-2025 Álinson Santos Xavier <git@axavier.org>
+ *
+ * This file is part of Loop Habit Tracker.
+ *
+ * Loop Habit Tracker is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by the
+ * Free Software Foundation, either version 3 of the License, or (at your
+ * option) any later version.
+ *
+ * Loop Habit Tracker is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY
+ * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for
+ * more details.
+ *
+ * You should have received a copy of the GNU General Public License along
+ * with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package org.isoron.uhabits.core.models
+
+open class GoalList {
+    protected val goals: MutableList<Goal> = mutableListOf()
+
+    open fun add(goal: Goal) {
+        goals.add(goal)
+    }
+
+    open fun remove(goal: Goal) {
+        goals.remove(goal)
+    }
+
+    open fun getAll(): List<Goal> = goals.toList()
+
+    open fun getById(id: Long): Goal? = goals.find { it.id == id }
+
+    open fun update(goal: Goal) {
+        val index = goals.indexOfFirst { it.id == goal.id }
+        if (index >= 0) {
+            goals[index] = goal
+        }
+    }
+
+    open fun getArchived(archived: Boolean): List<Goal> =
+        goals.filter { it.archived == archived }
+
+    open fun iterator(): Iterator<Goal> = goals.iterator()
+}
