@@ -21,25 +21,53 @@ package org.isoron.uhabits.core.models
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.isoron.uhabits.core.BaseUnitTest
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalHabitLink
+import org.isoron.uhabits.core.models.goals.GoalMilestone
+import org.isoron.uhabits.core.models.goals.GoalProgressCalculator
+import org.isoron.uhabits.core.models.goals.MemoryGoalList
+import org.junit.Before
 import org.junit.Test
+import kotlin.test.assertNotNull
 
 class GoalProgressCalculatorTest : BaseUnitTest() {
+    private lateinit var testGoalList: MemoryGoalList
+    private lateinit var calculator: GoalProgressCalculator
+
+    @Before
+    override fun setUp() {
+        super.setUp()
+        testGoalList = MemoryGoalList()
+        calculator = GoalProgressCalculator(testGoalList, habitList)
+    }
 
     @Test
     fun testCalculateProgressWithNoLinkedHabits() {
-        val habit1 = fixtures.createEmptyHabit("Read")
-        val habit2 = fixtures.createEmptyHabit("Write")
+        val goal = Goal(name = "No Links", targetValue = 100.0)
+        testGoalList.add(goal)
         
-        assertThat(habitList.size(), equalTo(2))
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.percentageComplete, equalTo(0.0))
+        assertThat(progress?.linkedHabits?.size, equalTo(0))
     }
 
     @Test
     fun testCalculateProgressWithSingleLinkedHabit() {
-        val habit1 = fixtures.createEmptyHabit("Exercise")
-        val habit2 = fixtures.createEmptyHabit("Sleep")
-        val habit3 = fixtures.createEmptyHabit("Meditate")
+        val habit = fixtures.createEmptyHabit("Exercise")
+        habitList.add(habit)
         
-        assertThat(habitList.size(), equalTo(3))
+        val goal = Goal(name = "Single Link", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val link = GoalHabitLink(goalId = goal.id, habitId = habit.id, weight = 1.0)
+        testGoalList.addHabitLink(link)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.linkedHabits?.size, equalTo(1))
     }
 
     @Test
@@ -48,28 +76,80 @@ class GoalProgressCalculatorTest : BaseUnitTest() {
         val habit2 = fixtures.createLongHabit()
         val habit3 = fixtures.createShortHabit()
         
-        assertThat(habitList.size(), equalTo(3))
+        habitList.add(habit1)
+        habitList.add(habit2)
+        habitList.add(habit3)
+        
+        val goal = Goal(name = "Weighted Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val link1 = GoalHabitLink(goalId = goal.id, habitId = habit1.id, weight = 1.0)
+        val link2 = GoalHabitLink(goalId = goal.id, habitId = habit2.id, weight = 1.5)
+        val link3 = GoalHabitLink(goalId = goal.id, habitId = habit3.id, weight = 2.0)
+        
+        testGoalList.addHabitLink(link1)
+        testGoalList.addHabitLink(link2)
+        testGoalList.addHabitLink(link3)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.linkedHabits?.size, equalTo(3))
     }
 
     @Test
     fun testCalculateProgressWithOverdeadline() {
-        val today = timestamp(2015, 0, 25)
-        val pastDate = timestamp(2015, 0, 1)
+        val pastDate = System.currentTimeMillis() - 86400000
+        val goal = Goal(
+            name = "Overdue Goal",
+            targetValue = 100.0,
+            deadline = pastDate
+        )
+        testGoalList.add(goal)
         
-        assertThat(today.toCalendar().timeInMillis, equalTo(FIXED_LOCAL_TIME))
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.deadlineOverdue, equalTo(true))
     }
 
     @Test
     fun testCalculateProgressWithMilestoneCompletion() {
         val habit = fixtures.createNumericalHabit()
-        val habit2 = fixtures.createEmptyNumericalHabit(NumericalHabitType.AT_LEAST)
+        habitList.add(habit)
         
-        assertThat(habitList.size(), equalTo(2))
+        val goal = Goal(name = "Goal with Milestones", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val milestone1 = GoalMilestone(
+            goalId = goal.id,
+            name = "First Milestone",
+            targetValue = 25.0
+        )
+        val milestone2 = GoalMilestone(
+            goalId = goal.id,
+            name = "Second Milestone",
+            targetValue = 50.0
+        )
+        
+        testGoalList.addMilestone(milestone1)
+        testGoalList.addMilestone(milestone2)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.milestoneStatus?.size, equalTo(2))
     }
 
     @Test
     fun testProgressCalculationWithEmptyHabits() {
-        assertThat(habitList.size(), equalTo(0))
+        val goal = Goal(name = "Empty Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.linkedHabits?.size, equalTo(0))
     }
 
     @Test
@@ -77,7 +157,22 @@ class GoalProgressCalculatorTest : BaseUnitTest() {
         val habit1 = fixtures.createShortHabit()
         val habit2 = fixtures.createLongHabit()
         
-        assertThat(habitList.size(), equalTo(2))
+        habitList.add(habit1)
+        habitList.add(habit2)
+        
+        val goal = Goal(name = "Completed Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val link1 = GoalHabitLink(goalId = goal.id, habitId = habit1.id, weight = 1.0)
+        val link2 = GoalHabitLink(goalId = goal.id, habitId = habit2.id, weight = 1.0)
+        
+        testGoalList.addHabitLink(link1)
+        testGoalList.addHabitLink(link2)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.linkedHabits?.size, equalTo(2))
     }
 
     @Test
@@ -86,22 +181,57 @@ class GoalProgressCalculatorTest : BaseUnitTest() {
         val habit2 = fixtures.createEmptyHabit("Partial 2")
         val habit3 = fixtures.createEmptyHabit("Partial 3")
         
-        assertThat(habitList.size(), equalTo(3))
+        habitList.add(habit1)
+        habitList.add(habit2)
+        habitList.add(habit3)
+        
+        val goal = Goal(name = "Partial Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val link1 = GoalHabitLink(goalId = goal.id, habitId = habit1.id, weight = 1.0)
+        val link2 = GoalHabitLink(goalId = goal.id, habitId = habit2.id, weight = 1.0)
+        
+        testGoalList.addHabitLink(link1)
+        testGoalList.addHabitLink(link2)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.linkedHabits?.size, equalTo(2))
     }
 
     @Test
     fun testProgressCalculationWithNumericalTargets() {
         val habit = fixtures.createNumericalHabit()
-        val habit2 = fixtures.createLongNumericalHabit(timestamp(2015, 0, 25))
+        habitList.add(habit)
         
-        assertThat(habitList.size(), equalTo(2))
+        val goal = Goal(name = "Numerical Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val link = GoalHabitLink(goalId = goal.id, habitId = habit.id, weight = 1.0)
+        testGoalList.addHabitLink(link)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.linkedHabits?.size, equalTo(1))
     }
 
     @Test
     fun testProgressCalculationWithZeroWeight() {
-        val habit1 = fixtures.createEmptyHabit()
+        val habit = fixtures.createEmptyHabit()
+        habitList.add(habit)
         
-        assertThat(habitList.size(), equalTo(1))
+        val goal = Goal(name = "Zero Weight Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val link = GoalHabitLink(goalId = goal.id, habitId = habit.id, weight = 0.0)
+        testGoalList.addHabitLink(link)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.percentageComplete, equalTo(0.0))
     }
 
     @Test
@@ -109,6 +239,21 @@ class GoalProgressCalculatorTest : BaseUnitTest() {
         val habit1 = fixtures.createEmptyHabit()
         val habit2 = fixtures.createEmptyHabit()
         
-        assertThat(habitList.size(), equalTo(2))
+        habitList.add(habit1)
+        habitList.add(habit2)
+        
+        val goal = Goal(name = "High Weight Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        val link1 = GoalHabitLink(goalId = goal.id, habitId = habit1.id, weight = 10.0)
+        val link2 = GoalHabitLink(goalId = goal.id, habitId = habit2.id, weight = 20.0)
+        
+        testGoalList.addHabitLink(link1)
+        testGoalList.addHabitLink(link2)
+        
+        val progress = calculator.calculate(goal.id!!)
+        
+        assertNotNull(progress)
+        assertThat(progress?.linkedHabits?.size, equalTo(2))
     }
 }

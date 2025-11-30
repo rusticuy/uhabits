@@ -28,6 +28,7 @@ import org.isoron.uhabits.core.models.GoalList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
 import org.isoron.uhabits.core.models.Timestamp
+import org.isoron.uhabits.core.models.goals.MemoryGoalList
 import org.isoron.uhabits.core.models.memory.MemoryModelFactory
 import org.isoron.uhabits.core.tasks.SingleThreadTaskRunner
 import org.isoron.uhabits.core.test.HabitFixtures
@@ -82,7 +83,7 @@ open class BaseUnitTest {
         setStartDayOffset(0, 0)
         val memoryModelFactory = MemoryModelFactory()
         habitList = spy(memoryModelFactory.buildHabitList())
-        goalList = spy(GoalList())
+        goalList = spy(MemoryGoalList())
         fixtures = HabitFixtures(memoryModelFactory, habitList)
         modelFactory = memoryModelFactory
         taskRunner = SingleThreadTaskRunner()

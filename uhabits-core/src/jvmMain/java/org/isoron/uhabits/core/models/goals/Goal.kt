@@ -19,19 +19,6 @@
 package org.isoron.uhabits.core.models.goals
 
 import org.isoron.uhabits.core.models.ModelObservable
-import org.isoron.uhabits.core.models.PaletteColor
-import java.util.UUID
-
-data class Goal(
-    var color: PaletteColor = PaletteColor(8),
-    var description: String = "",
-    var id: Long? = null,
-    var isArchived: Boolean = false,
-    var name: String = "",
-    var position: Int = 0,
-    var uuid: String? = null,
-    var dueDate: Long? = null,
-    val milestones: GoalMilestoneList
 import java.util.UUID
 
 data class Goal(
@@ -50,14 +37,6 @@ data class Goal(
     var observable = ModelObservable()
 
     fun copyFrom(other: Goal) {
-        this.color = other.color
-        this.description = other.description
-        this.isArchived = other.isArchived
-        this.name = other.name
-        this.position = other.position
-        this.uuid = other.uuid
-        this.dueDate = other.dueDate
-    fun copyFrom(other: Goal) {
         this.name = other.name
         this.description = other.description
         this.targetValue = other.targetValue
@@ -70,14 +49,6 @@ data class Goal(
         if (this === other) return true
         if (other !is Goal) return false
 
-        if (color != other.color) return false
-        if (description != other.description) return false
-        if (id != other.id) return false
-        if (isArchived != other.isArchived) return false
-        if (name != other.name) return false
-        if (position != other.position) return false
-        if (uuid != other.uuid) return false
-        if (dueDate != other.dueDate) return false
         if (id != other.id) return false
         if (name != other.name) return false
         if (description != other.description) return false
@@ -90,14 +61,6 @@ data class Goal(
     }
 
     override fun hashCode(): Int {
-        var result = color.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + isArchived.hashCode()
-        result = 31 * result + name.hashCode()
-        result = 31 * result + position
-        result = 31 * result + (uuid?.hashCode() ?: 0)
-        result = 31 * result + (dueDate?.hashCode() ?: 0)
         var result = id?.hashCode() ?: 0
         result = 31 * result + name.hashCode()
         result = 31 * result + description.hashCode()

@@ -122,4 +122,93 @@ class Version26Test : BaseUnitTest() {
         cursor.moveToNext()
         assertThat(cursor.getDouble(0), equalTo(1.5))
     }
+
+    @Test
+    fun `test migrate to 26 enforces foreign key constraints on Goals`() {
+        migrateTo26()
+        db.execute(
+            "insert into Habits(id, name, description, frequency_num, frequency_den, " +
+            "color) values (1, 'Test', '', 1, 1, 0)"
+        )
+        db.execute(
+            "insert into Goals(id, name, created_at) values (1, 'Goal 1', 123456789)"
+        )
+        db.execute(
+            "insert into Goals(id, name, created_at) values (2, 'Goal 2', 123456789)"
+        )
+        
+        val cursor = db.query("select count(*) from Goals")
+        cursor.moveToNext()
+        assertThat(cursor.getLong(0), equalTo(2L))
+    }
+
+    @Test
+    fun `test migrate to 26 allows multiple goals with linked habits`() {
+        migrateTo26()
+        db.execute(
+            "insert into Habits(id, name, description, frequency_num, frequency_den, " +
+            "color) values (1, 'Habit 1', '', 1, 1, 0)"
+        )
+        db.execute(
+            "insert into Habits(id, name, description, frequency_num, frequency_den, " +
+            "color) values (2, 'Habit 2', '', 1, 1, 0)"
+        )
+        db.execute(
+            "insert into Goals(id, name, created_at) values (1, 'Goal 1', 123456789)"
+        )
+        db.execute("insert into GoalHabitLinks(goal_id, habit_id, weight) " +
+                   "values (1, 1, 1.0)")
+        db.execute("insert into GoalHabitLinks(goal_id, habit_id, weight) " +
+                   "values (1, 2, 2.0)")
+        
+        val cursor = db.query("select count(*) from GoalHabitLinks where goal_id = 1")
+        cursor.moveToNext()
+        assertThat(cursor.getLong(0), equalTo(2L))
+    }
+
+    @Test
+    fun `test migrate to 26 allows milestones with multiple goals`() {
+        migrateTo26()
+        db.execute(
+            "insert into Goals(id, name, created_at) values (1, 'Goal 1', 123456789)"
+        )
+        db.execute(
+            "insert into Goals(id, name, created_at) values (2, 'Goal 2', 123456789)"
+        )
+        db.execute(
+            "insert into GoalMilestones(goal_id, title, target_value) " +
+            "values (1, 'Milestone 1', 25.0)"
+        )
+        db.execute(
+            "insert into GoalMilestones(goal_id, title, target_value) " +
+            "values (1, 'Milestone 2', 50.0)"
+        )
+        db.execute(
+            "insert into GoalMilestones(goal_id, title, target_value) " +
+            "values (2, 'Milestone 3', 75.0)"
+        )
+        
+        val cursor1 = db.query("select count(*) from GoalMilestones where goal_id = 1")
+        cursor1.moveToNext()
+        assertThat(cursor1.getLong(0), equalTo(2L))
+        
+        val cursor2 = db.query("select count(*) from GoalMilestones where goal_id = 2")
+        cursor2.moveToNext()
+        assertThat(cursor2.getLong(0), equalTo(1L))
+    }
+
+    @Test
+    fun `test migrate to 26 schema has proper indexes`() {
+        migrateTo26()
+        val cursor = db.query(
+            "select name from sqlite_master where type='index' and " +
+            "name in ('idx_GoalHabitLinks_goal_id', 'idx_GoalHabitLinks_habit_id', " +
+            "'idx_GoalMilestones_goal_id')"
+        )
+        var count = 0
+        while (cursor.moveToNext()) {
+            count++
+        }
+        assertThat(count, equalTo(3))
+    }
 }

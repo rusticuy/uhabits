@@ -18,14 +18,15 @@
  */
 package org.isoron.uhabits.core.commands
 
-import org.isoron.uhabits.core.models.Goal
-import org.isoron.uhabits.core.models.GoalList
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalList
 
 data class ArchiveGoalCommand(
     val goalList: GoalList,
     val goal: Goal
 ) : Command {
     override fun run() {
-        goalList.update(goal.copy(archived = true))
+        goal.isArchived = true
+        goalList.update(goal)
     }
 }

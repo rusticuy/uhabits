@@ -18,8 +18,8 @@
  */
 package org.isoron.uhabits.core.commands
 
-import org.isoron.uhabits.core.models.Goal
-import org.isoron.uhabits.core.models.GoalList
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalList
 
 data class DeleteGoalCommand(
     val goalList: GoalList,

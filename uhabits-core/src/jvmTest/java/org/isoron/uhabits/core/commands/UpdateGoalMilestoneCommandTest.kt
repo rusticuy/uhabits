@@ -45,14 +45,14 @@ class UpdateGoalMilestoneCommandTest : BaseUnitTest() {
 
         milestone = GoalMilestone(
             goalId = goalId,
-            targetPercentage = 50.0,
-            isComplete = false
+            name = "Test Milestone",
+            targetValue = 50.0,
+            isCompleted = false
         )
         goalList.addMilestone(milestone)
         milestoneId = milestone.id ?: throw IllegalStateException()
 
-        milestone.isComplete = true
-        milestone.completedAt = System.currentTimeMillis()
+        milestone.isCompleted = true
         command = UpdateGoalMilestoneCommand(goalList, milestone)
     }
 
@@ -60,26 +60,26 @@ class UpdateGoalMilestoneCommandTest : BaseUnitTest() {
     fun testExecute() {
         val originalMilestones = goalList.getMilestones(goalId)
         val original = originalMilestones[0]
-        assertThat(original.isComplete, equalTo(true))
+        assertThat(original.isCompleted, equalTo(true))
         command.run()
         val updated = goalList.getMilestones(goalId)[0]
-        assertThat(updated.isComplete, equalTo(true))
+        assertThat(updated.isCompleted, equalTo(true))
     }
 
     @Test
     fun testMilestoneCompletionStatus() {
         val before = goalList.getMilestones(goalId)[0]
-        before.isComplete = false
+        before.isCompleted = false
         goalList.updateMilestone(before)
 
         val incomplete = goalList.getMilestones(goalId)[0]
-        assertThat(incomplete.isComplete, equalTo(false))
+        assertThat(incomplete.isCompleted, equalTo(false))
 
-        incomplete.isComplete = true
+        incomplete.isCompleted = true
         val updateCmd = UpdateGoalMilestoneCommand(goalList, incomplete)
         updateCmd.run()
 
         val completed = goalList.getMilestones(goalId)[0]
-        assertThat(completed.isComplete, equalTo(true))
+        assertThat(completed.isCompleted, equalTo(true))
     }
 }

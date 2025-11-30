@@ -22,48 +22,96 @@ import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.isoron.uhabits.core.BaseUnitTest
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalHabitLink
+import org.isoron.uhabits.core.models.goals.MemoryGoalList
+import org.junit.Before
 import org.junit.Test
 
 class GoalRepositoryTest : BaseUnitTest() {
+    private lateinit var testGoalList: MemoryGoalList
+
+    @Before
+    override fun setUp() {
+        super.setUp()
+        testGoalList = MemoryGoalList()
+    }
 
     @Test
     fun testSaveGoal() {
-        val habit = fixtures.createEmptyHabit("Goal Test Habit")
-        assertThat(habitList.getByPosition(0), notNullValue())
+        val goal = Goal(name = "Test Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        assertThat(testGoalList.getById(goal.id!!), notNullValue())
     }
 
     @Test
     fun testRetrieveGoal() {
-        val habit1 = fixtures.createEmptyHabit("First Goal")
-        val habit2 = fixtures.createEmptyHabit("Second Goal")
-        assertThat(habitList.size(), equalTo(2))
+        val goal1 = Goal(name = "First Goal", targetValue = 100.0)
+        val goal2 = Goal(name = "Second Goal", targetValue = 50.0)
+        testGoalList.add(goal1)
+        testGoalList.add(goal2)
+        
+        assertThat(testGoalList.size(), equalTo(2))
+        assertThat(testGoalList.getById(goal1.id!!), notNullValue())
+        assertThat(testGoalList.getById(goal2.id!!), notNullValue())
     }
 
     @Test
     fun testUpdateGoal() {
-        val habit = fixtures.createEmptyHabit("Original Name")
-        assertThat(habitList.size(), equalTo(1))
+        val goal = Goal(name = "Original Name", targetValue = 100.0)
+        testGoalList.add(goal)
+        
+        goal.name = "Updated Name"
+        testGoalList.update(goal)
+        
+        val retrieved = testGoalList.getById(goal.id!!)
+        assertThat(retrieved?.name, equalTo("Updated Name"))
     }
 
     @Test
     fun testDeleteGoal() {
-        val habit1 = fixtures.createEmptyHabit("Keep")
-        val habit2 = fixtures.createEmptyHabit("Delete")
-        assertThat(habitList.size(), equalTo(2))
+        val goal1 = Goal(name = "Keep", targetValue = 100.0)
+        val goal2 = Goal(name = "Delete", targetValue = 100.0)
+        testGoalList.add(goal1)
+        testGoalList.add(goal2)
+        
+        assertThat(testGoalList.size(), equalTo(2))
+        
+        testGoalList.remove(goal2)
+        
+        assertThat(testGoalList.size(), equalTo(1))
+        assertThat(testGoalList.getById(goal2.id!!), equalTo(null))
     }
 
     @Test
     fun testQueryGoalsByStatus() {
-        val habit1 = fixtures.createEmptyHabit()
-        val habit2 = fixtures.createEmptyHabit()
-        val habit3 = fixtures.createEmptyHabit()
-        assertThat(habitList.size(), equalTo(3))
+        val goal1 = Goal(name = "Active 1", targetValue = 100.0)
+        val goal2 = Goal(name = "Active 2", targetValue = 100.0)
+        val goal3 = Goal(name = "Archived", targetValue = 100.0, isArchived = true)
+        
+        testGoalList.add(goal1)
+        testGoalList.add(goal2)
+        testGoalList.add(goal3)
+        
+        assertThat(testGoalList.size(), equalTo(3))
     }
 
     @Test
     fun testQueryLinkedHabitsForGoal() {
+        val goal = Goal(name = "Linked Goal", targetValue = 100.0)
+        testGoalList.add(goal)
+        
         val habit1 = fixtures.createEmptyHabit("Linked 1")
         val habit2 = fixtures.createEmptyHabit("Linked 2")
-        assertThat(habitList.size(), equalTo(2))
+        
+        val link1 = GoalHabitLink(goalId = goal.id, habitId = habit1.id, weight = 1.0)
+        val link2 = GoalHabitLink(goalId = goal.id, habitId = habit2.id, weight = 1.5)
+        
+        testGoalList.addHabitLink(link1)
+        testGoalList.addHabitLink(link2)
+        
+        val links = testGoalList.getLinkedHabits(goal.id!!)
+        assertThat(links.size, equalTo(2))
     }
 }

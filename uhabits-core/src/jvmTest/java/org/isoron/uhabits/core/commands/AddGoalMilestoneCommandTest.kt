@@ -45,8 +45,9 @@ class AddGoalMilestoneCommandTest : BaseUnitTest() {
 
         milestone = GoalMilestone(
             goalId = goalId,
-            targetPercentage = 50.0,
-            isComplete = false
+            name = "Milestone 1",
+            targetValue = 50.0,
+            isCompleted = false
         )
         command = AddGoalMilestoneCommand(goalList, milestone)
     }
@@ -58,8 +59,8 @@ class AddGoalMilestoneCommandTest : BaseUnitTest() {
         val milestones = goalList.getMilestones(goalId)
         assertThat(milestones.size, equalTo(1))
         val addedMilestone = milestones[0]
-        assertThat(addedMilestone.targetPercentage, equalTo(50.0))
-        assertThat(addedMilestone.isComplete, equalTo(false))
+        assertThat(addedMilestone.targetValue, equalTo(50.0))
+        assertThat(addedMilestone.isCompleted, equalTo(false))
     }
 
     @Test
@@ -71,7 +72,7 @@ class AddGoalMilestoneCommandTest : BaseUnitTest() {
 
     @Test(expected = IllegalArgumentException::class)
     fun testAddMilestoneNonExistentGoal() {
-        val invalidMilestone = GoalMilestone(goalId = 999L, targetPercentage = 50.0)
+        val invalidMilestone = GoalMilestone(goalId = 999L, name = "Invalid", targetValue = 50.0)
         val invalidCommand = AddGoalMilestoneCommand(goalList, invalidMilestone)
         invalidCommand.run()
     }
@@ -81,8 +82,9 @@ class AddGoalMilestoneCommandTest : BaseUnitTest() {
         command.run()
         val milestone2 = GoalMilestone(
             goalId = goalId,
-            targetPercentage = 75.0,
-            isComplete = false
+            name = "Milestone 2",
+            targetValue = 75.0,
+            isCompleted = false
         )
         val command2 = AddGoalMilestoneCommand(goalList, milestone2)
         command2.run()
