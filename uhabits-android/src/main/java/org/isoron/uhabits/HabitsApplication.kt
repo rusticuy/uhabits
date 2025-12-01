@@ -90,6 +90,13 @@ class HabitsApplication : Application() {
         notificationTray = component.notificationTray
         notificationTray.startListening()
 
+        val achievementNotificationManager = component.achievementNotificationManager
+        achievementNotificationManager.startListening()
+
+        val achievementCommandListener = component.achievementCommandListener
+        achievementCommandListener.startListening()
+        component.commandRunner.addListener(achievementCommandListener)
+
         val appLockManager = component.appLockManager
         appLockManager.initialize()
 
@@ -104,6 +111,9 @@ class HabitsApplication : Application() {
         reminderScheduler.stopListening()
         widgetUpdater.stopListening()
         notificationTray.stopListening()
+        component.achievementNotificationManager.stopListening()
+        component.achievementCommandListener.stopListening()
+        component.commandRunner.removeListener(component.achievementCommandListener)
         super.onTerminate()
     }
 

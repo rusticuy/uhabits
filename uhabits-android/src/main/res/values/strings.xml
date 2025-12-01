@@ -306,4 +306,13 @@
     <string name="toast_goal_created">Goal created</string>
     <string name="toast_goal_archived">Goal archived</string>
     <string name="toast_goal_deleted">Goal deleted</string>
+    
+    <!-- Achievement notifications -->
+    <string name="achievements">Achievements</string>
+    <string name="achievement_notifications_description">Notifications for unlocked achievements</string>
+    <string name="achievement_notifications">Achievement notifications</string>
+    <string name="achievement_notifications_summary">Show notifications when achievements are unlocked</string>
+    <string name="achievement_unlocked">Achievement unlocked!</string>
+    <string name="achievement_unlocked_for_habit">%1$s: %2$s</string>
+    <string name="habit">Habit</string>
 </resources>

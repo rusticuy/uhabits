@@ -92,6 +92,14 @@ class PendingIntentFactory
             )
             .getPendingIntent(0, FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT)!!
 
+    fun showListHabits(): PendingIntent =
+        androidx.core.app.TaskStackBuilder
+            .create(context)
+            .addNextIntentWithParentStack(
+                intentFactory.startListHabitsActivity(context)
+            )
+            .getPendingIntent(0, FLAG_IMMUTABLE or FLAG_UPDATE_CURRENT)!!
+
     fun showHabitTemplate(): PendingIntent {
         return getActivity(
             context,

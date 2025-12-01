@@ -32,6 +32,8 @@ import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.sqlite.SQLModelFactory
 import org.isoron.uhabits.core.models.sqlite.SQLiteGoalList
 import org.isoron.uhabits.core.models.sqlite.SQLiteHabitList
+import org.isoron.uhabits.achievements.AchievementCommandListener
+import org.isoron.uhabits.core.models.achievements.AchievementDetector
 import org.isoron.uhabits.core.preferences.Preferences
 import org.isoron.uhabits.core.preferences.WidgetPreferences
 import org.isoron.uhabits.core.reminders.ReminderScheduler
@@ -42,9 +44,11 @@ import org.isoron.uhabits.database.AndroidDatabaseOpener
 import org.isoron.uhabits.intents.IntentScheduler
 import org.isoron.uhabits.io.AndroidLogging
 import org.isoron.uhabits.notifications.AndroidNotificationTray
+import org.isoron.uhabits.notifications.AchievementNotificationManager
 import org.isoron.uhabits.preferences.SharedPreferencesStorage
 import org.isoron.uhabits.security.AppLockConfig
 import org.isoron.uhabits.utils.DatabaseUtils
+import android.content.Context
 import java.io.File
 
 @Module
@@ -128,5 +132,31 @@ class HabitsModule(dbFile: File) {
     @AppScope
     fun getAppLockConfig(preferences: Preferences): AppLockConfig {
         return AppLockConfig(preferences)
+    }
+
+    @Provides
+    @AppScope
+    fun getAchievementDetector(): AchievementDetector {
+        return AchievementDetector()
+    }
+
+    @Provides
+    @AppScope
+    fun getAchievementNotificationManager(
+        context: Context,
+        pendingIntents: PendingIntentFactory,
+        preferences: Preferences,
+        achievementDetector: AchievementDetector
+    ): AchievementNotificationManager {
+        return AchievementNotificationManager(context, pendingIntents, preferences, achievementDetector)
+    }
+
+    @Provides
+    @AppScope
+    fun getAchievementCommandListener(
+        achievementDetector: AchievementDetector,
+        habitList: HabitList
+    ): AchievementCommandListener {
+        return AchievementCommandListener(achievementDetector, habitList)
     }
 }

@@ -28,6 +28,7 @@ import org.isoron.uhabits.activities.goals.edit.EditGoalActivity
 import org.isoron.uhabits.activities.goals.list.ListGoalsActivity
 import org.isoron.uhabits.activities.goals.show.ShowGoalActivity
 import org.isoron.uhabits.activities.habits.edit.EditHabitActivity
+import org.isoron.uhabits.activities.habits.list.ListHabitsActivity
 import org.isoron.uhabits.activities.habits.show.ShowHabitActivity
 import org.isoron.uhabits.activities.intro.IntroActivity
 import org.isoron.uhabits.activities.settings.SettingsActivity
@@ -68,6 +69,9 @@ class IntentFactory
         Intent(context, ShowHabitActivity::class.java).apply {
             data = Uri.parse(habit.uriString)
         }
+
+    fun startListHabitsActivity(context: Context) =
+        Intent(context, ListHabitsActivity::class.java)
 
     fun viewFAQ(context: Context) =
         buildViewIntent(context.getString(R.string.helpURL))
