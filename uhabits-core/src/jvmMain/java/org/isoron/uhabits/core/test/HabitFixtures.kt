@@ -20,7 +20,7 @@ package org.isoron.uhabits.core.test
 
 import org.isoron.uhabits.core.models.Entry
 import org.isoron.uhabits.core.models.Frequency
-import org.isoron.uhabits.core.models.Goal
+import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.models.Habit
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.HabitType
@@ -29,6 +29,7 @@ import org.isoron.uhabits.core.models.NumericalHabitType
 import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.core.models.Timestamp
 import org.isoron.uhabits.core.models.sqlite.SQLiteEntryList
+import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.utils.DateUtils.Companion.getToday
 
 class HabitFixtures(private val modelFactory: ModelFactory, private val habitList: HabitList) {
@@ -164,19 +165,17 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
     fun createGoal(
         name: String = "Learn Guitar",
         description: String = "Learn to play 10 songs",
-        daysUntilDeadline: Int = 30,
-        linkedHabits: List<Long> = emptyList()
+        daysUntilDeadline: Int = 30
     ): Goal {
-        val deadline = getToday().plus(daysUntilDeadline)
+        val deadlineMillis = getToday().plus(daysUntilDeadline).unixTime
         return Goal(
             id = System.currentTimeMillis(),
             name = name,
             description = description,
             targetValue = 100.0,
-            deadlineDate = deadline,
-            createdAt = getToday(),
-            linkedHabits = linkedHabits,
-            archived = false
+            deadline = deadlineMillis,
+            created = System.currentTimeMillis(),
+            isArchived = false
         )
     }
 
@@ -188,9 +187,9 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
             id = System.currentTimeMillis(),
             name = name,
             description = description,
-            deadlineDate = getToday().plus(30),
-            createdAt = getToday(),
-            archived = false
+            deadline = getToday().plus(30).unixTime,
+            created = System.currentTimeMillis(),
+            isArchived = false
         )
     }
 
@@ -198,9 +197,9 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
         return Goal(
             id = System.currentTimeMillis(),
             name = name,
-            deadlineDate = getToday().minus(30),
-            createdAt = getToday().minus(60),
-            archived = true
+            deadline = getToday().minus(30).unixTime,
+            created = getToday().minus(60).unixTime,
+            isArchived = true
         )
     }
 
@@ -208,25 +207,10 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
         return Goal(
             id = System.currentTimeMillis(),
             name = name,
-            deadlineDate = getToday().minus(5),
-            createdAt = getToday().minus(60),
-            archived = false
+            deadline = getToday().minus(5).unixTime,
+            created = getToday().minus(60).unixTime,
+            isArchived = false
         )
     }
-    fun createEmptyGoal(
-        name: String = "Learn Guitar",
-        description: String = ""
-    ): Any {
-        return mapOf(
-            "name" to name,
-            "description" to description,
-            "id" to System.currentTimeMillis()
-        )
-    }
-
-    val goals: Any
-        get() = object {
-            fun getById(id: Long): Map<String, Any>? = null
-            fun remove(goal: Any) {}
-        }
+}
 }

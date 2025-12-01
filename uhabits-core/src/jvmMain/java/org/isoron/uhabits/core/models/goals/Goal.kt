@@ -19,6 +19,8 @@
 package org.isoron.uhabits.core.models.goals
 
 import org.isoron.uhabits.core.models.ModelObservable
+import org.isoron.uhabits.core.models.PaletteColor
+import org.isoron.uhabits.core.models.memory.MemoryGoalMilestoneList
 import java.util.UUID
 
 data class Goal(
@@ -29,6 +31,21 @@ data class Goal(
     var isArchived: Boolean = false,
     var deadline: Long? = null,
     var uuid: String? = null
+    var created: Long = System.currentTimeMillis(),
+    var goalType: String = "CUMULATIVE",
+    var uuid: String? = null,
+    var position: Int = 0,
+    var color: PaletteColor = PaletteColor(8),
+    var dueDate: Long? = null
+    var color: PaletteColor = PaletteColor(8),
+    var description: String = "",
+    var id: Long? = null,
+    var isArchived: Boolean = false,
+    var name: String = "",
+    var position: Int = 0,
+    var uuid: String? = null,
+    var dueDate: Long? = null,
+    val milestones: GoalMilestoneList = MemoryGoalMilestoneList()
 ) {
     init {
         if (uuid == null) this.uuid = UUID.randomUUID().toString().replace("-", "")
@@ -43,6 +60,18 @@ data class Goal(
         this.isArchived = other.isArchived
         this.deadline = other.deadline
         this.uuid = other.uuid
+        this.created = other.created
+        this.goalType = other.goalType
+        this.uuid = other.uuid
+        this.position = other.position
+        this.color = other.color
+        this.color = other.color
+        this.description = other.description
+        this.isArchived = other.isArchived
+        this.name = other.name
+        this.position = other.position
+        this.uuid = other.uuid
+        this.dueDate = other.dueDate
     }
 
     override fun equals(other: Any?): Boolean {
@@ -56,6 +85,19 @@ data class Goal(
         if (isArchived != other.isArchived) return false
         if (deadline != other.deadline) return false
         if (uuid != other.uuid) return false
+        if (created != other.created) return false
+        if (goalType != other.goalType) return false
+        if (uuid != other.uuid) return false
+        if (position != other.position) return false
+        if (color != other.color) return false
+        if (color != other.color) return false
+        if (description != other.description) return false
+        if (id != other.id) return false
+        if (isArchived != other.isArchived) return false
+        if (name != other.name) return false
+        if (position != other.position) return false
+        if (uuid != other.uuid) return false
+        if (dueDate != other.dueDate) return false
 
         return true
     }
@@ -68,6 +110,19 @@ data class Goal(
         result = 31 * result + isArchived.hashCode()
         result = 31 * result + (deadline?.hashCode() ?: 0)
         result = 31 * result + (uuid?.hashCode() ?: 0)
+        result = 31 * result + created.hashCode()
+        result = 31 * result + goalType.hashCode()
+        result = 31 * result + (uuid?.hashCode() ?: 0)
+        result = 31 * result + position
+        result = 31 * result + color.hashCode()
+        var result = color.hashCode()
+        result = 31 * result + description.hashCode()
+        result = 31 * result + (id?.hashCode() ?: 0)
+        result = 31 * result + isArchived.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + position
+        result = 31 * result + (uuid?.hashCode() ?: 0)
+        result = 31 * result + (dueDate?.hashCode() ?: 0)
         return result
     }
 }

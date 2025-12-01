@@ -46,9 +46,15 @@ class MemoryGoalList : GoalList() {
         }
     }
 
-    override fun size(): Int {
+    override fun getByPosition(position: Int): Goal {
         synchronized(this) {
-            return goals.size
+            return goals[position]
+        }
+    }
+
+    override fun indexOf(goal: Goal): Int {
+        synchronized(this) {
+            return goals.indexOf(goal)
         }
     }
 
@@ -61,8 +67,30 @@ class MemoryGoalList : GoalList() {
         }
     }
 
-    override fun update(goal: Goal) {
-        update(listOf(goal))
+    override fun reorder(from: Goal, to: Goal) {
+        synchronized(this) {
+            require(indexOf(from) >= 0) { "list does not contain (from) goal" }
+            val toPos = indexOf(to)
+            require(toPos >= 0) { "list does not contain (to) goal" }
+            goals.remove(from)
+            goals.add(toPos, from)
+            var position = 0
+            for (g in goals) g.position = position++
+            observable.notifyListeners()
+        }
+    }
+
+    override fun repair() {
+        synchronized(this) {
+            resort()
+            observable.notifyListeners()
+        }
+    }
+
+    override fun size(): Int {
+        synchronized(this) {
+            return goals.size
+        }
     }
 
     override fun update(goals: List<Goal>) {
@@ -71,9 +99,10 @@ class MemoryGoalList : GoalList() {
         }
     }
 
-    override fun indexOf(goal: Goal): Int {
+    override fun resort() {
         synchronized(this) {
-            return goals.indexOf(goal)
+            goals.sortWith { g1, g2 -> g1.position.compareTo(g2.position) }
+            observable.notifyListeners()
         }
     }
 

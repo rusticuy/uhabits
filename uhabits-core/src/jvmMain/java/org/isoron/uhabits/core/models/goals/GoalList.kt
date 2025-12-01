@@ -31,17 +31,54 @@ abstract class GoalList : Iterable<Goal> {
     }
 
     abstract fun add(goal: Goal)
+
     abstract fun getById(id: Long): Goal?
+
     abstract fun getByUUID(uuid: String?): Goal?
+
     abstract fun getByPosition(position: Int): Goal
     abstract fun indexOf(goal: Goal): Int
     abstract fun remove(goal: Goal)
+
+    abstract fun indexOf(g: Goal): Int
+
+    abstract fun remove(g: Goal)
+
     abstract fun reorder(from: Goal, to: Goal)
+
     abstract fun repair()
+
     abstract fun size(): Int
     abstract fun update(goal: Goal)
     abstract fun update(goals: List<Goal>)
     abstract fun resort()
+
+    abstract fun update(goals: List<Goal>)
+
+    abstract fun resort()
+
+    abstract fun getLinkedHabits(goalId: Long): List<GoalHabitLink>
+
+    abstract fun addHabitLink(link: GoalHabitLink)
+
+    abstract fun removeHabitLink(link: GoalHabitLink)
+
+    abstract fun updateHabitLink(link: GoalHabitLink)
+
+    abstract fun getMilestones(goalId: Long): List<GoalMilestone>
+
+    abstract fun addMilestone(milestone: GoalMilestone)
+
+    abstract fun removeMilestone(milestone: GoalMilestone)
+
+    abstract fun addHabitLink(link: GoalHabitLink)
+    abstract fun removeHabitLink(link: GoalHabitLink)
+    abstract fun updateHabitLink(link: GoalHabitLink)
+
+    abstract fun getMilestones(goalId: Long): List<GoalMilestone>
+    abstract fun addMilestone(milestone: GoalMilestone)
+    abstract fun removeMilestone(milestone: GoalMilestone)
+    abstract fun updateMilestone(milestone: GoalMilestone)
 
     val isEmpty: Boolean
         get() = size() == 0
@@ -68,6 +105,9 @@ abstract class GoalList : Iterable<Goal> {
     abstract fun removeMilestone(milestone: GoalMilestone)
 
     abstract fun updateMilestone(milestone: GoalMilestone)
+    fun update(goal: Goal) {
+        update(listOf(goal))
+    }
 
     enum class Order {
         BY_NAME_ASC,
