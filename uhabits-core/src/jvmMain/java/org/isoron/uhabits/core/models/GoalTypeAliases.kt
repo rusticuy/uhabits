@@ -16,16 +16,11 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core.commands
 
-import org.isoron.uhabits.core.models.goals.Goal
-import org.isoron.uhabits.core.models.goals.GoalList
+package org.isoron.uhabits.core.models
 
-data class CreateGoalCommand(
-    val goalList: GoalList,
-    val goal: Goal
-) : Command {
-    override fun run() {
-        goalList.add(goal)
-    }
-}
+typealias Goal = org.isoron.uhabits.core.models.goals.Goal
+typealias GoalList = org.isoron.uhabits.core.models.goals.GoalList
+typealias GoalHabitLink = org.isoron.uhabits.core.models.goals.GoalHabitLink
+typealias GoalMilestone = org.isoron.uhabits.core.models.goals.GoalMilestone
+typealias GoalProgress = org.isoron.uhabits.core.models.goals.GoalProgress

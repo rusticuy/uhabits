@@ -23,25 +23,18 @@ import org.isoron.uhabits.core.models.PaletteColor
 import java.util.UUID
 
 data class Goal(
-    var color: PaletteColor = PaletteColor(8),
-    var description: String = "",
-    var id: Long? = null,
-    var isArchived: Boolean = false,
-    var name: String = "",
-    var position: Int = 0,
-    var uuid: String? = null,
-    var dueDate: Long? = null,
-    val milestones: GoalMilestoneList
-import java.util.UUID
-
-data class Goal(
     var id: Long? = null,
     var name: String = "",
     var description: String = "",
     var targetValue: Double = 0.0,
     var isArchived: Boolean = false,
     var deadline: Long? = null,
-    var uuid: String? = null
+    var created: Long = System.currentTimeMillis(),
+    var goalType: String = "CUMULATIVE",
+    var uuid: String? = null,
+    var position: Int = 0,
+    var color: PaletteColor = PaletteColor(8),
+    var dueDate: Long? = null
 ) {
     init {
         if (uuid == null) this.uuid = UUID.randomUUID().toString().replace("-", "")
@@ -50,61 +43,52 @@ data class Goal(
     var observable = ModelObservable()
 
     fun copyFrom(other: Goal) {
-        this.color = other.color
-        this.description = other.description
-        this.isArchived = other.isArchived
-        this.name = other.name
-        this.position = other.position
-        this.uuid = other.uuid
-        this.dueDate = other.dueDate
-    fun copyFrom(other: Goal) {
         this.name = other.name
         this.description = other.description
         this.targetValue = other.targetValue
         this.isArchived = other.isArchived
         this.deadline = other.deadline
+        this.created = other.created
+        this.goalType = other.goalType
         this.uuid = other.uuid
+        this.position = other.position
+        this.color = other.color
+        this.dueDate = other.dueDate
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Goal) return false
 
-        if (color != other.color) return false
-        if (description != other.description) return false
-        if (id != other.id) return false
-        if (isArchived != other.isArchived) return false
-        if (name != other.name) return false
-        if (position != other.position) return false
-        if (uuid != other.uuid) return false
-        if (dueDate != other.dueDate) return false
         if (id != other.id) return false
         if (name != other.name) return false
         if (description != other.description) return false
         if (targetValue != other.targetValue) return false
         if (isArchived != other.isArchived) return false
         if (deadline != other.deadline) return false
+        if (created != other.created) return false
+        if (goalType != other.goalType) return false
         if (uuid != other.uuid) return false
+        if (position != other.position) return false
+        if (color != other.color) return false
+        if (dueDate != other.dueDate) return false
 
         return true
     }
 
     override fun hashCode(): Int {
-        var result = color.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + (id?.hashCode() ?: 0)
-        result = 31 * result + isArchived.hashCode()
-        result = 31 * result + name.hashCode()
-        result = 31 * result + position
-        result = 31 * result + (uuid?.hashCode() ?: 0)
-        result = 31 * result + (dueDate?.hashCode() ?: 0)
         var result = id?.hashCode() ?: 0
         result = 31 * result + name.hashCode()
         result = 31 * result + description.hashCode()
         result = 31 * result + targetValue.hashCode()
         result = 31 * result + isArchived.hashCode()
         result = 31 * result + (deadline?.hashCode() ?: 0)
+        result = 31 * result + created.hashCode()
+        result = 31 * result + goalType.hashCode()
         result = 31 * result + (uuid?.hashCode() ?: 0)
+        result = 31 * result + position
+        result = 31 * result + color.hashCode()
+        result = 31 * result + (dueDate?.hashCode() ?: 0)
         return result
     }
 }

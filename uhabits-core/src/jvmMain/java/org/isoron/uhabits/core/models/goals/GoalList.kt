@@ -31,44 +31,27 @@ abstract class GoalList : Iterable<Goal> {
     }
 
     abstract fun add(goal: Goal)
+
     abstract fun getById(id: Long): Goal?
+
     abstract fun getByUUID(uuid: String?): Goal?
+
     abstract fun getByPosition(position: Int): Goal
+
     abstract fun indexOf(g: Goal): Int
+
     abstract fun remove(g: Goal)
+
     abstract fun reorder(from: Goal, to: Goal)
+
     abstract fun repair()
+
     abstract fun size(): Int
+
     abstract fun update(goals: List<Goal>)
+
     abstract fun resort()
 
-    abstract fun getById(id: Long): Goal?
-
-    abstract fun getByUUID(uuid: String?): Goal?
-
-    abstract fun size(): Int
-
-    abstract fun remove(goal: Goal)
-
-    abstract fun update(goal: Goal)
-
-    abstract fun update(goals: List<Goal>)
-
-    abstract fun indexOf(goal: Goal): Int
-
-    val isEmpty: Boolean
-        get() = size() == 0
-
-    open fun removeAll() {
-        val copy: MutableList<Goal> = LinkedList()
-        val copy = mutableListOf<Goal>()
-        for (g in this) copy.add(g)
-        for (g in copy) remove(g)
-        observable.notifyListeners()
-    }
-
-    fun update(goal: Goal) {
-        update(listOf(goal))
     abstract fun getLinkedHabits(goalId: Long): List<GoalHabitLink>
 
     abstract fun addHabitLink(link: GoalHabitLink)
@@ -84,6 +67,20 @@ abstract class GoalList : Iterable<Goal> {
     abstract fun removeMilestone(milestone: GoalMilestone)
 
     abstract fun updateMilestone(milestone: GoalMilestone)
+
+    val isEmpty: Boolean
+        get() = size() == 0
+
+    open fun removeAll() {
+        val copy: MutableList<Goal> = LinkedList()
+        for (g in this) copy.add(g)
+        for (g in copy) remove(g)
+        observable.notifyListeners()
+    }
+
+    fun update(goal: Goal) {
+        update(listOf(goal))
+    }
 
     enum class Order {
         BY_NAME_ASC,

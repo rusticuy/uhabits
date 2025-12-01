@@ -30,7 +30,10 @@ data class GoalMilestone(
     var targetValue: Double = 0.0,
     var dueDate: Long? = null,
     var position: Int = 0,
-    var isCompleted: Boolean = false
+    var isCompleted: Boolean = false,
+    var targetPercentage: Double = 0.0,
+    var isComplete: Boolean = false,
+    var completedAt: Long? = null
 ) {
     init {
         if (uuid == null) this.uuid = UUID.randomUUID().toString().replace("-", "")
@@ -47,6 +50,9 @@ data class GoalMilestone(
         this.position = other.position
         this.isCompleted = other.isCompleted
         this.uuid = other.uuid
+        this.targetPercentage = other.targetPercentage
+        this.isComplete = other.isComplete
+        this.completedAt = other.completedAt
     }
 
     override fun equals(other: Any?): Boolean {
@@ -62,6 +68,9 @@ data class GoalMilestone(
         if (dueDate != other.dueDate) return false
         if (position != other.position) return false
         if (isCompleted != other.isCompleted) return false
+        if (targetPercentage != other.targetPercentage) return false
+        if (isComplete != other.isComplete) return false
+        if (completedAt != other.completedAt) return false
 
         return true
     }
@@ -76,13 +85,9 @@ data class GoalMilestone(
         result = 31 * result + (dueDate?.hashCode() ?: 0)
         result = 31 * result + position
         result = 31 * result + isCompleted.hashCode()
+        result = 31 * result + targetPercentage.hashCode()
+        result = 31 * result + isComplete.hashCode()
+        result = 31 * result + (completedAt?.hashCode() ?: 0)
         return result
     }
 }
-data class GoalMilestone(
-    var id: Long? = null,
-    var goalId: Long = 0,
-    var targetPercentage: Double = 0.0,
-    var isComplete: Boolean = false,
-    var completedAt: Long? = null
-)
