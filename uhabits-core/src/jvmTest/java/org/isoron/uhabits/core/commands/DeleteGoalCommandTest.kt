@@ -21,28 +21,52 @@ package org.isoron.uhabits.core.commands
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.isoron.uhabits.core.BaseUnitTest
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalHabitLink
+import org.isoron.uhabits.core.models.goals.GoalList
+import org.isoron.uhabits.core.models.goals.MemoryGoalList
 import org.junit.Before
 import org.junit.Test
 
 class DeleteGoalCommandTest : BaseUnitTest() {
+    private lateinit var goalList: GoalList
 
     @Before
-    @Throws(Exception::class)
     override fun setUp() {
         super.setUp()
+        goalList = MemoryGoalList()
     }
 
     @Test
     fun testDeleteGoal() {
-        val goal = fixtures.createEmptyGoal("Delete Me")
-        assertThat(goal, notNullValue())
+        val goal = Goal(name = "Delete Me", targetValue = 100.0)
+        goalList.add(goal)
+        
+        assertThat(goalList.size(), equalTo(1))
+        
+        val deleteCommand = DeleteGoalsCommand(goalList, listOf(goal))
+        deleteCommand.run()
+        
+        assertThat(goalList.size(), equalTo(0))
     }
 
     @Test
     fun testDeleteGoalCleansUpLinks() {
-        val goal1 = fixtures.createEmptyGoal("Goal 1")
-        val goal2 = fixtures.createEmptyGoal("Goal 2")
-        assertThat(goal1, notNullValue())
-        assertThat(goal2, notNullValue())
+        val goal = Goal(name = "Goal with Links", targetValue = 100.0)
+        goalList.add(goal)
+        
+        val habit = fixtures.createEmptyHabit()
+        habitList.add(habit)
+        
+        val link = GoalHabitLink(goalId = goal.id, habitId = habit.id, weight = 1.0)
+        goalList.addHabitLink(link)
+        
+        assertThat(goalList.getLinkedHabits(goal.id!!).size, equalTo(1))
+        
+        val deleteCommand = DeleteGoalsCommand(goalList, listOf(goal))
+        deleteCommand.run()
+        
+        assertThat(goalList.size(), equalTo(0))
+        assertThat(goalList.getLinkedHabits(goal.id!!).size, equalTo(0))
     }
 }

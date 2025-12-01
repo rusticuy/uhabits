@@ -21,38 +21,62 @@ package org.isoron.uhabits.core.commands
 import org.hamcrest.CoreMatchers.equalTo
 import org.hamcrest.MatcherAssert.assertThat
 import org.isoron.uhabits.core.BaseUnitTest
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalList
+import org.isoron.uhabits.core.models.goals.MemoryGoalList
 import org.junit.Before
 import org.junit.Test
 
 class ArchiveGoalCommandTest : BaseUnitTest() {
+    private lateinit var goalList: GoalList
 
     @Before
-    @Throws(Exception::class)
     override fun setUp() {
         super.setUp()
+        goalList = MemoryGoalList()
     }
 
     @Test
     fun testArchiveGoal() {
-        val habit1 = fixtures.createEmptyHabit()
-        val habit2 = fixtures.createEmptyHabit()
+        val goal = Goal(name = "Test Goal", targetValue = 100.0, isArchived = false)
+        goalList.add(goal)
         
-        assertThat(habitList.size(), equalTo(2))
+        assertThat(goal.isArchived, equalTo(false))
+        
+        val archiveCommand = ArchiveGoalsCommand(goalList, listOf(goal))
+        archiveCommand.run()
+        
+        assertThat(goal.isArchived, equalTo(true))
     }
 
     @Test
-    fun testUnarchiveGoal() {
-        val habit = fixtures.createEmptyHabit("Test Goal")
+    fun testMultipleGoalsArchived() {
+        val goal1 = Goal(name = "Goal 1", targetValue = 100.0)
+        val goal2 = Goal(name = "Goal 2", targetValue = 50.0)
+        goalList.add(goal1)
+        goalList.add(goal2)
         
-        assertThat(habitList.size(), equalTo(1))
+        assertThat(goal1.isArchived, equalTo(false))
+        assertThat(goal2.isArchived, equalTo(false))
+        
+        val archiveCommand = ArchiveGoalsCommand(goalList, listOf(goal1, goal2))
+        archiveCommand.run()
+        
+        assertThat(goal1.isArchived, equalTo(true))
+        assertThat(goal2.isArchived, equalTo(true))
     }
 
     @Test
-    fun testArchivedGoalsNotDisplayedInActiveList() {
-        val habit1 = fixtures.createEmptyHabit()
-        val habit2 = fixtures.createEmptyHabit()
-        val habit3 = fixtures.createEmptyHabit()
+    fun testSelectiveArchiveGoals() {
+        val goal1 = Goal(name = "Archive Me", targetValue = 100.0)
+        val goal2 = Goal(name = "Keep Me Active", targetValue = 100.0)
+        goalList.add(goal1)
+        goalList.add(goal2)
         
-        assertThat(habitList.size(), equalTo(3))
+        val archiveCommand = ArchiveGoalsCommand(goalList, listOf(goal1))
+        archiveCommand.run()
+        
+        assertThat(goal1.isArchived, equalTo(true))
+        assertThat(goal2.isArchived, equalTo(false))
     }
 }

@@ -19,6 +19,7 @@
 package org.isoron.uhabits.core.commands
 
 import org.hamcrest.CoreMatchers.equalTo
+import org.hamcrest.CoreMatchers.notNullValue
 import org.hamcrest.MatcherAssert.assertThat
 import org.isoron.uhabits.core.BaseUnitTest
 import org.isoron.uhabits.core.models.goals.Goal
@@ -52,14 +53,14 @@ class CreateGoalCommandTest : BaseUnitTest() {
         assertThat(goalList.size(), equalTo(1))
         val createdGoal = goalList.iterator().next()
         assertThat(createdGoal.name, equalTo(goal.name))
-        assertThat(createdGoal.id != null, equalTo(true))
+        assertThat(createdGoal.id, notNullValue())
     }
 
     @Test
     fun testGoalIdAssigned() {
         command.run()
         val createdGoal = goalList.iterator().next()
-        assertThat(createdGoal.id != null, equalTo(true))
+        assertThat(createdGoal.id, notNullValue())
     }
 
     @Test
@@ -69,23 +70,5 @@ class CreateGoalCommandTest : BaseUnitTest() {
         assertThat(createdGoal.name, equalTo(goal.name))
         assertThat(createdGoal.description, equalTo(goal.description))
         assertThat(createdGoal.targetValue, equalTo(goal.targetValue))
-import org.hamcrest.CoreMatchers.notNullValue
-import org.hamcrest.MatcherAssert.assertThat
-import org.isoron.uhabits.core.BaseUnitTest
-import org.junit.Before
-import org.junit.Test
-
-class CreateGoalCommandTest : BaseUnitTest() {
-
-    @Before
-    @Throws(Exception::class)
-    override fun setUp() {
-        super.setUp()
-    }
-
-    @Test
-    fun testCreateGoal() {
-        val goal = fixtures.createEmptyGoal("Test Goal")
-        assertThat(goal, notNullValue())
     }
 }

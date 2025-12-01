@@ -30,6 +30,7 @@ data class Goal(
     var targetValue: Double = 0.0,
     var isArchived: Boolean = false,
     var deadline: Long? = null,
+    var uuid: String? = null
     var created: Long = System.currentTimeMillis(),
     var goalType: String = "CUMULATIVE",
     var uuid: String? = null,
@@ -58,6 +59,7 @@ data class Goal(
         this.targetValue = other.targetValue
         this.isArchived = other.isArchived
         this.deadline = other.deadline
+        this.uuid = other.uuid
         this.created = other.created
         this.goalType = other.goalType
         this.uuid = other.uuid
@@ -82,6 +84,7 @@ data class Goal(
         if (targetValue != other.targetValue) return false
         if (isArchived != other.isArchived) return false
         if (deadline != other.deadline) return false
+        if (uuid != other.uuid) return false
         if (created != other.created) return false
         if (goalType != other.goalType) return false
         if (uuid != other.uuid) return false
@@ -106,6 +109,7 @@ data class Goal(
         result = 31 * result + targetValue.hashCode()
         result = 31 * result + isArchived.hashCode()
         result = 31 * result + (deadline?.hashCode() ?: 0)
+        result = 31 * result + (uuid?.hashCode() ?: 0)
         result = 31 * result + created.hashCode()
         result = 31 * result + goalType.hashCode()
         result = 31 * result + (uuid?.hashCode() ?: 0)
