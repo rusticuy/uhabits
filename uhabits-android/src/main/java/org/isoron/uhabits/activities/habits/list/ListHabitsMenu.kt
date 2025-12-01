@@ -26,6 +26,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import org.isoron.uhabits.R
+import org.isoron.uhabits.activities.achievements.history.AchievementsHistoryActivity
 import org.isoron.uhabits.activities.goals.list.ListGoalsActivity
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.preferences.Preferences
@@ -150,6 +151,11 @@ class ListHabitsMenu @Inject constructor(
 
             R.id.actionGoals -> {
                 activity.startActivity(Intent(activity, ListGoalsActivity::class.java))
+                return true
+            }
+
+            R.id.actionAchievements -> {
+                activity.startActivity(Intent(activity, AchievementsHistoryActivity::class.java))
                 return true
             }
 

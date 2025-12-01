@@ -26,9 +26,11 @@ import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.database.Database
 import org.isoron.uhabits.core.database.DatabaseOpener
 import org.isoron.uhabits.core.io.Logging
+import org.isoron.uhabits.core.models.AchievementList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
 import org.isoron.uhabits.core.models.goals.GoalList
+import org.isoron.uhabits.core.models.memory.MemoryAchievementList
 import org.isoron.uhabits.core.models.sqlite.SQLModelFactory
 import org.isoron.uhabits.core.models.sqlite.SQLiteGoalList
 import org.isoron.uhabits.core.models.sqlite.SQLiteHabitList
@@ -128,5 +130,11 @@ class HabitsModule(dbFile: File) {
     @AppScope
     fun getAppLockConfig(preferences: Preferences): AppLockConfig {
         return AppLockConfig(preferences)
+    }
+
+    @Provides
+    @AppScope
+    fun getAchievementList(): AchievementList {
+        return MemoryAchievementList()
     }
 }

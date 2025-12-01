@@ -24,6 +24,7 @@ import org.isoron.uhabits.core.AppScope
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.io.GenericImporter
 import org.isoron.uhabits.core.io.Logging
+import org.isoron.uhabits.core.models.AchievementList
 import org.isoron.uhabits.core.models.GoalList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
@@ -47,6 +48,7 @@ import org.isoron.uhabits.widgets.WidgetUpdater
 @AppScope
 @Component(modules = [AppContextModule::class, HabitsModule::class, AndroidTaskRunner::class])
 interface HabitsApplicationComponent {
+    val achievementList: AchievementList
     val appLockConfig: AppLockConfig
     val commandRunner: CommandRunner
 
@@ -56,7 +58,6 @@ interface HabitsApplicationComponent {
     val goalList: GoalList
     val habitCardListCache: HabitCardListCache
     val habitList: HabitList
-    val goalList: GoalList
     val intentFactory: IntentFactory
     val intentParser: IntentParser
     val logging: Logging

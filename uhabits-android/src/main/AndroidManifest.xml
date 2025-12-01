@@ -100,6 +100,22 @@
         </activity>
 
         <activity
+            android:name=".activities.achievements.history.AchievementsHistoryActivity"
+            android:exported="true"
+            android:label="@string/achievements">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.habits.list.ListHabitsActivity" />
+            <intent-filter android:label="@string/achievements">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data
+                    android:host="achievements"
+                    android:scheme="loop" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".activities.settings.SettingsActivity"
             android:label="@string/settings">
             <meta-data
