@@ -20,8 +20,8 @@
 package org.isoron.uhabits.core.ui.screens.goals
 
 import org.isoron.uhabits.core.commands.CommandRunner
-import org.isoron.uhabits.core.models.Goal
-import org.isoron.uhabits.core.models.GoalList
+import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.GoalProgressCalculator
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.preferences.Preferences

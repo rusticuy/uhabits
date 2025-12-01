@@ -20,7 +20,7 @@ package org.isoron.uhabits.core.test
 
 import org.isoron.uhabits.core.models.Entry
 import org.isoron.uhabits.core.models.Frequency
-import org.isoron.uhabits.core.models.Goal
+import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.models.Habit
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.HabitType
@@ -161,72 +161,5 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
         habitList.add(habit)
     }
 
-    fun createGoal(
-        name: String = "Learn Guitar",
-        description: String = "Learn to play 10 songs",
-        daysUntilDeadline: Int = 30,
-        linkedHabits: List<Long> = emptyList()
-    ): Goal {
-        val deadline = getToday().plus(daysUntilDeadline)
-        return Goal(
-            id = System.currentTimeMillis(),
-            name = name,
-            description = description,
-            targetValue = 100.0,
-            deadlineDate = deadline,
-            createdAt = getToday(),
-            linkedHabits = linkedHabits,
-            archived = false
-        )
-    }
-
-    fun createEmptyGoal(
-        name: String = "Learn Guitar",
-        description: String = ""
-    ): Goal {
-        return Goal(
-            id = System.currentTimeMillis(),
-            name = name,
-            description = description,
-            deadlineDate = getToday().plus(30),
-            createdAt = getToday(),
-            archived = false
-        )
-    }
-
-    fun createArchivedGoal(name: String = "Past Goal"): Goal {
-        return Goal(
-            id = System.currentTimeMillis(),
-            name = name,
-            deadlineDate = getToday().minus(30),
-            createdAt = getToday().minus(60),
-            archived = true
-        )
-    }
-
-    fun createOverdueGoal(name: String = "Overdue Goal"): Goal {
-        return Goal(
-            id = System.currentTimeMillis(),
-            name = name,
-            deadlineDate = getToday().minus(5),
-            createdAt = getToday().minus(60),
-            archived = false
-        )
-    }
-    fun createEmptyGoal(
-        name: String = "Learn Guitar",
-        description: String = ""
-    ): Any {
-        return mapOf(
-            "name" to name,
-            "description" to description,
-            "id" to System.currentTimeMillis()
-        )
-    }
-
-    val goals: Any
-        get() = object {
-            fun getById(id: Long): Map<String, Any>? = null
-            fun remove(goal: Any) {}
-        }
+}
 }

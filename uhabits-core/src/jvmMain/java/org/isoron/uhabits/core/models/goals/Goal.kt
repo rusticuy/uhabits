@@ -20,6 +20,7 @@ package org.isoron.uhabits.core.models.goals
 
 import org.isoron.uhabits.core.models.ModelObservable
 import org.isoron.uhabits.core.models.PaletteColor
+import org.isoron.uhabits.core.models.memory.MemoryGoalMilestoneList
 import java.util.UUID
 
 data class Goal(
@@ -31,17 +32,7 @@ data class Goal(
     var position: Int = 0,
     var uuid: String? = null,
     var dueDate: Long? = null,
-    val milestones: GoalMilestoneList
-import java.util.UUID
-
-data class Goal(
-    var id: Long? = null,
-    var name: String = "",
-    var description: String = "",
-    var targetValue: Double = 0.0,
-    var isArchived: Boolean = false,
-    var deadline: Long? = null,
-    var uuid: String? = null
+    val milestones: GoalMilestoneList = MemoryGoalMilestoneList()
 ) {
     init {
         if (uuid == null) this.uuid = UUID.randomUUID().toString().replace("-", "")
@@ -57,13 +48,6 @@ data class Goal(
         this.position = other.position
         this.uuid = other.uuid
         this.dueDate = other.dueDate
-    fun copyFrom(other: Goal) {
-        this.name = other.name
-        this.description = other.description
-        this.targetValue = other.targetValue
-        this.isArchived = other.isArchived
-        this.deadline = other.deadline
-        this.uuid = other.uuid
     }
 
     override fun equals(other: Any?): Boolean {
@@ -78,13 +62,6 @@ data class Goal(
         if (position != other.position) return false
         if (uuid != other.uuid) return false
         if (dueDate != other.dueDate) return false
-        if (id != other.id) return false
-        if (name != other.name) return false
-        if (description != other.description) return false
-        if (targetValue != other.targetValue) return false
-        if (isArchived != other.isArchived) return false
-        if (deadline != other.deadline) return false
-        if (uuid != other.uuid) return false
 
         return true
     }
@@ -98,13 +75,6 @@ data class Goal(
         result = 31 * result + position
         result = 31 * result + (uuid?.hashCode() ?: 0)
         result = 31 * result + (dueDate?.hashCode() ?: 0)
-        var result = id?.hashCode() ?: 0
-        result = 31 * result + name.hashCode()
-        result = 31 * result + description.hashCode()
-        result = 31 * result + targetValue.hashCode()
-        result = 31 * result + isArchived.hashCode()
-        result = 31 * result + (deadline?.hashCode() ?: 0)
-        result = 31 * result + (uuid?.hashCode() ?: 0)
         return result
     }
 }

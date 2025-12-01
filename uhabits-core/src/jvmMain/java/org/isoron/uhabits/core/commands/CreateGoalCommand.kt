@@ -26,26 +26,6 @@ data class CreateGoalCommand(
     val goal: Goal
 ) : Command {
     override fun run() {
-import org.isoron.uhabits.core.models.Goal
-import org.isoron.uhabits.core.models.GoalList
-import org.isoron.uhabits.core.models.Timestamp
-
-data class CreateGoalCommand(
-    val goalList: GoalList,
-    val name: String,
-    val description: String = "",
-    val deadlineDate: Timestamp = Timestamp(0),
-    val linkedHabits: List<Long> = emptyList()
-) : Command {
-    override fun run() {
-        val goal = Goal(
-            id = System.currentTimeMillis(),
-            name = name,
-            description = description,
-            deadlineDate = deadlineDate,
-            createdAt = Timestamp.today(),
-            linkedHabits = linkedHabits
-        )
         goalList.add(goal)
     }
 }
