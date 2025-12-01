@@ -24,7 +24,7 @@ import org.isoron.uhabits.core.database.Database
 import org.isoron.uhabits.core.database.DatabaseOpener
 import org.isoron.uhabits.core.database.JdbcDatabase
 import org.isoron.uhabits.core.database.MigrationHelper
-import org.isoron.uhabits.core.models.GoalList
+import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
 import org.isoron.uhabits.core.models.Timestamp

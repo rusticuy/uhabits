@@ -66,6 +66,13 @@ abstract class GoalList : Iterable<Goal> {
 
     abstract fun removeMilestone(milestone: GoalMilestone)
 
+    abstract fun addHabitLink(link: GoalHabitLink)
+    abstract fun removeHabitLink(link: GoalHabitLink)
+    abstract fun updateHabitLink(link: GoalHabitLink)
+
+    abstract fun getMilestones(goalId: Long): List<GoalMilestone>
+    abstract fun addMilestone(milestone: GoalMilestone)
+    abstract fun removeMilestone(milestone: GoalMilestone)
     abstract fun updateMilestone(milestone: GoalMilestone)
 
     val isEmpty: Boolean
@@ -73,6 +80,7 @@ abstract class GoalList : Iterable<Goal> {
 
     open fun removeAll() {
         val copy: MutableList<Goal> = LinkedList()
+        val copy = mutableListOf<Goal>()
         for (g in this) copy.add(g)
         for (g in copy) remove(g)
         observable.notifyListeners()

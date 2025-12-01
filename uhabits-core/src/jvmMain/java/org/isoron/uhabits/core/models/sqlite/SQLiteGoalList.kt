@@ -21,8 +21,10 @@ package org.isoron.uhabits.core.models.sqlite
 import org.isoron.uhabits.core.database.Database
 import org.isoron.uhabits.core.database.Repository
 import org.isoron.uhabits.core.models.goals.Goal
+import org.isoron.uhabits.core.models.goals.GoalHabitLink
 import org.isoron.uhabits.core.models.goals.GoalList
-import org.isoron.uhabits.core.models.memory.MemoryGoalList
+import org.isoron.uhabits.core.models.goals.GoalMilestone
+import org.isoron.uhabits.core.models.goals.MemoryGoalList
 import org.isoron.uhabits.core.models.sqlite.records.GoalRecord
 import javax.inject.Inject
 
@@ -180,5 +182,59 @@ class SQLiteGoalList @Inject constructor(private val database: Database) : GoalL
     @Synchronized
     fun reload() {
         loaded = false
+    }
+
+    @Synchronized
+    override fun getLinkedHabits(goalId: Long): List<GoalHabitLink> {
+        loadRecords()
+        return list.getLinkedHabits(goalId)
+    }
+
+    @Synchronized
+    override fun addHabitLink(link: GoalHabitLink) {
+        loadRecords()
+        list.addHabitLink(link)
+        observable.notifyListeners()
+    }
+
+    @Synchronized
+    override fun removeHabitLink(link: GoalHabitLink) {
+        loadRecords()
+        list.removeHabitLink(link)
+        observable.notifyListeners()
+    }
+
+    @Synchronized
+    override fun updateHabitLink(link: GoalHabitLink) {
+        loadRecords()
+        list.updateHabitLink(link)
+        observable.notifyListeners()
+    }
+
+    @Synchronized
+    override fun getMilestones(goalId: Long): List<GoalMilestone> {
+        loadRecords()
+        return list.getMilestones(goalId)
+    }
+
+    @Synchronized
+    override fun addMilestone(milestone: GoalMilestone) {
+        loadRecords()
+        list.addMilestone(milestone)
+        observable.notifyListeners()
+    }
+
+    @Synchronized
+    override fun removeMilestone(milestone: GoalMilestone) {
+        loadRecords()
+        list.removeMilestone(milestone)
+        observable.notifyListeners()
+    }
+
+    @Synchronized
+    override fun updateMilestone(milestone: GoalMilestone) {
+        loadRecords()
+        list.updateMilestone(milestone)
+        observable.notifyListeners()
     }
 }

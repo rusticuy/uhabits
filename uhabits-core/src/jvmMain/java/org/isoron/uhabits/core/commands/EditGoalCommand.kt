@@ -29,6 +29,9 @@ data class EditGoalCommand(
     override fun run() {
         val goal = goalList.getById(goalId) ?: throw IllegalArgumentException("Goal not found")
         goal.copyFrom(modified)
+    val goal: Goal
+) : Command {
+    override fun run() {
         goalList.update(goal)
     }
 }

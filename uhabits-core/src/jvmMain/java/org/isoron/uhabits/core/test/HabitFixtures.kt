@@ -20,6 +20,7 @@ package org.isoron.uhabits.core.test
 
 import org.isoron.uhabits.core.models.Entry
 import org.isoron.uhabits.core.models.Frequency
+import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.models.Habit
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.HabitType
@@ -211,4 +212,5 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
             isArchived = false
         )
     }
+}
 }
