@@ -38,6 +38,10 @@ import org.isoron.uhabits.core.utils.MidnightTimer
 import org.isoron.uhabits.intents.IntentFactory
 import org.isoron.uhabits.intents.IntentParser
 import org.isoron.uhabits.intents.PendingIntentFactory
+import org.isoron.uhabits.achievements.AchievementCommandListener
+import org.isoron.uhabits.core.models.achievements.AchievementDetector
+import org.isoron.uhabits.notifications.AchievementNotificationManager
+import org.isoron.uhabits.notifications.AndroidNotificationTray
 import org.isoron.uhabits.receivers.ReminderController
 import org.isoron.uhabits.security.AppLockConfig
 import org.isoron.uhabits.security.AppLockManager
@@ -71,4 +75,7 @@ interface HabitsApplicationComponent {
     val widgetPreferences: WidgetPreferences
     val widgetUpdater: WidgetUpdater
     val appLockManager: AppLockManager
+    val achievementDetector: AchievementDetector
+    val achievementNotificationManager: AchievementNotificationManager
+    val achievementCommandListener: AchievementCommandListener
 }

@@ -162,6 +162,14 @@ open class Preferences(private val storage: Storage) {
         return storage.getBoolean("pref_sticky_notifications", false)
     }
 
+    fun areAchievementNotificationsEnabled(): Boolean {
+        return storage.getBoolean("pref_achievement_notifications_enabled", true)
+    }
+
+    fun setAchievementNotificationsEnabled(enabled: Boolean) {
+        storage.putBoolean("pref_achievement_notifications_enabled", enabled)
+    }
+
     open var isCheckmarkSequenceReversed: Boolean
         get() {
             if (shouldReverseCheckmarks == null) {

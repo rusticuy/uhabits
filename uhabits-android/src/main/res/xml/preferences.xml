@@ -172,6 +172,13 @@
                 android:title="@string/sticky_notifications"
                 app:iconSpaceReserved="false" />
 
+        <SwitchPreferenceCompat
+                android:defaultValue="true"
+                android:key="pref_achievement_notifications_enabled"
+                android:summary="@string/achievement_notifications_summary"
+                android:title="@string/achievement_notifications"
+                app:iconSpaceReserved="false" />
+
         <Preference
                 android:key="reminderCustomize"
                 android:summary="@string/customize_notification_summary"
