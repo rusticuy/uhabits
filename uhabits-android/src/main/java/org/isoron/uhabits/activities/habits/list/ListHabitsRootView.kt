@@ -20,9 +20,11 @@
 package org.isoron.uhabits.activities.habits.list
 
 import android.content.Context
+import android.os.SystemClock
 import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.widget.FrameLayout
 import android.widget.RelativeLayout
+import androidx.annotation.VisibleForTesting
 import nl.dionsegijn.konfetti.xml.KonfettiView
 import org.isoron.uhabits.R
 import org.isoron.uhabits.activities.common.views.ScrollableChart
@@ -77,6 +79,10 @@ class ListHabitsRootView @Inject constructor(
     val hintView: HintView
     val header = HeaderView(context, preferences, midnightTimer)
 
+    @VisibleForTesting
+    var lastConfettiTimestamp: Long = 0
+        private set
+
     init {
         val hints = resources.getStringArray(R.array.hints)
         val hintList = hintListFactory.create(hints)
@@ -107,6 +113,10 @@ class ListHabitsRootView @Inject constructor(
 
     override fun onModelChange() {
         updateEmptyView()
+    }
+
+    fun markConfettiTriggered() {
+        lastConfettiTimestamp = SystemClock.elapsedRealtime()
     }
 
     private fun setupControllers() {

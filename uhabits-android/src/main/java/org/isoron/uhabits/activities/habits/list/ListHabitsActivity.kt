@@ -34,6 +34,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import org.isoron.uhabits.BaseExceptionHandler
 import org.isoron.uhabits.HabitsApplication
+import org.isoron.uhabits.activities.achievements.AchievementCelebrationPresenter
 import org.isoron.uhabits.activities.habits.list.views.HabitCardListAdapter
 import org.isoron.uhabits.core.models.Timestamp
 import org.isoron.uhabits.core.preferences.Preferences
@@ -63,6 +64,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
     lateinit var prefs: Preferences
     lateinit var midnightTimer: MidnightTimer
     lateinit var appLockManager: AppLockManager
+    lateinit var celebrationPresenter: AchievementCelebrationPresenter
     private val scope = CoroutineScope(Dispatchers.Main)
 
     private var permissionAlreadyRequested = false
@@ -104,6 +106,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
         adapter = component.habitCardListAdapter
         taskRunner = appComponent.taskRunner
         menu = component.listHabitsMenu
+        celebrationPresenter = component.achievementCelebrationPresenter
         Thread.setDefaultUncaughtExceptionHandler(BaseExceptionHandler(this))
         component.listHabitsBehavior.onStartup()
         rootView.applyRootViewInsets()
@@ -114,6 +117,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
         midnightTimer.onPause()
         screen.onDetached()
         adapter.cancelRefresh()
+        celebrationPresenter.detach()
         dismissCurrentDialog()
         super.onPause()
     }
@@ -123,6 +127,7 @@ class ListHabitsActivity : AppCompatActivity(), Preferences.Listener {
         
         adapter.refresh()
         screen.onAttached()
+        celebrationPresenter.attach()
         rootView.postInvalidate()
         midnightTimer.onResume()
 

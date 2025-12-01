@@ -306,4 +306,17 @@
     <string name="toast_goal_created">Goal created</string>
     <string name="toast_goal_archived">Goal archived</string>
     <string name="toast_goal_deleted">Goal deleted</string>
+
+    <plurals name="achievement_streak_days">
+        <item quantity="one">%1$d day streak</item>
+        <item quantity="other">%1$d day streak</item>
+    </plurals>
+    <string name="achievement_habit_label">Habit: %1$s</string>
+    <string name="achievement_share_button">Share</string>
+    <string name="achievement_dismiss_button">Got it</string>
+    <string name="achievement_share_title">Share achievement</string>
+    <string name="achievement_share_message">I just unlocked &quot;%2$s&quot; for %1$s with a %3$d day streak in Loop Habit Tracker.</string>
+    <string name="achievement_unlocked_snackbar">%1$s unlocked</string>
+    <string name="achievement_share_error">No compatible app found to share this achievement.</string>
+    <string name="achievement_icon_description">Achievement badge</string>
 </resources>

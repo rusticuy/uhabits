@@ -236,7 +236,9 @@ class ListHabitsScreen
             return
         }
         val baseColor = themeSwitcher.currentTheme!!.color(color).toInt()
-        rootView.get().konfettiView.start(
+        val root = rootView.get()
+        root.markConfettiTriggered()
+        root.konfettiView.start(
             Party(
                 speed = 0f,
                 maxSpeed = 16f,
