@@ -22,6 +22,8 @@ package org.isoron.uhabits.inject
 import dagger.Module
 import dagger.Provides
 import org.isoron.uhabits.core.AppScope
+import org.isoron.uhabits.core.achievements.AchievementDetector
+import org.isoron.uhabits.core.achievements.DefaultAchievementDetector
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.database.Database
 import org.isoron.uhabits.core.database.DatabaseOpener
@@ -128,5 +130,11 @@ class HabitsModule(dbFile: File) {
     @AppScope
     fun getAppLockConfig(preferences: Preferences): AppLockConfig {
         return AppLockConfig(preferences)
+    }
+
+    @Provides
+    @AppScope
+    fun getAchievementDetector(): AchievementDetector {
+        return DefaultAchievementDetector()
     }
 }

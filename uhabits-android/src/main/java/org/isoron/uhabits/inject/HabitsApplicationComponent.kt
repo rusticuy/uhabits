@@ -21,6 +21,7 @@ package org.isoron.uhabits.inject
 import android.content.Context
 import dagger.Component
 import org.isoron.uhabits.core.AppScope
+import org.isoron.uhabits.core.achievements.AchievementDetector
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.io.GenericImporter
 import org.isoron.uhabits.core.io.Logging
@@ -61,6 +62,7 @@ interface HabitsApplicationComponent {
     val intentParser: IntentParser
     val logging: Logging
     val midnightTimer: MidnightTimer
+    val achievementDetector: AchievementDetector
     val modelFactory: ModelFactory
     val notificationTray: NotificationTray
     val pendingIntentFactory: PendingIntentFactory

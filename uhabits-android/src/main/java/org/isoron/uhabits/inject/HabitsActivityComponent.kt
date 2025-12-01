@@ -20,6 +20,7 @@
 package org.isoron.uhabits.inject
 
 import dagger.Component
+import org.isoron.uhabits.activities.achievements.AchievementCelebrationPresenter
 import org.isoron.uhabits.activities.common.dialogs.ColorPickerDialogFactory
 import org.isoron.uhabits.activities.habits.list.ListHabitsMenu
 import org.isoron.uhabits.activities.habits.list.ListHabitsModule
@@ -44,4 +45,5 @@ interface HabitsActivityComponent {
     val listHabitsScreen: ListHabitsScreen
     val listHabitsSelectionMenu: ListHabitsSelectionMenu
     val themeSwitcher: ThemeSwitcher
+    val achievementCelebrationPresenter: AchievementCelebrationPresenter
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="28dp"
+    android:paddingBottom="12dp">
+
+    <ImageView
+        android:id="@+id/celebrationIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/achievement_icon_description"
+        android:src="@drawable/ic_achievement_trophy"
+        tools:ignore="UseCompatLoadingForDrawables" />
+
+    <TextView
+        android:id="@+id/celebrationTitle"
+        style="?attr/textAppearanceHeadlineSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="?attr/colorOnBackground"
+        android:textStyle="bold"
+        tools:text="Streak legend" />
+
+    <TextView
+        android:id="@+id/celebrationDescription"
+        style="?attr/textAppearanceBodyLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textColor="?attr/colorOnBackground"
+        tools:text="Complete a 30 day streak to unlock this badge." />
+
+    <TextView
+        android:id="@+id/celebrationHabit"
+        style="?attr/textAppearanceBodyMedium"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:textColor="?attr/colorOnBackground"
+        tools:text="Meditate" />
+
+    <TextView
+        android:id="@+id/celebrationStreak"
+        style="?attr/textAppearanceLabelLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="?attr/colorPrimary"
+        tools:text="30 day streak" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/celebrationDismissButton"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/achievement_dismiss_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/celebrationShareButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@string/achievement_share_button" />
+    </LinearLayout>
+</LinearLayout>
