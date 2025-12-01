@@ -37,4 +37,6 @@ class MemoryModelFactory : ModelFactory {
     override fun buildGoalListRepository() = throw NotImplementedError()
     override fun buildGoalHabitLinkRepository() = throw NotImplementedError()
     override fun buildGoalMilestoneRepository() = throw NotImplementedError()
+    override fun buildAchievementRepository() = throw NotImplementedError()
+    override fun buildAchievementUnlockRepository() = throw NotImplementedError()
 }

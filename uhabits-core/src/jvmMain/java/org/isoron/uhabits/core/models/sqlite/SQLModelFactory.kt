@@ -26,6 +26,8 @@ import org.isoron.uhabits.core.models.ScoreList
 import org.isoron.uhabits.core.models.StreakList
 import org.isoron.uhabits.core.models.goals.GoalMilestoneList
 import org.isoron.uhabits.core.models.memory.MemoryGoalMilestoneList
+import org.isoron.uhabits.core.models.sqlite.records.AchievementRecord
+import org.isoron.uhabits.core.models.sqlite.records.AchievementUnlockRecord
 import org.isoron.uhabits.core.models.sqlite.records.EntryRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalHabitLinkRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalMilestoneRecord
@@ -62,4 +64,10 @@ class SQLModelFactory
 
     override fun buildGoalMilestoneRepository() =
         Repository(GoalMilestoneRecord::class.java, database)
+
+    override fun buildAchievementRepository() =
+        Repository(AchievementRecord::class.java, database)
+
+    override fun buildAchievementUnlockRepository() =
+        Repository(AchievementUnlockRecord::class.java, database)
 }

@@ -22,6 +22,8 @@ import org.isoron.uhabits.core.database.Repository
 import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.goals.GoalMilestoneList
+import org.isoron.uhabits.core.models.sqlite.records.AchievementRecord
+import org.isoron.uhabits.core.models.sqlite.records.AchievementUnlockRecord
 import org.isoron.uhabits.core.models.sqlite.records.EntryRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalHabitLinkRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalMilestoneRecord
@@ -61,4 +63,6 @@ interface ModelFactory {
     fun buildGoalListRepository(): Repository<GoalRecord>
     fun buildGoalHabitLinkRepository(): Repository<GoalHabitLinkRecord>
     fun buildGoalMilestoneRepository(): Repository<GoalMilestoneRecord>
+    fun buildAchievementRepository(): Repository<AchievementRecord>
+    fun buildAchievementUnlockRepository(): Repository<AchievementUnlockRecord>
 }

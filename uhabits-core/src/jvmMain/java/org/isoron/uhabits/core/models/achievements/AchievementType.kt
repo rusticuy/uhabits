@@ -16,8 +16,11 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.models.achievements
 
-const val DATABASE_FILENAME = "uhabits.db"
-
-const val DATABASE_VERSION = 27
+enum class AchievementType {
+    GLOBAL_STREAK,
+    HABIT_SPECIFIC_STREAK,
+    HABIT_COUNT,
+    TOTAL_COMPLETIONS
+}
