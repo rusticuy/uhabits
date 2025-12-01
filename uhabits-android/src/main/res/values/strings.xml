@@ -306,4 +306,11 @@
     <string name="toast_goal_created">Goal created</string>
     <string name="toast_goal_archived">Goal archived</string>
     <string name="toast_goal_deleted">Goal deleted</string>
+
+    <!-- Achievements Strings -->
+    <string name="achievements">Achievements</string>
+    <string name="achievement_icon">Achievement icon</string>
+    <string name="achievement_streak_tier">%s-Day Streak</string>
+    <string name="achievement_unlocked_at">Unlocked: %s</string>
+    <string name="achievement_locked">Locked</string>
 </resources>

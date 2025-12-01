@@ -24,6 +24,7 @@ import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
+import org.isoron.uhabits.core.models.AchievementList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.core.preferences.Preferences
@@ -36,8 +37,10 @@ import org.junit.Before
 open class BaseUserInterfaceTest {
     private lateinit var component: HabitsApplicationComponent
     private lateinit var habitList: HabitList
+    private lateinit var achievementList: AchievementList
     private lateinit var prefs: Preferences
     private lateinit var fixtures: HabitFixtures
+    private lateinit var achievementFixtures: AchievementFixtures
     private lateinit var cache: HabitCardListCache
 
     @Before
@@ -48,9 +51,11 @@ open class BaseUserInterfaceTest {
             ApplicationProvider.getApplicationContext<Context>().applicationContext as HabitsApplication
         component = app.component
         habitList = component.habitList
+        achievementList = component.achievementList
         prefs = component.preferences
         cache = component.habitCardListCache
         fixtures = HabitFixtures(component.modelFactory, habitList)
+        achievementFixtures = AchievementFixtures(achievementList)
         resetState()
     }
 
@@ -67,6 +72,7 @@ open class BaseUserInterfaceTest {
         prefs.isFirstRun = false
         prefs.updateLastHint(100, getToday())
         habitList.removeAll()
+        achievementFixtures.purgeAchievements(achievementList)
         cache.refreshAllHabits()
         Thread.sleep(1000)
         val h1 = fixtures.createEmptyHabit()
@@ -93,6 +99,8 @@ open class BaseUserInterfaceTest {
         h4.description = ""
         h4.color = PaletteColor(2)
         habitList.update(h4)
+        achievementFixtures.createSampleAchievements(h1.id!!)
+        achievementFixtures.createSampleAchievements(h2.id!!)
     }
 
     @Throws(Exception::class)
