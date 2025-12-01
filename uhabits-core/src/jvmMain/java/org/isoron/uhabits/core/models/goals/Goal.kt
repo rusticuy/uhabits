@@ -24,6 +24,18 @@ import org.isoron.uhabits.core.models.memory.MemoryGoalMilestoneList
 import java.util.UUID
 
 data class Goal(
+    var id: Long? = null,
+    var name: String = "",
+    var description: String = "",
+    var targetValue: Double = 0.0,
+    var isArchived: Boolean = false,
+    var deadline: Long? = null,
+    var created: Long = System.currentTimeMillis(),
+    var goalType: String = "CUMULATIVE",
+    var uuid: String? = null,
+    var position: Int = 0,
+    var color: PaletteColor = PaletteColor(8),
+    var dueDate: Long? = null
     var color: PaletteColor = PaletteColor(8),
     var description: String = "",
     var id: Long? = null,
@@ -41,6 +53,16 @@ data class Goal(
     var observable = ModelObservable()
 
     fun copyFrom(other: Goal) {
+        this.name = other.name
+        this.description = other.description
+        this.targetValue = other.targetValue
+        this.isArchived = other.isArchived
+        this.deadline = other.deadline
+        this.created = other.created
+        this.goalType = other.goalType
+        this.uuid = other.uuid
+        this.position = other.position
+        this.color = other.color
         this.color = other.color
         this.description = other.description
         this.isArchived = other.isArchived
@@ -54,6 +76,17 @@ data class Goal(
         if (this === other) return true
         if (other !is Goal) return false
 
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (description != other.description) return false
+        if (targetValue != other.targetValue) return false
+        if (isArchived != other.isArchived) return false
+        if (deadline != other.deadline) return false
+        if (created != other.created) return false
+        if (goalType != other.goalType) return false
+        if (uuid != other.uuid) return false
+        if (position != other.position) return false
+        if (color != other.color) return false
         if (color != other.color) return false
         if (description != other.description) return false
         if (id != other.id) return false
@@ -67,6 +100,17 @@ data class Goal(
     }
 
     override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+        result = 31 * result + name.hashCode()
+        result = 31 * result + description.hashCode()
+        result = 31 * result + targetValue.hashCode()
+        result = 31 * result + isArchived.hashCode()
+        result = 31 * result + (deadline?.hashCode() ?: 0)
+        result = 31 * result + created.hashCode()
+        result = 31 * result + goalType.hashCode()
+        result = 31 * result + (uuid?.hashCode() ?: 0)
+        result = 31 * result + position
+        result = 31 * result + color.hashCode()
         var result = color.hashCode()
         result = 31 * result + description.hashCode()
         result = 31 * result + (id?.hashCode() ?: 0)

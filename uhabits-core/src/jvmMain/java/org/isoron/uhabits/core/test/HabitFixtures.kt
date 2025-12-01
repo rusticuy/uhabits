@@ -29,6 +29,7 @@ import org.isoron.uhabits.core.models.NumericalHabitType
 import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.core.models.Timestamp
 import org.isoron.uhabits.core.models.sqlite.SQLiteEntryList
+import org.isoron.uhabits.core.models.goals.Goal
 import org.isoron.uhabits.core.utils.DateUtils.Companion.getToday
 
 class HabitFixtures(private val modelFactory: ModelFactory, private val habitList: HabitList) {
@@ -161,5 +162,55 @@ class HabitFixtures(private val modelFactory: ModelFactory, private val habitLis
         habitList.add(habit)
     }
 
+    fun createGoal(
+        name: String = "Learn Guitar",
+        description: String = "Learn to play 10 songs",
+        daysUntilDeadline: Int = 30
+    ): Goal {
+        val deadlineMillis = getToday().plus(daysUntilDeadline).unixTime
+        return Goal(
+            id = System.currentTimeMillis(),
+            name = name,
+            description = description,
+            targetValue = 100.0,
+            deadline = deadlineMillis,
+            created = System.currentTimeMillis(),
+            isArchived = false
+        )
+    }
+
+    fun createEmptyGoal(
+        name: String = "Learn Guitar",
+        description: String = ""
+    ): Goal {
+        return Goal(
+            id = System.currentTimeMillis(),
+            name = name,
+            description = description,
+            deadline = getToday().plus(30).unixTime,
+            created = System.currentTimeMillis(),
+            isArchived = false
+        )
+    }
+
+    fun createArchivedGoal(name: String = "Past Goal"): Goal {
+        return Goal(
+            id = System.currentTimeMillis(),
+            name = name,
+            deadline = getToday().minus(30).unixTime,
+            created = getToday().minus(60).unixTime,
+            isArchived = true
+        )
+    }
+
+    fun createOverdueGoal(name: String = "Overdue Goal"): Goal {
+        return Goal(
+            id = System.currentTimeMillis(),
+            name = name,
+            deadline = getToday().minus(5).unixTime,
+            created = getToday().minus(60).unixTime,
+            isArchived = false
+        )
+    }
 }
 }

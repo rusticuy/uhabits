@@ -16,22 +16,11 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core.commands
 
-import org.isoron.uhabits.core.models.goals.Goal
-import org.isoron.uhabits.core.models.goals.GoalList
+package org.isoron.uhabits.core.models
 
-data class EditGoalCommand(
-    val goalList: GoalList,
-    val goalId: Long,
-    val modified: Goal
-) : Command {
-    override fun run() {
-        val goal = goalList.getById(goalId) ?: throw IllegalArgumentException("Goal not found")
-        goal.copyFrom(modified)
-    val goal: Goal
-) : Command {
-    override fun run() {
-        goalList.update(goal)
-    }
-}
+typealias Goal = org.isoron.uhabits.core.models.goals.Goal
+typealias GoalList = org.isoron.uhabits.core.models.goals.GoalList
+typealias GoalHabitLink = org.isoron.uhabits.core.models.goals.GoalHabitLink
+typealias GoalMilestone = org.isoron.uhabits.core.models.goals.GoalMilestone
+typealias GoalProgress = org.isoron.uhabits.core.models.goals.GoalProgress

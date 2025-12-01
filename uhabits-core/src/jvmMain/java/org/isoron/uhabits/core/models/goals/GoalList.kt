@@ -31,18 +31,41 @@ abstract class GoalList : Iterable<Goal> {
     }
 
     abstract fun add(goal: Goal)
+
     abstract fun getById(id: Long): Goal?
+
     abstract fun getByUUID(uuid: String?): Goal?
+
     abstract fun getByPosition(position: Int): Goal
+
     abstract fun indexOf(g: Goal): Int
+
     abstract fun remove(g: Goal)
+
     abstract fun reorder(from: Goal, to: Goal)
+
     abstract fun repair()
+
     abstract fun size(): Int
+
     abstract fun update(goals: List<Goal>)
+
     abstract fun resort()
 
     abstract fun getLinkedHabits(goalId: Long): List<GoalHabitLink>
+
+    abstract fun addHabitLink(link: GoalHabitLink)
+
+    abstract fun removeHabitLink(link: GoalHabitLink)
+
+    abstract fun updateHabitLink(link: GoalHabitLink)
+
+    abstract fun getMilestones(goalId: Long): List<GoalMilestone>
+
+    abstract fun addMilestone(milestone: GoalMilestone)
+
+    abstract fun removeMilestone(milestone: GoalMilestone)
+
     abstract fun addHabitLink(link: GoalHabitLink)
     abstract fun removeHabitLink(link: GoalHabitLink)
     abstract fun updateHabitLink(link: GoalHabitLink)
@@ -56,6 +79,7 @@ abstract class GoalList : Iterable<Goal> {
         get() = size() == 0
 
     open fun removeAll() {
+        val copy: MutableList<Goal> = LinkedList()
         val copy = mutableListOf<Goal>()
         for (g in this) copy.add(g)
         for (g in copy) remove(g)
