@@ -46,6 +46,8 @@
         <item name="iconUnarchive">@drawable/ic_action_unarchive_dark</item>
         <item name="iconArrowUp">@drawable/ic_arrow_up_light</item>
         <item name="iconArrowDown">@drawable/ic_arrow_down_light</item>
+        <item name="iconTrophy">@drawable/ic_trophy</item>
+        <item name="iconStar">@drawable/ic_star</item>
         <item name="contrast0">@color/white</item>
         <item name="contrast20">@color/grey_300</item>
         <item name="contrast40">@color/grey_350</item>
