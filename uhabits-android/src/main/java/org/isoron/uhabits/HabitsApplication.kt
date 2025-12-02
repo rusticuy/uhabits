@@ -21,6 +21,7 @@ package org.isoron.uhabits
 
 import android.app.Application
 import android.content.Context
+import org.isoron.uhabits.core.achievements.AchievementDetector
 import org.isoron.uhabits.core.database.UnsupportedDatabaseVersionException
 import org.isoron.uhabits.core.reminders.ReminderScheduler
 import org.isoron.uhabits.core.ui.NotificationTray
@@ -42,6 +43,7 @@ class HabitsApplication : Application() {
     private lateinit var widgetUpdater: WidgetUpdater
     private lateinit var reminderScheduler: ReminderScheduler
     private lateinit var notificationTray: NotificationTray
+    private lateinit var achievementDetector: AchievementDetector
 
     override fun onCreate() {
         super.onCreate()
@@ -90,6 +92,9 @@ class HabitsApplication : Application() {
         notificationTray = component.notificationTray
         notificationTray.startListening()
 
+        achievementDetector = component.achievementDetector
+        achievementDetector.startListening()
+
         val appLockManager = component.appLockManager
         appLockManager.initialize()
 
@@ -104,6 +109,7 @@ class HabitsApplication : Application() {
         reminderScheduler.stopListening()
         widgetUpdater.stopListening()
         notificationTray.stopListening()
+        achievementDetector.stopListening()
         super.onTerminate()
     }
 
