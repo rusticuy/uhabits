@@ -16,8 +16,28 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.models.achievements
 
-const val DATABASE_FILENAME = "uhabits.db"
+import javax.inject.Inject
 
-const val DATABASE_VERSION = 27
+class AchievementStore @Inject constructor(
+    private val repository: AchievementRepository
+) {
+    fun getDefinitions(): List<AchievementDefinition> {
+        return repository.getAllDefinitions()
+    }
+
+    fun getDefinition(key: String): AchievementDefinition? {
+        return repository.getDefinitionByKey(key)
+    }
+
+    fun getUnlocks(): List<AchievementUnlock> {
+        return repository.getAllUnlocks()
+    }
+
+    fun unlockByKey(key: String, habitUuid: String? = null, timestamp: Long = System.currentTimeMillis()) {
+        val definition = repository.getDefinitionByKey(key) ?: return
+        val id = definition.id ?: return
+        repository.unlock(id, habitUuid, timestamp)
+    }
+}
