@@ -27,6 +27,8 @@ import org.isoron.uhabits.core.io.Logging
 import org.isoron.uhabits.core.models.GoalList
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
+import org.isoron.uhabits.core.models.TemplateHelper
+import org.isoron.uhabits.core.models.TemplateRepository
 import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.preferences.Preferences
 import org.isoron.uhabits.core.preferences.WidgetPreferences
@@ -71,4 +73,6 @@ interface HabitsApplicationComponent {
     val widgetPreferences: WidgetPreferences
     val widgetUpdater: WidgetUpdater
     val appLockManager: AppLockManager
+    val templateRepository: TemplateRepository
+    val templateHelper: TemplateHelper
 }

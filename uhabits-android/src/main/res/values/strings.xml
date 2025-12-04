@@ -338,4 +338,9 @@
     <string name="milestone_achieved">Milestone Reached!</string>
     <string name="achievement_share_subject">Check out my achievement!</string>
     <string name="achievement_share_text">%1$s - %2$s\n%3$s\n\nAchieved with Loop Habit Tracker</string>
+    <string name="templates">Templates</string>
+    <string name="create_from_scratch">Create from scratch</string>
+    <string name="search">Search</string>
+    <string name="add">Add</string>
+    <string name="customize">Customize</string>
 </resources>

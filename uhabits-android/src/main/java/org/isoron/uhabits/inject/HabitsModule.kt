@@ -28,8 +28,11 @@ import org.isoron.uhabits.core.database.DatabaseOpener
 import org.isoron.uhabits.core.io.Logging
 import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.ModelFactory
+import org.isoron.uhabits.core.models.TemplateHelper
+import org.isoron.uhabits.core.models.TemplateRepository
 import org.isoron.uhabits.core.models.achievements.AchievementRepository
 import org.isoron.uhabits.core.models.achievements.AchievementStore
+import org.isoron.uhabits.core.models.memory.MemoryTemplateRepository
 import org.isoron.uhabits.core.ui.screens.achievements.history.AchievementHistoryPresenter
 import org.isoron.uhabits.core.models.goals.GoalList
 import org.isoron.uhabits.core.models.sqlite.SQLModelFactory
@@ -156,5 +159,17 @@ class HabitsModule(dbFile: File) {
         preferences: Preferences
     ): AchievementHistoryPresenter.PresenterFactory {
         return AchievementHistoryPresenter.PresenterFactory(achievementRepository, habitList, preferences)
+    }
+
+    @Provides
+    @AppScope
+    fun getTemplateRepository(): TemplateRepository {
+        return MemoryTemplateRepository()
+    }
+
+    @Provides
+    @AppScope
+    fun getTemplateHelper(modelFactory: ModelFactory): TemplateHelper {
+        return TemplateHelper(modelFactory)
     }
 }

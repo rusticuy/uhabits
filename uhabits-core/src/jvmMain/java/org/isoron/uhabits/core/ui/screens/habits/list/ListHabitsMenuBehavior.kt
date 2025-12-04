@@ -34,7 +34,7 @@ class ListHabitsMenuBehavior @Inject constructor(
     private var showArchived: Boolean
 
     fun onCreateHabit() {
-        screen.showSelectHabitTypeDialog()
+        screen.showTemplatePicker()
     }
 
     fun onViewFAQ() {
@@ -138,6 +138,7 @@ class ListHabitsMenuBehavior @Inject constructor(
         fun showSettingsScreen()
         fun showSelectHabitTypeDialog()
         fun showAchievementHistory()
+        fun showTemplatePicker()
     }
 
     init {
