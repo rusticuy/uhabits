@@ -153,6 +153,11 @@ class ListHabitsMenu @Inject constructor(
                 return true
             }
 
+            R.id.actionAchievements -> {
+                behavior.onShowAchievements()
+                return true
+            }
+
             else -> return false
         }
     }

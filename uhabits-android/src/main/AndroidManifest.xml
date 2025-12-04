@@ -100,6 +100,15 @@
         </activity>
 
         <activity
+            android:name=".activities.achievements.history.AchievementHistoryActivity"
+            android:exported="true"
+            android:label="@string/achievement_history">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.habits.list.ListHabitsActivity" />
+        </activity>
+
+        <activity
             android:name=".activities.settings.SettingsActivity"
             android:label="@string/settings">
             <meta-data

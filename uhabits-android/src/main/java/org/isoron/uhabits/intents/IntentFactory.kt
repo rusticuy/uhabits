@@ -24,6 +24,7 @@ import android.content.Intent
 import android.net.Uri
 import org.isoron.uhabits.R
 import org.isoron.uhabits.activities.about.AboutActivity
+import org.isoron.uhabits.activities.achievements.history.AchievementHistoryActivity
 import org.isoron.uhabits.activities.goals.edit.EditGoalActivity
 import org.isoron.uhabits.activities.goals.list.ListGoalsActivity
 import org.isoron.uhabits.activities.goals.show.ShowGoalActivity
@@ -120,4 +121,7 @@ class IntentFactory
 
     fun startEditGoalActivity(context: Context) =
         Intent(context, EditGoalActivity::class.java)
+
+    fun startAchievementHistoryActivity(context: Context) =
+        Intent(context, AchievementHistoryActivity::class.java)
 }

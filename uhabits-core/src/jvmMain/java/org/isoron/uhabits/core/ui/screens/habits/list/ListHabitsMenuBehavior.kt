@@ -97,6 +97,10 @@ class ListHabitsMenuBehavior @Inject constructor(
         screen.applyTheme()
     }
 
+    fun onShowAchievements() {
+        screen.showAchievementHistory()
+    }
+
     fun onPreferencesChanged() {
         updateAdapterFilter()
     }
@@ -133,6 +137,7 @@ class ListHabitsMenuBehavior @Inject constructor(
         fun showFAQScreen()
         fun showSettingsScreen()
         fun showSelectHabitTypeDialog()
+        fun showAchievementHistory()
     }
 
     init {
