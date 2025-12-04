@@ -16,8 +16,23 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.models.templates
 
-const val DATABASE_FILENAME = "uhabits.db"
+import org.isoron.uhabits.core.models.HabitTemplate
+import org.isoron.uhabits.core.models.HabitTemplateRepository
+import org.isoron.uhabits.core.models.ModelFactory
+import org.isoron.uhabits.core.models.sqlite.SQLiteHabitTemplateRepository
+import org.isoron.uhabits.core.models.sqlite.records.HabitTemplateRecord
+import javax.inject.Inject
 
-const val DATABASE_VERSION = 28
+/**
+ * Factory for creating habit template repositories.
+ */
+class HabitTemplateRepositoryFactory @Inject constructor(
+    private val modelFactory: ModelFactory
+) {
+    fun createRepository(): HabitTemplateRepository {
+        val repository = modelFactory.buildHabitTemplateRepository()
+        return SQLiteHabitTemplateRepository(repository)
+    }
+}

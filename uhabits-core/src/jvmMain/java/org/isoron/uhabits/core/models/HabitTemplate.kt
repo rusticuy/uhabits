@@ -16,8 +16,26 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.models
 
-const val DATABASE_FILENAME = "uhabits.db"
-
-const val DATABASE_VERSION = 28
+/**
+ * Represents a habit template that can be used to create new habits with predefined settings.
+ */
+data class HabitTemplate(
+    var id: Long? = null,
+    var name: String = "",
+    var description: String = "",
+    var category: TemplateCategory = TemplateCategory.CUSTOM,
+    var frequency: Frequency = Frequency.DAILY,
+    var targetValue: Double = 0.0,
+    var targetType: NumericalHabitType = NumericalHabitType.AT_LEAST,
+    var unit: String = "",
+    var iconKey: String = "",
+    var color: PaletteColor = PaletteColor(8),
+    var reminderHour: Int? = null,
+    var reminderMin: Int? = null,
+    var reminderDays: Int? = null,
+    var position: Int = 0
+) {
+    var observable = ModelObservable()
+}

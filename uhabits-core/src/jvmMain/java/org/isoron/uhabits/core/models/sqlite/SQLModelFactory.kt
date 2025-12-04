@@ -33,6 +33,7 @@ import org.isoron.uhabits.core.models.sqlite.records.GoalHabitLinkRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalMilestoneRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalRecord
 import org.isoron.uhabits.core.models.sqlite.records.HabitRecord
+import org.isoron.uhabits.core.models.sqlite.records.HabitTemplateRecord
 import javax.inject.Inject
 
 /**
@@ -70,4 +71,7 @@ class SQLModelFactory
 
     override fun buildAchievementUnlockRepository() =
         Repository(AchievementUnlockRecord::class.java, database)
+
+    override fun buildHabitTemplateRepository() =
+        Repository(HabitTemplateRecord::class.java, database)
 }

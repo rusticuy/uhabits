@@ -16,8 +16,15 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.models
 
-const val DATABASE_FILENAME = "uhabits.db"
-
-const val DATABASE_VERSION = 28
+/**
+ * Enum representing different categories for habit templates.
+ */
+enum class TemplateCategory {
+    HEALTH,
+    LEARNING,
+    PRODUCTIVITY,
+    WELLNESS,
+    CUSTOM
+}

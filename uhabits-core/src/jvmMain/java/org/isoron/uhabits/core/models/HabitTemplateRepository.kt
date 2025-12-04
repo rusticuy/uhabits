@@ -16,8 +16,39 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.models
 
-const val DATABASE_FILENAME = "uhabits.db"
+/**
+ * Repository interface for habit templates.
+ */
+interface HabitTemplateRepository {
+    /**
+     * Get all habit templates.
+     */
+    fun findAll(): List<HabitTemplate>
 
-const val DATABASE_VERSION = 28
+    /**
+     * Get habit templates by category.
+     */
+    fun findByCategory(category: TemplateCategory): List<HabitTemplate>
+
+    /**
+     * Get a habit template by ID.
+     */
+    fun findById(id: Long): HabitTemplate?
+
+    /**
+     * Search habit templates by name or description.
+     */
+    fun search(query: String): List<HabitTemplate>
+
+    /**
+     * Save a habit template (create or update).
+     */
+    fun save(template: HabitTemplate)
+
+    /**
+     * Delete a habit template.
+     */
+    fun delete(template: HabitTemplate)
+}

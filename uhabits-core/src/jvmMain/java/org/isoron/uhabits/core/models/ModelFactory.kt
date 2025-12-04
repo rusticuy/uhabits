@@ -29,6 +29,7 @@ import org.isoron.uhabits.core.models.sqlite.records.GoalHabitLinkRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalMilestoneRecord
 import org.isoron.uhabits.core.models.sqlite.records.GoalRecord
 import org.isoron.uhabits.core.models.sqlite.records.HabitRecord
+import org.isoron.uhabits.core.models.sqlite.records.HabitTemplateRecord
 
 /**
  * Interface implemented by factories that provide concrete implementations of
@@ -65,4 +66,5 @@ interface ModelFactory {
     fun buildGoalMilestoneRepository(): Repository<GoalMilestoneRecord>
     fun buildAchievementRepository(): Repository<AchievementRecord>
     fun buildAchievementUnlockRepository(): Repository<AchievementUnlockRecord>
+    fun buildHabitTemplateRepository(): Repository<HabitTemplateRecord>
 }
