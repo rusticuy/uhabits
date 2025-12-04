@@ -109,6 +109,15 @@
         </activity>
 
         <activity
+            android:name=".activities.templates.picker.TemplatePickerActivity"
+            android:exported="true"
+            android:label="@string/templates">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.habits.list.ListHabitsActivity" />
+        </activity>
+
+        <activity
             android:name=".activities.settings.SettingsActivity"
             android:label="@string/settings">
             <meta-data

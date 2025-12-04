@@ -38,6 +38,7 @@ import org.isoron.uhabits.activities.common.dialogs.NumberDialog
 import org.isoron.uhabits.activities.habits.edit.HabitTypeDialog
 import org.isoron.uhabits.activities.habits.list.views.HabitCardListAdapter
 import org.isoron.uhabits.activities.achievements.celebration.AchievementCelebrationDialog
+import org.isoron.uhabits.activities.templates.picker.TemplatePickerActivity
 import org.isoron.uhabits.core.commands.ArchiveHabitsCommand
 import org.isoron.uhabits.core.commands.ChangeHabitColorCommand
 import org.isoron.uhabits.core.commands.Command
@@ -302,6 +303,11 @@ class ListHabitsScreen
 
     override fun showAchievementHistory() {
         val intent = intentFactory.startAchievementHistoryActivity(activity)
+        activity.startActivity(intent)
+    }
+
+    override fun showTemplatePicker() {
+        val intent = Intent(activity, TemplatePickerActivity::class.java)
         activity.startActivity(intent)
     }
 

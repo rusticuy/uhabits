@@ -121,6 +121,28 @@ class EditHabitActivity : AppCompatActivity() {
             binding.targetInput.setText(habit.targetValue.toString())
         } else {
             habitType = HabitType.fromInt(intent.getIntExtra("habitType", HabitType.YES_NO.value))
+            if (intent.hasExtra("templateColor")) {
+                color = PaletteColor(intent.getIntExtra("templateColor", 11))
+            }
+            if (intent.hasExtra("templateName")) {
+                binding.nameInput.setText(intent.getStringExtra("templateName"))
+            }
+            if (intent.hasExtra("templateDescription")) {
+                binding.notesInput.setText(intent.getStringExtra("templateDescription"))
+            }
+            if (intent.hasExtra("templateFreqNum") && intent.hasExtra("templateFreqDen")) {
+                freqNum = intent.getIntExtra("templateFreqNum", 1)
+                freqDen = intent.getIntExtra("templateFreqDen", 1)
+            }
+            if (intent.hasExtra("templateUnit")) {
+                binding.unitInput.setText(intent.getStringExtra("templateUnit"))
+            }
+            if (intent.hasExtra("templateTargetValue")) {
+                binding.targetInput.setText(intent.getDoubleExtra("templateTargetValue", 0.0).toString())
+            }
+            if (intent.hasExtra("templateTargetType")) {
+                targetType = NumericalHabitType.fromInt(intent.getIntExtra("templateTargetType", NumericalHabitType.AT_LEAST.value))
+            }
         }
 
         if (state != null) {
