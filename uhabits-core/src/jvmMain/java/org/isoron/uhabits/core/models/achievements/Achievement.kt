@@ -16,8 +16,26 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.models.achievements
 
-const val DATABASE_FILENAME = "uhabits.db"
+data class Achievement(
+    val id: String,
+    val type: AchievementType,
+    val title: String,
+    val description: String,
+    val iconId: Int,
+    val unlockedAt: Long
+)
 
-const val DATABASE_VERSION = 27
+enum class AchievementType {
+    FIRST_HABIT,
+    STREAK_7,
+    STREAK_30,
+    STREAK_100,
+    STREAK_365,
+    HABIT_COUNT_5,
+    HABIT_COUNT_10,
+    HABIT_COUNT_25,
+    PERFECT_WEEK,
+    PERFECT_MONTH
+}

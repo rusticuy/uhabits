@@ -16,8 +16,16 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.utils
 
-const val DATABASE_FILENAME = "uhabits.db"
-
-const val DATABASE_VERSION = 27
+class FakeClock(private var currentTime: Long = 0L) : Clock {
+    override fun currentTimeMillis(): Long = currentTime
+    
+    fun setTime(millis: Long) {
+        currentTime = millis
+    }
+    
+    fun advance(millis: Long) {
+        currentTime += millis
+    }
+}

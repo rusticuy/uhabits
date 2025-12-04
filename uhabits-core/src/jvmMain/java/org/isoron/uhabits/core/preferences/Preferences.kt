@@ -141,6 +141,18 @@ open class Preferences(private val storage: Storage) {
             storage.putBoolean("pref_disable_animation", enabled)
         }
 
+    var achievementHistoryFilter: String
+        get() = storage.getString("pref_achievement_history_filter", "ALL")
+        set(filter) {
+            storage.putString("pref_achievement_history_filter", filter)
+        }
+
+    var achievementHistoryGrouping: String
+        get() = storage.getString("pref_achievement_history_grouping", "BY_CATEGORY")
+        set(grouping) {
+            storage.putString("pref_achievement_history_grouping", grouping)
+        }
+
     fun removeListener(listener: Listener) {
         listeners.remove(listener)
     }

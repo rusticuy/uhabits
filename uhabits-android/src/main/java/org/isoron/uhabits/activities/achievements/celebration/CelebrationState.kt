@@ -16,8 +16,14 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
 
-const val DATABASE_FILENAME = "uhabits.db"
+package org.isoron.uhabits.activities.achievements.celebration
 
-const val DATABASE_VERSION = 27
+import org.isoron.uhabits.core.models.PaletteColor
+
+data class CelebrationState(
+    val title: String = "",
+    val message: String = "",
+    val palette: PaletteColor = PaletteColor(8),
+    val playConfetti: Boolean = false
+)

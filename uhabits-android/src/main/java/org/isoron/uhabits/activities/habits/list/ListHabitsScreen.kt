@@ -37,6 +37,7 @@ import org.isoron.uhabits.activities.common.dialogs.ConfirmDeleteDialog
 import org.isoron.uhabits.activities.common.dialogs.NumberDialog
 import org.isoron.uhabits.activities.habits.edit.HabitTypeDialog
 import org.isoron.uhabits.activities.habits.list.views.HabitCardListAdapter
+import org.isoron.uhabits.activities.achievements.celebration.AchievementCelebrationDialog
 import org.isoron.uhabits.core.commands.ArchiveHabitsCommand
 import org.isoron.uhabits.core.commands.ChangeHabitColorCommand
 import org.isoron.uhabits.core.commands.Command
@@ -46,6 +47,7 @@ import org.isoron.uhabits.core.commands.DeleteHabitsCommand
 import org.isoron.uhabits.core.commands.EditHabitCommand
 import org.isoron.uhabits.core.commands.UnarchiveHabitsCommand
 import org.isoron.uhabits.core.models.Habit
+import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.core.preferences.Preferences
 import org.isoron.uhabits.core.tasks.TaskRunner
@@ -59,6 +61,8 @@ import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsBehavior.Message
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsBehavior.Message.FILE_NOT_RECOGNIZED
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsBehavior.Message.IMPORT_FAILED
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsBehavior.Message.IMPORT_SUCCESSFUL
+import org.isoron.uhabits.core.ui.screens.achievements.celebration.AchievementType
+import org.isoron.uhabits.core.ui.screens.achievements.celebration.CelebrationPresenter
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsMenuBehavior
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsSelectionMenuBehavior
 import org.isoron.uhabits.inject.ActivityContext
@@ -79,6 +83,8 @@ import java.io.File
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
+import kotlin.math.max
+import kotlin.math.min
 
 const val RESULT_IMPORT_DATA = 101
 const val RESULT_EXPORT_CSV = 102
@@ -102,7 +108,9 @@ class ListHabitsScreen
     private val colorPickerFactory: ColorPickerDialogFactory,
     private val behavior: Lazy<ListHabitsBehavior>,
     private val preferences: Preferences,
-    private val rootView: Lazy<ListHabitsRootView>
+    private val rootView: Lazy<ListHabitsRootView>,
+    private val celebrationPresenter: CelebrationPresenter,
+    private val habitList: HabitList
 ) : CommandRunner.Listener,
     ListHabitsBehavior.Screen,
     ListHabitsMenuBehavior.Screen,
@@ -112,10 +120,41 @@ class ListHabitsScreen
 
     fun onAttached() {
         commandRunner.addListener(this)
+        setupCelebrationDialog()
     }
 
     fun onDetached() {
         commandRunner.removeListener(this)
+    }
+
+    private var celebrationDialog: AchievementCelebrationDialog? = null
+
+    private fun setupCelebrationDialog() {
+        celebrationDialog = AchievementCelebrationDialog()
+        celebrationDialog?.setScreenCallback(object : AchievementCelebrationDialog.ScreenCallback {
+            override fun onViewHistoryRequested(habitName: String) {
+                // Find the habit by name and show its history
+                val habit = habitList.firstOrNull { it.name == habitName }
+                if (habit != null) {
+                    showHabitScreen(habit)
+                }
+            }
+        })
+    }
+
+    fun showAchievementCelebration(
+        habitName: String,
+        achievementType: AchievementType,
+        habitColor: PaletteColor,
+        description: String
+    ) {
+        celebrationPresenter.showCelebration(habitName, achievementType, habitColor, description)
+        
+        celebrationDialog?.let { dialog ->
+            if (!dialog.isAdded) {
+                dialog.show(activity.supportFragmentManager, "achievementCelebration")
+            }
+        }
     }
 
     override fun onCommandFinished(command: Command) {

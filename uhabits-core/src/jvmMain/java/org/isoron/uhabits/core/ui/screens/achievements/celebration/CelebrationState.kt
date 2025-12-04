@@ -16,8 +16,18 @@
  * You should have received a copy of the GNU General Public License along
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package org.isoron.uhabits.core
+package org.isoron.uhabits.core.ui.screens.achievements.celebration
 
-const val DATABASE_FILENAME = "uhabits.db"
-
-const val DATABASE_VERSION = 27
+data class CelebrationState(
+    val achievementId: String,
+    val title: String,
+    val subtitle: String,
+    val description: String,
+    val iconId: Int,
+    val shareText: String,
+    val showShareButton: Boolean,
+    val showHistoryButton: Boolean,
+    val playConfetti: Boolean,
+    val confettiColors: List<Int>,
+    val autoDismissMillis: Long?
+)
