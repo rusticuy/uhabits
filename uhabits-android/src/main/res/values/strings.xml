@@ -338,4 +338,10 @@
     <string name="milestone_achieved">Milestone Reached!</string>
     <string name="achievement_share_subject">Check out my achievement!</string>
     <string name="achievement_share_text">%1$s - %2$s\n%3$s\n\nAchieved with Loop Habit Tracker</string>
+    
+    <string name="insights">Insights</string>
+    <string name="view_details">View Details</string>
+    <string name="apply">Apply</string>
+    <string name="view_habit">View Habit</string>
+    <string name="no_insights_available">No insights available yet. Keep tracking your habits!</string>
 </resources>

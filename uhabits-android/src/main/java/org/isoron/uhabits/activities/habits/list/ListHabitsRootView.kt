@@ -33,6 +33,7 @@ import org.isoron.uhabits.activities.habits.list.views.HabitCardListView
 import org.isoron.uhabits.activities.habits.list.views.HabitCardListViewFactory
 import org.isoron.uhabits.activities.habits.list.views.HeaderView
 import org.isoron.uhabits.activities.habits.list.views.HintView
+import org.isoron.uhabits.activities.habits.list.views.InsightsCardCarousel
 import org.isoron.uhabits.core.models.ModelObservable
 import org.isoron.uhabits.core.models.PaletteColor
 import org.isoron.uhabits.core.preferences.Preferences
@@ -64,7 +65,8 @@ class ListHabitsRootView @Inject constructor(
     midnightTimer: MidnightTimer,
     runner: TaskRunner,
     private val listAdapter: HabitCardListAdapter,
-    habitCardListViewFactory: HabitCardListViewFactory
+    habitCardListViewFactory: HabitCardListViewFactory,
+    val insightsCarousel: InsightsCardCarousel
 ) : FrameLayout(context), ModelObservable.Listener {
 
     val listView: HabitCardListView = habitCardListViewFactory.create()
@@ -87,8 +89,11 @@ class ListHabitsRootView @Inject constructor(
             addAtTop(konfettiView)
             addAtTop(tbar)
             addBelow(header, tbar)
-            addBelow(listView, header, height = MATCH_PARENT)
-            addBelow(llEmpty, header, height = MATCH_PARENT)
+            addBelow(insightsCarousel, header) {
+                it.topMargin = dp(8.0f).toInt()
+            }
+            addBelow(listView, insightsCarousel, height = MATCH_PARENT)
+            addBelow(llEmpty, insightsCarousel, height = MATCH_PARENT)
             addBelow(progressBar, header) {
                 it.topMargin = dp(-6.0f).toInt()
             }
