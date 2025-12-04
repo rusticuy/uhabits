@@ -18,6 +18,64 @@
  */
 package org.isoron.uhabits.core.models.achievements
 
+import org.isoron.uhabits.core.database.Repository
+import org.isoron.uhabits.core.models.sqlite.records.AchievementRecord
+import org.isoron.uhabits.core.models.sqlite.records.AchievementUnlockRecord
+import javax.inject.Inject
+
+class AchievementRepository @Inject constructor(
+    private val achievementRepo: Repository<AchievementRecord>,
+    private val unlockRepo: Repository<AchievementUnlockRecord>
+) {
+    fun getAllDefinitions(): List<AchievementDefinition> {
+        return achievementRepo.findAll("order by coalesce(streak_target, 0), id").map { it.toModel() }
+    }
+
+    fun getDefinitionByKey(key: String): AchievementDefinition? {
+        return achievementRepo.findFirst("where key=?", key)?.toModel()
+    }
+
+    fun getAllUnlocks(): List<AchievementUnlock> {
+        return unlockRepo.findAll("order by unlocked_at desc").map { it.toModel() }
+    }
+
+    fun getUnlocksForAchievement(achievementId: Long): List<AchievementUnlock> {
+        return unlockRepo.findAll("where achievement_id=?", achievementId.toString()).map { it.toModel() }
+    }
+
+    fun isUnlocked(achievementId: Long, habitUuid: String? = null): Boolean {
+        val query = if (habitUuid != null) {
+            "where achievement_id=? and habit_uuid=?"
+        } else {
+            "where achievement_id=? and habit_uuid is null"
+        }
+        val params = if (habitUuid != null) {
+            arrayOf(achievementId.toString(), habitUuid)
+        } else {
+            arrayOf(achievementId.toString())
+        }
+        return unlockRepo.findFirst(query, *params) != null
+    }
+
+    fun unlock(achievementId: Long, habitUuid: String? = null, timestamp: Long = System.currentTimeMillis()) {
+        if (isUnlocked(achievementId, habitUuid)) return
+
+        val unlock = AchievementUnlock(
+            achievementId = achievementId,
+            unlockedAt = timestamp,
+            habitUuid = habitUuid
+        )
+        val record = AchievementUnlockRecord()
+        record.copyFrom(unlock)
+        unlockRepo.save(record)
+    }
+
+    fun saveDefinition(definition: AchievementDefinition) {
+        val record = AchievementRecord()
+        record.copyFrom(definition)
+        achievementRepo.save(record)
+        definition.id = record.id
+    }
 import kotlinx.coroutines.flow.Flow
 
 interface AchievementRepository {
