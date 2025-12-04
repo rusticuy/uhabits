@@ -25,6 +25,7 @@ import dagger.Module
 import org.isoron.uhabits.AndroidBugReporter
 import org.isoron.uhabits.activities.HabitsDirFinder
 import org.isoron.uhabits.activities.habits.list.views.HabitCardListAdapter
+import org.isoron.uhabits.core.models.HabitList
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsBehavior
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsMenuBehavior
 import org.isoron.uhabits.core.ui.screens.habits.list.ListHabitsSelectionMenuBehavior
