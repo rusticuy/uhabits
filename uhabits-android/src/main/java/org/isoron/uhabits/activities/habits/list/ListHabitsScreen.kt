@@ -110,21 +110,26 @@ class ListHabitsScreen
     private val preferences: Preferences,
     private val rootView: Lazy<ListHabitsRootView>,
     private val celebrationPresenter: CelebrationPresenter,
-    private val habitList: HabitList
+    private val habitList: HabitList,
+    private val insightsPresenter: Lazy<ListHabitsInsightsPresenter>
 ) : CommandRunner.Listener,
     ListHabitsBehavior.Screen,
     ListHabitsMenuBehavior.Screen,
-    ListHabitsSelectionMenuBehavior.Screen {
+    ListHabitsSelectionMenuBehavior.Screen,
+    ListHabitsInsightsPresenter.Screen {
 
     val activity = (context as AppCompatActivity)
 
     fun onAttached() {
         commandRunner.addListener(this)
         setupCelebrationDialog()
+        insightsPresenter.get().setupCarousel()
+        insightsPresenter.get().onAttach()
     }
 
     fun onDetached() {
         commandRunner.removeListener(this)
+        insightsPresenter.get().onDetach()
     }
 
     private var celebrationDialog: AchievementCelebrationDialog? = null
@@ -418,5 +423,17 @@ class ListHabitsScreen
                 }
             }
         )
+    }
+
+    override fun showInsightsDetail() {
+        val intent = intentFactory.startInsightsDetailActivity(activity)
+        activity.startActivity(intent)
+    }
+
+    override fun showHabitForInsight(habitId: Long) {
+        val habit = habitList.getById(habitId)
+        if (habit != null) {
+            showHabitScreen(habit)
+        }
     }
 }

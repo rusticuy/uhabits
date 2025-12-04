@@ -124,4 +124,7 @@ class IntentFactory
 
     fun startAchievementHistoryActivity(context: Context) =
         Intent(context, AchievementHistoryActivity::class.java)
+
+    fun startInsightsDetailActivity(context: Context) =
+        Intent(context, org.isoron.uhabits.activities.insights.InsightsDetailActivity::class.java)
 }
