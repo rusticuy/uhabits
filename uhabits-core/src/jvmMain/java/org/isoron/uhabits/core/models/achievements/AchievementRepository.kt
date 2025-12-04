@@ -76,4 +76,12 @@ class AchievementRepository @Inject constructor(
         achievementRepo.save(record)
         definition.id = record.id
     }
+import kotlinx.coroutines.flow.Flow
+
+interface AchievementRepository {
+    fun observeUnlocks(): Flow<Achievement>
+    
+    fun markAsShown(achievementId: String)
+    
+    fun getLastShownId(): String?
 }

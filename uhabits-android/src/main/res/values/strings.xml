@@ -306,4 +306,17 @@
     <string name="toast_goal_created">Goal created</string>
     <string name="toast_goal_archived">Goal archived</string>
     <string name="toast_goal_deleted">Goal deleted</string>
+    
+    <!-- Achievement Celebration Dialog -->
+    <string name="achievement_unlocked">Achievement Unlocked!</string>
+    <string name="achievement_icon">Achievement icon</string>
+    <string name="share_achievement">Share</string>
+    <string name="view_history">View History</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="streak_achieved">Streak Achieved!</string>
+    <string name="perfect_week_achieved">Perfect Week!</string>
+    <string name="perfect_month_achieved">Perfect Month!</string>
+    <string name="milestone_achieved">Milestone Reached!</string>
+    <string name="achievement_share_subject">Check out my achievement!</string>
+    <string name="achievement_share_text">%1$s - %2$s\n%3$s\n\nAchieved with Loop Habit Tracker</string>
 </resources>
