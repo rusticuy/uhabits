@@ -22,6 +22,10 @@ package org.isoron.uhabits.inject
 import dagger.Module
 import dagger.Provides
 import org.isoron.uhabits.core.AppScope
+import org.isoron.uhabits.core.achievements.AchievementDefinitionProvider
+import org.isoron.uhabits.core.achievements.AchievementRepository
+import org.isoron.uhabits.core.achievements.DefaultAchievementDefinitionProvider
+import org.isoron.uhabits.core.achievements.PreferencesAchievementRepository
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.database.Database
 import org.isoron.uhabits.core.database.DatabaseOpener
@@ -59,6 +63,20 @@ class HabitsModule(dbFile: File) {
     @AppScope
     fun getPreferences(storage: SharedPreferencesStorage): Preferences {
         return Preferences(storage)
+    }
+
+    @Provides
+    @AppScope
+    fun getAchievementRepository(storage: SharedPreferencesStorage): AchievementRepository {
+        return PreferencesAchievementRepository(storage)
+    }
+
+    @Provides
+    @AppScope
+    fun getAchievementDefinitionProvider(
+        provider: DefaultAchievementDefinitionProvider
+    ): AchievementDefinitionProvider {
+        return provider
     }
 
     @Provides

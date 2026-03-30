@@ -21,6 +21,7 @@ package org.isoron.uhabits.inject
 import android.content.Context
 import dagger.Component
 import org.isoron.uhabits.core.AppScope
+import org.isoron.uhabits.core.achievements.AchievementDetector
 import org.isoron.uhabits.core.commands.CommandRunner
 import org.isoron.uhabits.core.io.GenericImporter
 import org.isoron.uhabits.core.io.Logging
@@ -70,5 +71,6 @@ interface HabitsApplicationComponent {
     val taskRunner: TaskRunner
     val widgetPreferences: WidgetPreferences
     val widgetUpdater: WidgetUpdater
+    val achievementDetector: AchievementDetector
     val appLockManager: AppLockManager
 }
